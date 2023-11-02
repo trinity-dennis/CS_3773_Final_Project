@@ -15,7 +15,7 @@ $: python get-pip.py
 
 ### Installing project dependencies
 
-- For Windows (yuk)
+- For Windows
 
 ```commandline
 $: pip.exe install -r requirements.txt
@@ -27,7 +27,7 @@ $: pip.exe install -r requirements.txt
 1. just click run or debug
 2. In a browser, navigate to http://127.0.0.1:5000/
 
-### From the Command prompt (Windows Yuk) or terminal (Unixish :)
+### From the Command prompt (Windows) or terminal (Unixish)
 
 1. Launch the application
 
