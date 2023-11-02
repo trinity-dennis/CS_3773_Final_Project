@@ -36,3 +36,5 @@ $: python app.py
 ```
 
 2. In a browser, navigate to http://127.0.0.1:5000/
+
+### NOTE: You will need to update the path in the config.ini to match your path
