@@ -7,9 +7,31 @@ h1 {
     padding-bottom: 30px;
     margin: 0;
 }
+
+/* logo style */
+
+.logo-style {
+    height: 100%;
+    width: 100%;
+    object-fit: contain;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.logo-container{
+    height: 175px;
+    width: 175px;
+    float: left;
+    position: relative;
+    overflow: hidden;
+    margin-top: -10px;
+}
+
 .background-c{
     background-color: #ebe5d5;
 }
+
 
 
 /* paragraph style with class */
@@ -22,28 +44,23 @@ h1 {
     padding: 25px;
     word-spacing: normal;
 }
+
 .nav-bar-contain{
     display: flex;
     justify-content: center;
+    align-items: center;
     background-color: 	#ebe5d5;
-    min-width: 1080px;
-    
+    width: 85%;
 }
-.nav-bar{
-    width: 80%;
+.nav-bar {
     display: flex;
     text-align: center;
-    justify-content:center;
-   
-    
-
-
-
+    margin-left: -125px;
 }
 
 .item{
     color: #4A3432;
-    font-size: 17px;
+    font-size: 15px;
     font-weight: 600;
     font-stretch: normal;
     font-style: normal;
@@ -54,7 +71,7 @@ h1 {
    border-style: solid;
     border-width: 0px 1px 0px 0px;
     overflow: hidden;
-    
+
 }
 
 .item.last{
@@ -76,16 +93,17 @@ a{
 .content-container{
     padding-top: 20px;
     display: flex;
-    width: 100%;
+    width: 80%;
+    margin: auto;
     justify-content: center;
 }
 .content{
     display: flex;
     width: 70%;
     flex-wrap: wrap;
-    justify-content: start;
+    justify-content: center;
     gap: 25px;
-    
+
 }
 
 .book-container{
@@ -120,6 +138,7 @@ color: #4A3432;
     display: flex;
     justify-content: center;
     padding-bottom: 20px;
+    margin-left: -120px;
 }
 #search-bar{
     width: 500px;

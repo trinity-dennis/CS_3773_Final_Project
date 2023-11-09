@@ -46,6 +46,11 @@ def comic_manga():
     # test to see if i could route linke
     return render_template("index.html", genre_page="Comic/Manga")
 
+@app.route('/accessories')
+def accesories():
+    # test to see if i could route linke
+    return render_template("index.html", genre_page="Accessories")
+
 @app.route('/shopping-cart')
 def shopping_cart():
     return 'Use templates to build out the shopping cart UI found at this route (http://127.0.0.1:5000/shopping-cart)'
