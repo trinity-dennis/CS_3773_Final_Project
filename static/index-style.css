@@ -2,21 +2,3 @@
 
 /* header styles */
 
-h1 {
-    font-size: 50px;
-    text-align: center;
-    background-color: #ebe5d5;
-    color: #4a3432;
-    margin: 0;
-}
-
-/* paragraph style with class */
-
-.paragraph-style {
-    color: #4a3432;
-    width: 25%;
-    margin-left: 20px;
-    background-color: #ebe5d5;
-    padding: 25px;
-    word-spacing: normal;
-}

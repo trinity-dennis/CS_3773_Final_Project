@@ -1,14 +1,2 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>CalicoReads Home Page</title>
-    <link rel="styleSheet" type="text/css" href="{{ url_for('static', filename='index-style.css')}}" >
-</head>
-<body>
-    <h1>Welcome to CalicoReads!</h1>
-    <p class="paragraph-style">
-        Tester Paragraph
-    </p>
-</body>
-</html>
+{% extends "base.html" %}
+{% block genre %}{{ genre_page}}{% endblock %}

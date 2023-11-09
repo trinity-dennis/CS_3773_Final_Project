@@ -1,1 +1,127 @@
 /* this will hold any styles that will be used throughout the website */
+h1 {
+    font-size: 50px;
+    text-align: center;
+    background-color: #ebe5d5;
+    color: #4a3432;
+    padding-bottom: 30px;
+    margin: 0;
+}
+.background-c{
+    background-color: #ebe5d5;
+}
+
+
+/* paragraph style with class */
+
+.paragraph-style {
+    color: #4a3432;
+    width: 25%;
+    margin-left: 20px;
+    background-color: #ebe5d5;
+    padding: 25px;
+    word-spacing: normal;
+}
+.nav-bar-contain{
+    display: flex;
+    justify-content: center;
+    background-color: 	#ebe5d5;
+    min-width: 1080px;
+    
+}
+.nav-bar{
+    width: 80%;
+    display: flex;
+    text-align: center;
+    justify-content:center;
+   
+    
+
+
+
+}
+
+.item{
+    color: #4A3432;
+    font-size: 17px;
+    font-weight: 600;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.18;
+    letter-spacing: .45px;
+    padding: 6px 30px 6px 30px;
+
+   border-style: solid;
+    border-width: 0px 1px 0px 0px;
+    overflow: hidden;
+    
+}
+
+.item.last{
+    border-style: solid;
+    border-width: 0px 0px 0px 0px;
+    white-space: nowrap;
+
+}
+.nav-bar .item:hover{
+    border-width: 0px 1px 1px 0px;
+}
+.nav-bar .item.last:hover{
+    border-width: 0px 0px 1px 0px;
+}
+a{
+    text-decoration: none;
+}
+
+.content-container{
+    padding-top: 20px;
+    display: flex;
+    width: 100%;
+    justify-content: center;
+}
+.content{
+    display: flex;
+    width: 70%;
+    flex-wrap: wrap;
+    justify-content: start;
+    gap: 25px;
+    
+}
+
+.book-container{
+    background-color: #ebe5d5;
+    width: 15%;
+    height: 150px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+
+}
+h2{
+text-align: center;
+margin-top: 20px;
+color: #4A3432;
+
+}
+.cr-r{
+    text-align: right;
+}
+.website{
+    padding-right: 20px;
+    text-align: center;
+    color: #4A3432;
+    font-weight: 600;
+    font-stretch: normal;
+    font-style: normal;
+    font-size: 25px;
+    letter-spacing: 1px;
+}
+.search-bar-container{
+    width: 80%;
+    display: flex;
+    justify-content: center;
+    padding-bottom: 20px;
+}
+#search-bar{
+    width: 500px;
+
+}
