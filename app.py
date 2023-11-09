@@ -4,22 +4,47 @@ app = Flask(__name__)
 
 
 @app.route('/')
-def hello_world():  # put application's code here
+def home_page():
     # this would be the websites home page
     return render_template("index.html", genre_page="Check Out Our Vast Selection Of Books!")
-@app.route('/Non-Fiction')
-def non_fiction():  # put application's code here
+@app.route('/non-fiction')
+def non_fiction():
     # test to see if i could route linke
     #rerenders index.html which inherits from base.html. the index.html is passed a value for the genre_page variable and shown on screen when index.html is rendered
-    return render_template("index.html", genre_page="Check Out Our Non Fiction!")
-@app.route('/Fiction')
-def fiction():  # put application's code here
+    return render_template("index.html", genre_page="Non-Fiction")
+@app.route('/fiction')
+def fiction():
     # test to see if i could route linke
-    return render_template("index.html", genre_page="Check Out Our Fiction")
-@app.route('/Romance')
-def romance():  # put application's code here
+    return render_template("index.html", genre_page="Fiction")
+@app.route('/romance')
+def romance():
     # test to see if i could route linke
-    return render_template("index.html", genre_page="Check Out Our  Romance")
+    return render_template("index.html", genre_page="Romance")
+
+@app.route('/action')
+def action():
+    # test to see if i could route linke
+    return render_template("index.html", genre_page="Action")
+
+@app.route('/comedy')
+def comedy():
+    # test to see if i could route linke
+    return render_template("index.html", genre_page="Comedy")
+
+@app.route('/fantasy')
+def fantasy():
+    # test to see if i could route linke
+    return render_template("index.html", genre_page="Fantasy")
+
+@app.route('/horror')
+def horror():
+    # test to see if i could route linke
+    return render_template("index.html", genre_page="Horror")
+
+@app.route('/comic-manga')
+def comic_manga():
+    # test to see if i could route linke
+    return render_template("index.html", genre_page="Comic/Manga")
 
 @app.route('/shopping-cart')
 def shopping_cart():
