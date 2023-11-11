@@ -107,11 +107,13 @@ a{
 }
 
 .book-container{
-    background-color: #ebe5d5;
+    
+    background-color:white;
     width: 15%;
-    height: 150px;
+    height: 200px;
     margin-top: 15px;
     margin-bottom: 15px;
+    
 
 }
 h2{
@@ -143,4 +145,36 @@ color: #4A3432;
 #search-bar{
     width: 500px;
 
+}
+
+.book{
+    display: block;
+  margin-left: auto;
+  margin-right: auto;
+    height: 130px;
+    width: 100%;
+    object-fit: contain;
+}
+p{
+    padding: 0px;
+    margin: 0px;
+}
+.book-title{
+    font-size: 10px;
+    font-weight: bold;
+    text-align: center;
+    padding-top: 5px;
+}
+.book-author{
+font-size: 8px;
+text-decoration: underline;
+text-align: center;
+padding-top: 5px;
+
+}
+.book-price{
+    font-size: 8px;
+    font-weight: bold;
+    text-align: center;
+    padding-top: 5px;
 }
