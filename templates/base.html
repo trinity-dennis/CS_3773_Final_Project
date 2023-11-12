@@ -55,7 +55,7 @@
             <div class="content">
                 {% for x in booksL %} <!-- For loop printing out book containers-->
                 <div class="book-container rounded-3 shadow">
-                    <img class="book" src="{{ url_for('static', filename=x.img)}}" alt="book">
+                    <img class="book" src="{{ url_for('static', filename='assets/books/'+ x.img)}}" alt="book">
                     <p class="book-title">{{x.name}}</p>
                     <p class="book-author">{{x.author}}</p>
                     <p class="book-price">{{x.price}}</p>

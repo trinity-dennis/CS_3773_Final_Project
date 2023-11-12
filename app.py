@@ -1,6 +1,13 @@
 from flask import Flask, render_template
+from flask_sqlalchemy import SQLAlchemy
+
 
 app = Flask(__name__)
+
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'
+ 
+# Creating an SQLAlchemy instance
+db = SQLAlchemy(app)
 
 
 #test class for books
@@ -13,17 +20,17 @@ class books:
 
 books_list =[]
 loc = "assets/books/"
-books_list.append(books("Harry Potter","JK Rowling", loc+"harrypotter.jpg",5.00))
-books_list.append(books("Game of Thrones","George R Martin ", loc+"gameofthrones.jpg",5.00))
-books_list.append(books("Lightning Thief","Rick Riordan",loc+ "lightningthief.jpg",15.00))
-books_list.append(books("Shadow Of Night","Debora Harkness ",loc+ "shadowofthenight.jpg",18.81))
-books_list.append(books("Enemy Tribe (Ancestors Saga Book 3)","Lori Holmes",loc+ "enemytribe.jpg",15.99))
-books_list.append(books("The Ever King","L.J Andrews",loc+ "theeverking.jpg",17.99))
-books_list.append(books("The Witcher Tower of Swallows ","Andrzej Sapkowski",loc+ "thewitcher.jpg",14.99))
-books_list.append(books("Vows and Ruins The Legends of Thezmar","Helen Scheuerer",loc+ "vowsandruins.jpg",15.99))
-books_list.append(books("The Forbidden (Ancestors Saga Book 1)","Lori Holmes",loc+ "theforbidden.jpg",9.99))
-books_list.append(books("Daughter of Ninmah (Ancestors Saga Book 2) ","Lori Holmes",loc+ "daughterofninmah.jpg",14.99))
-books_list.append(books("The Last Kamaali (Ancestors Saga Book 4) ","Lori Holmes",loc+ "thelastkamaali.jpg",15.99))
+books_list.append(books("Harry Potter","JK Rowling", "harrypotter.jpg",5.00))
+books_list.append(books("Game of Thrones","George R Martin ", "gameofthrones.jpg",5.00))
+books_list.append(books("Lightning Thief","Rick Riordan", "lightningthief.jpg",15.00))
+books_list.append(books("Shadow Of Night","Debora Harkness ", "shadowofthenight.jpg",18.81))
+books_list.append(books("Enemy Tribe (Ancestors Saga Book 3)","Lori Holmes", "enemytribe.jpg",15.99))
+books_list.append(books("The Ever King","L.J Andrews", "theeverking.jpg",17.99))
+books_list.append(books("The Witcher Tower of Swallows ","Andrzej Sapkowski", "thewitcher.jpg",14.99))
+books_list.append(books("Vows and Ruins The Legends of Thezmar","Helen Scheuerer","vowsandruins.jpg",15.99))
+books_list.append(books("The Forbidden (Ancestors Saga Book 1)","Lori Holmes", "theforbidden.jpg",9.99))
+books_list.append(books("Daughter of Ninmah (Ancestors Saga Book 2) ","Lori Holmes", "daughterofninmah.jpg",14.99))
+books_list.append(books("The Last Kamaali (Ancestors Saga Book 4) ","Lori Holmes","thelastkamaali.jpg",15.99))
 
 @app.route('/')
 def home_page():
