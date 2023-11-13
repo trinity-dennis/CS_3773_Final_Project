@@ -8,6 +8,15 @@ h1 {
     margin: 0;
 }
 
+h2 {
+    text-align: center;
+    margin-top: 20px;
+    color: #4A3432;
+}
+
+
+
+
 /* logo style */
 
 .logo-style {
@@ -116,12 +125,7 @@ a{
     
 
 }
-h2{
-text-align: center;
-margin-top: 20px;
-color: #4A3432;
 
-}
 .cr-r{
     text-align: right;
 }
