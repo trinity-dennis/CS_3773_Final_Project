@@ -1,8 +1,8 @@
 """initial
 
-Revision ID: b29d82bde3b8
+Revision ID: b15fc8fa17ee
 Revises: 
-Create Date: 2023-11-01 19:28:33.981309
+Create Date: 2023-11-12 21:46:16.327861
 
 """
 from typing import Sequence, Union
@@ -10,11 +10,9 @@ from typing import Sequence, Union
 from alembic import op
 import sqlalchemy as sa
 
-from migrations.test_data.populate_initial import Populate
-
 
 # revision identifiers, used by Alembic.
-revision: str = 'b29d82bde3b8'
+revision: str = 'b15fc8fa17ee'
 down_revision: Union[str, None] = None
 branch_labels: Union[str, Sequence[str], None] = None
 depends_on: Union[str, Sequence[str], None] = None
@@ -29,8 +27,6 @@ def upgrade() -> None:
     sa.PrimaryKeyConstraint('id')
     )
     # ### end Alembic commands ###
-    pop = Populate()
-    pop.insert_user_accounts()
 
 
 def downgrade() -> None:
