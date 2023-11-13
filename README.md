@@ -47,7 +47,7 @@ $: python app.py
     > For example: from model.book import Book
 3. Run the follow command in the terminal to create a new version
     ```commandline
-    $: alembic revision --autogenerate -m "message of what table was added(ex: "books")"
+    $: alembic revision --autogenerate -m "message of what table was updated"
     ```
 4. Run the following command in the terminal to update the head
     ```commandline
