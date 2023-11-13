@@ -59,8 +59,13 @@ def fantasy():
 
 @app.route('/horror')
 def horror():
-    # test to see if i could route linke
-    return render_template("index.html", genre_page="Horror")
+    db_executor = DatabaseExecutor()
+    
+    # Get books by genre
+    genre_page = "Horror"
+    books = db_executor.get_books_by_genre(genre_page)
+    books_data = [{'img': book.img, 'title': book.title, 'author': book.author, 'price': book.price} for book in books]
+    return render_template("index.html", genre_page=genre_page, books=books_data)
 
 
 @app.route('/comic-manga')
