@@ -1,5 +1,6 @@
 from model.base_model import BaseModel
 from model.user_account import UserAccount
+from model.book import Book
 
 from logging.config import fileConfig
 
