@@ -31,7 +31,7 @@ if __name__ == "__main__":
         {"genre": "Fantasy", "title": "Harry Potter", "author": "JK Rowling", "price": 5.00, "img": "harrypotter.jpg"},
         {"genre": "Fantasy", "title": "Game of Thrones", "author": "George R Martin", "price": 5.00, "img": "gameofthrones.jpg"},
         {"genre": "Fantasy", "title": "Lightning Thief", "author": "Rick Riordan", "price": 15.00, "img": "lightningthief.jpg"},
-        {"genre": "Fantasy", "title": "Shadow of Night", "author": "Debora Harkness", "price": 18.81, "img": "shadowofnight.jpg"},
+        {"genre": "Fantasy", "title": "Shadow of Night", "author": "Debora Harkness", "price": 18.81, "img": "shadowofthenight.jpg"},
         {"genre": "Fantasy", "title": "Enemy Tribe (Ancestors Saga Book 3)", "author": "Lori Holmes",
          "price": 15.99, "img": "enemytribe.jpg"},
         {"genre": "Fantasy", "title": "The Ever King", "author": "L.J Andrews", "price": 17.99, "img": "theeverking.jpg"},
