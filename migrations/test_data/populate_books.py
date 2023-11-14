@@ -114,7 +114,29 @@ if __name__ == "__main__":
         {"genre": "Horror", "title": "The Cabin at the End of the World", "author": "Paul Tremblay",
          "price": 17.99, "img": "TheCabinAtTheEndOfTheWorld.jpg"},
         {"genre": "Horror", "title": "The Terror", "author": "Dan Simmons",
-         "price": 24.99, "img": "TheTerror.jpg"}
+         "price": 24.99, "img": "TheTerror.jpg"},
+        {"genre": "Romance", "title": "Happy Place", "author": "Emily Henry", "price": 15.99, "img": "happyplace.jpg"},
+        {"genre": "Romance", "title": "Check & Mate", "author": "Ali Hazelwood", "price": 12.60,
+         "img": "checkmate.jpg"},
+        {"genre": "Romance", "title": "Just Listen", "author": "Sarah Dessen", "price": 9.99, "img": "justlisten.jpg"},
+        {"genre": "Romance", "title": "Kiss Her Once For Me", "author": "Alison Cochrun", "price": 13.99,
+         "img": "kissheronceforme.jpg"},
+        {"genre": "Romance", "title": "Love in the Time of Serial Killers", "author": "Alicia Thompson", "price": 12.99,
+         "img": "loveinthetimeofserialkillers.jpg"},
+        {"genre": "Romance", "title": "My Roommate is a Vampire", "author": "Jenna Levine", "price": 15.30,
+         "img": "myroomateisavampire.jpg"},
+        {"genre": "Romance", "title": "One Last Stop", "author": "Casey McQuiston", "price": 13.99,
+         "img": "onelaststop.jpg"},
+        {"genre": "Romance", "title": "Pride and Prejudice", "author": "Jane Austen", "price": 16.99,
+         "img": "prideandprejudice.jpg"},
+        {"genre": "Romance", "title": "Solitaire", "author": "Alice Oseman", "price": 14.96,
+         "img": "solitaire.jpg"},
+        {"genre": "Romance", "title": "The Dead Romantics", "author": "Ashley Poston", "price": 9.99,
+         "img": "thedeadromantics.jpg"},
+        {"genre": "Romance", "title": "Things We Never Got Over", "author": "Lucy Score", "price": 11.20,
+         "img": "thingswenevergotover.jpg"},
+        {"genre": "Romance", "title": "Twilight", "author": "Stephenie Meyer", "price": 9.99,
+         "img": "twilight.jpg"}
     ]
 
     pop.insert_books(books_to_insert)

@@ -29,8 +29,13 @@ def fiction():
 
 @app.route('/romance')
 def romance():
-    # test to see if i could route linke
-    return render_template("index.html", genre_page="Romance")
+    db_executor = DatabaseExecutor()
+
+    # Get books by genre
+    genre_page = "Romance"
+    books = db_executor.get_books_by_genre(genre_page)
+    books_data = [{'img': book.img, 'title': book.title, 'author': book.author, 'price': book.price} for book in books]
+    return render_template("index.html", genre_page=genre_page, books=books_data)
 
 
 @app.route('/action')
