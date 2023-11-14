@@ -161,8 +161,28 @@ if __name__ == "__main__":
          "img": "haunting.jpg"},
         {"genre": "Comic/Manga", "title": "Hide And Seek: An Ellham Woods Adventure", "author": "John Derek", "price": 14.99,
          "img": "hideseek.jpg"},
-
-
+        {"genre": "Fiction", "title": "A Court of Thorns and Roses (A Court of Thorns and Roses Series #1)", "author": "Sarah J. Maas",
+         "price": 15.99, "img": "acourtofthornsandroses.jpg"},
+        {"genre": "Fiction", "title": "Bloodmarked", "author": "Tracy Deonn", "price": 19.99, "img": "bloodmarked.jpg"},
+        {"genre": "Fiction", "title": "Freefall: A Novel", "author": "Jessica Barry", "price": 14.49,
+         "img": "freefall.jpg"},
+        {"genre": "Fiction", "title": "Haunting Adeline", "author": "H. D. Carlton", "price": 24.32,
+         "img": "hauntingadeline.jpg"},
+        {"genre": "Fiction", "title": "House of Flame and Shadow (Crescent City Series #3)", "author": "Sarah J. Maas",
+         "price": 27.20, "img": "houseofflameandshadow.jpg"},
+        {"genre": "Fiction", "title": "The Covenant of Water (Oprah's Book Club)", "author": "Abraham Verghese",
+         "price": 24.99, "img": "thecovenantofwater.jpg"},
+        {"genre": "Fiction", "title": "The Edge", "author": "David Baldacci", "price": 21.00, "img": "theedge.jpg"},
+        {"genre": "Fiction", "title": "The Little Liar: A Novel", "author": "Mitch Albom", "price": 21.59,
+         "img": "thelittleliar.jpg"},
+        {"genre": "Fiction", "title": "The Paleontologist", "author": "Luke Dumas", "price": 17.99,
+         "img": "thepaleontologist.jpg"},
+        {"genre": "Fiction", "title": "The Revenge List: A Novel", "author": "Hannah Mary McKinnon", "price": 18.99,
+         "img": "therevengelist.jpg"},
+        {"genre": "Fiction", "title": "The Secret (Jack Reacher Series #28)", "author": "Lee Child, Andrew Child",
+         "price": 20.29, "img": "thesecret.jpg"},
+        {"genre": "Fiction", "title": "The Things We Cannot Say", "author": "Kelly Rimmer",
+         "price": 14.49, "img": "thethingswecannotsay.jpg"}
     ]
 
     pop.insert_books(books_to_insert)
