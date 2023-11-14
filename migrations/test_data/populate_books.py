@@ -136,7 +136,33 @@ if __name__ == "__main__":
         {"genre": "Romance", "title": "Things We Never Got Over", "author": "Lucy Score", "price": 11.20,
          "img": "thingswenevergotover.jpg"},
         {"genre": "Romance", "title": "Twilight", "author": "Stephenie Meyer", "price": 9.99,
-         "img": "twilight.jpg"}
+         "img": "twilight.jpg"},
+        {"genre": "Comic/Manga", "title": "One Piece", "author": "Eiichiro Oda", "price": 7.99,
+         "img": "onepiece.jpg"},
+        {"genre": "Comic/Manga", "title": "The Promised Neverland", "author": "Kaiu Shirai", "price": 8.99,
+         "img": "thepromise.jpg"},
+        {"genre": "Comic/Manga", "title": "Naruto: 3-in-1 Edition", "author": "Masashi Kishimoto", "price": 10.99,
+         "img": "naruto.jpg"},
+        {"genre": "Comic/Manga", "title": "My Happy Marriage", "author": "Akumi Agitomi", "price": 14.99,
+         "img": "happymarriage.jpg"},
+        {"genre": "Comic/Manga", "title": "Demon Slayer: Kimetsu no Yaiba", "author": "Koyoharu Gotouge", "price": 9.99,
+         "img": "demonslayer.jpg"},
+        {"genre": "Comic/Manga", "title": "Legacy of the Inventor", "author": "J. I. Wagner", "price": 11.99,
+         "img": "legacy.jpg"},
+        {"genre": "Comic/Manga", "title": "Legend of the Star Runner", "author": "J. I. Wagner", "price": 9.99,
+         "img": "starrunner.jpg"},
+        {"genre": "Comic/Manga", "title": "A Family Secret", "author": "J. I. Wagner", "price": 12.99,
+         "img": "family.jpg"},
+        {"genre": "Comic/Manga", "title": "Case closed #1: Mystery in the Mansion", "author": "Lauren Magaziner", "price": 12.99,
+         "img": "mystery.jpg"},
+        {"genre": "Comic/Manga", "title": "Case Closed #2: Stolen from the Studio", "author": "Lauren Magaziner", "price": 12.99,
+         "img": "stolen.jpg"},
+        {"genre": "Comic/Manga", "title": "Case Closed #3: Haunting at the Hotel", "author": "Lauren Magaziner", "price": 12.99,
+         "img": "haunting.jpg"},
+        {"genre": "Comic/Manga", "title": "Hide And Seek: An Ellham Woods Adventure", "author": "John Derek", "price": 14.99,
+         "img": "hideseek.jpg"},
+
+
     ]
 
     pop.insert_books(books_to_insert)
