@@ -182,7 +182,30 @@ if __name__ == "__main__":
         {"genre": "Fiction", "title": "The Secret (Jack Reacher Series #28)", "author": "Lee Child, Andrew Child",
          "price": 20.29, "img": "thesecret.jpg"},
         {"genre": "Fiction", "title": "The Things We Cannot Say", "author": "Kelly Rimmer",
-         "price": 14.49, "img": "thethingswecannotsay.jpg"}
+         "price": 14.49, "img": "thethingswecannotsay.jpg"},
+        {"genre": "Kids", "title": "A Bear Called Paddington", "author": "Michael Bond, Peggy Fortnum (Illustrator)",
+         "price": 8.99, "img": "abearcalledpaddington.jpg"},
+        {"genre": "Kids", "title": "Amelia Bedelia", "author": "Peggy Parish, Fritz Siebel (Illustrator)",
+         "price": 4.99, "img": "ameliabedelia.jpg"},
+        {"genre": "Kids", "title": "Anne of Green Gables (Anne of Green Gables Series #1)", "author": "L. M. Montgomery",
+         "price": 7.19, "img": "anneofgreengables.jpg"},
+        {"genre": "Kids", "title": "Frog and Toad Are Friends (I Can Read Book Series: Level 2)",
+         "author": "Arnold Lobel", "price": 4.99, "img": "frogandtoadarefriends.jpg"},
+        {"genre": "Kids", "title": "Now We Are Six", "author": "A. A. Milne, Ernest H. Shepard (Illustrator)",
+         "price": 7.99, "img": "nowwearesix.jpg"},
+        {"genre": "Kids", "title": "Pippi Longstocking", "author": "Astrid Lindgren", "price": 7.99, "img": "pippilongstocking.jpg"},
+        {"genre": "Kids", "title": "Ramona the Pest", "author": "Beverly Cleary, Jacqueline Rogers (Illustrator)",
+         "price": 7.99, "img": "ramonathepest.jpg"},
+        {"genre": "Kids", "title": "The Black Stallion", "author": "Walter Farley",
+         "price": 8.99, "img": "theblackstallion.jpg"},
+        {"genre": "Kids", "title": "The Tale of Peter Rabbit", "author": "Beatrix Potter",
+         "price": 5.99, "img": "thetaleofpeterrabbit.jpg"},
+        {"genre": "Kids", "title": "The Tortoise and the Hare: An Aesop Fable", "author": "Aesop, Janet Stevens (Illustrator)",
+         "price": 7.99, "img": "thetortoiseandthehare.jpg"},
+        {"genre": "Kids", "title": "Where the Sidewalk Ends: Poems and Drawings", "author": "Shel Silverstein",
+         "price": 19.99, "img": "wherethesidewalkends.jpg"},
+        {"genre": "Kids", "title": "Winnie-the-Pooh", "author": "A. A. Milne, Ernest H. Shepard (Illustrator)",
+         "price": 17.99, "img": "winniethepooh.jpg"}
     ]
 
     pop.insert_books(books_to_insert)
