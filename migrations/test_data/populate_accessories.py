@@ -36,6 +36,26 @@ if __name__ == "__main__":
          "quantity": 25, "price": 32.95, "img": "booklight.jpg"},
         {"item_name": "Lysas 4 Sets Neon Page Markers Colored Index Tabs, Fluorescent Sticky Note for Page Marker, 560pcs",
          "quantity": 25, "price": 6.49, "img": "pagemarkers.jpg"},
+
+        {"item_name": "2 Pieces Dried Flower Resin Book Page Holder Transparent Thumb Ring Page Holder",
+         "quantity": 25, "price": 9.95, "img": "pageholder.jpg"},
+        {"item_name": "50pcs Book Stickers",
+         "quantity": 25, "price": 7.95, "img": "bookstickers.jpg"},
+        {"item_name": "10 Pack Bible Highlighters and Pens No Bleed, Gel Highlighter with Assorted Cute Colors",
+         "quantity": 25, "price": 11.95, "img": "pen.jpg"},
+        {"item_name": "Canvas Book Tote Bag with Pockets, Book Lovers Gifts",
+         "quantity": 25, "price": 12.95, "img": "totebag.jpg"},
+        {"item_name": "5 Rolls Highlighter Tape Transparent Marking Sticker Removable",
+         "quantity": 25, "price": 6.95, "img": "roll.jpg"},
+        {"item_name": "Adjustable Acrylic Book Stand for Reading",
+         "quantity": 25, "price": 35.95, "img": "bookstand.jpg"},
+        {"item_name": "26 Letters Personalized Hand Embroidered Corner Bookmark Cute Flower ",
+         "quantity": 25, "price": 8.95, "img": "bookmark.jpg"},
+        {"item_name": "Crochet Bookmark",
+         "quantity": 25, "price": 5.95, "img": "noelbookmark.jpg"},
+        {"item_name": "Flat Book Light for Reading in Bed at Night Clear LED",
+         "quantity": 25, "price": 10.95, "img": "flatbook.jpg"},
+
     ]
 
     pop.insert_accessories(accessories_to_insert)
