@@ -1,5 +1,5 @@
 from model.base_model import BaseModel
-from sqlalchemy import Integer, String, Column, Double
+from sqlalchemy import Integer, String, Column, Float
 
 
 class Book(BaseModel):
@@ -10,4 +10,4 @@ class Book(BaseModel):
     genre = Column(String)
     title = Column(String)
     author = Column(String)
-    price = Column(Double)
+    price = Column(Float)
