@@ -23,8 +23,13 @@ def non_fiction():
 
 @app.route('/fiction')
 def fiction():
-    # test to see if i could route linke
-    return render_template("index.html", genre_page="Fiction")
+    db_executor = DatabaseExecutor()
+
+    # Get books by genre
+    genre_page = "Fiction"
+    books = db_executor.get_books_by_genre(genre_page)
+    books_data = [{'img': book.img, 'title': book.title, 'author': book.author, 'price': book.price} for book in books]
+    return render_template("index.html", genre_page=genre_page, books=books_data)
 
 
 @app.route('/romance')
@@ -49,10 +54,15 @@ def action():
     return render_template("index.html", genre_page=genre_page, books=books_data)
 
 
-@app.route('/comedy')
-def comedy():
-    # test to see if i could route linke
-    return render_template("index.html", genre_page="Comedy")
+@app.route('/kids')
+def kids():
+    db_executor = DatabaseExecutor()
+
+    # Get books by genre
+    genre_page = "Kids"
+    books = db_executor.get_books_by_genre(genre_page)
+    books_data = [{'img': book.img, 'title': book.title, 'author': book.author, 'price': book.price} for book in books]
+    return render_template("index.html", genre_page=genre_page, books=books_data)
 
 
 @app.route('/fantasy')
