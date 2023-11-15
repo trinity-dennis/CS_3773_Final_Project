@@ -5,13 +5,14 @@ from database.database_session import DatabaseSession
 class Populate:
     db: DatabaseSession = DatabaseSession()
 
-    def delete_all_accounts(self):
+    def delete_all_except_admin(self):
         with self.db.session() as session:
-            session.query(Account).delete()
+            # deletes all accounts that are not admin
+            session.query(Account).filter(Account.admin == False).delete()
             session.commit()
 
 
 if __name__ == "__main__":
     pop = Populate()
 
-    pop.delete_all_accounts()
+    pop.delete_all_except_admin()
