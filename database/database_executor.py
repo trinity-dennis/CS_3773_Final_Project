@@ -1,7 +1,7 @@
 from sqlalchemy.orm import make_transient
 
 from database.database_session import DatabaseSession
-from model.user_account import UserAccount
+from model.accounts import Account
 from model.book import Book
 
 
@@ -11,7 +11,7 @@ class DatabaseExecutor:
 
     def get_user_accounts(self):
         with self._db_session.session() as session:
-            results = session.query(UserAccount).all()
+            results = session.query(Account).all()
             for result in results:
                 # disconnect from database so updates aren't tracked
                 session.expunge(result)
