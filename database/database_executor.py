@@ -10,8 +10,8 @@ class DatabaseExecutor:
     def __init__(self):
         self._db_session = DatabaseSession()
 
-    def register_user(self, username, password):
-        new_user = Account(username=username, password=password)
+    def register_user(self, admin, username, password):
+        new_user = Account(admin=admin, username=username, password=password)
         with self._db_session.session() as session:
             session.add(new_user)
 

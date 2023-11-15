@@ -114,13 +114,15 @@ def accesories():
 def signup():
     db_executor = DatabaseExecutor()
     if request.method == 'POST':
+        # will automatically set admin to false, since we should never be creating an admin account through the website
+        admin = False
         username = request.json.get('signup-username')
         password = request.json.get('signup-password')
 
         # register the user
-        db_executor.register_user(username, password)
+        db_executor.register_user(admin, username, password)
 
-        # return empty string to complete valid response
+        # return empty string to complete valid response (can change later to pop up a success message)
         return ''
 
 
