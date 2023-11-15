@@ -101,8 +101,8 @@ def comic_manga():
 
 @app.route('/accessories')
 def accesories():
-    # test to see if i could route linke
-    return render_template("index.html", genre_page="Accessories")
+    # test to see if i could route link
+    return render_template("display-accessories.html", genre_page="Accessories")
 
 
 @app.route('/shopping-cart')
