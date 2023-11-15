@@ -24,6 +24,11 @@ h3 {
     top: 3%;
     left: 38%;
 }
+.signup-text-container {
+    position: absolute;
+    top: 3%;
+    left: 38%;
+}
 
 .username-style {
     font-color:	#4a3432;
@@ -38,6 +43,19 @@ h3 {
     position: absolute;
     width: 25%;
     height: 35%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #ebe5d5;
+    border: 1px solid #4a3432;
+    z-index: 2;
+}
+
+.signup-form-container {
+    display: none;
+    position: absolute;
+    width: 50%;
+    height: 70%;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
