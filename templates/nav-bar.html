@@ -38,7 +38,7 @@
     </div>
 </div>
 
-<!-- Pop-up form container -->
+<!-- Pop-up login form container -->
 <div class="overlay" id="login-overlay"></div>
 <div class="login-form-container" id="login-form-container">
     <form id="login-form" method="get">
@@ -62,10 +62,10 @@
     </form>
 </div>
 
-<!-- Pop-up login form container -->
+<!-- Pop-up signup form container -->
 <div class="overlay" id="signup-overlay"></div>
 <div class="signup-form-container" id="signup-form-container">
-    <form id="signup-form" method="get">
+    <form id="signup-form" method="get" onsubmit="submitSignupForm(event)">
         <div class="signup-text-container">
             <h3>Sign Up</h3>
         </div>

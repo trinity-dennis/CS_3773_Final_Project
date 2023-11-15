@@ -10,13 +10,10 @@ class DatabaseExecutor:
     def __init__(self):
         self._db_session = DatabaseSession()
 
-    def get_user_accounts(self):
+    def register_user(self, username, password):
+        new_user = Account(username=username, password=password)
         with self._db_session.session() as session:
-            results = session.query(Account).all()
-            for result in results:
-                # disconnect from database so updates aren't tracked
-                session.expunge(result)
-            return results
+            session.add(new_user)
 
     def get_books_by_genre(self, genre):
         with self._db_session.session() as session:

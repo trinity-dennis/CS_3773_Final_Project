@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 from database.database_executor import DatabaseExecutor
 
 app = Flask(__name__)
@@ -108,6 +108,20 @@ def accesories():
     accessories = db_executor.get_accessories()
     accessories_data = [{'img': accessory.img, 'item_name': accessory.item_name, 'price': accessory.price} for accessory in accessories]
     return render_template("display-accessories.html", genre_page="Accessories", accessories=accessories_data)
+
+
+@app.route('/signup', methods=['POST'])
+def signup():
+    db_executor = DatabaseExecutor()
+    if request.method == 'POST':
+        username = request.json.get('signup-username')
+        password = request.json.get('signup-password')
+
+        # register the user
+        db_executor.register_user(username, password)
+
+        # return empty string to complete valid response
+        return ''
 
 
 @app.route('/shopping-cart')
