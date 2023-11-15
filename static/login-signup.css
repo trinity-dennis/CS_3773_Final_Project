@@ -1,43 +1,4 @@
-/* style for the login form */
-
-h3 {
-    text-align: center;
-    margin-top: 20px;
-    color: #4A3432;
-    font-size: 45px;
-    font-align: center;
-}
-
-.overlay {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5); /* Adjust the alpha value for transparency */
-    z-index: 1; /* Ensure it appears above other elements */
-}
-
-.login-text-container {
-    position: absolute;
-    top: 3%;
-    left: 38%;
-}
-.signup-text-container {
-    position: absolute;
-    top: 3%;
-    left: 38%;
-}
-
-.username-style {
-    font-color:	#4a3432;
-}
-
-.password-style {
-    font-color:	#4a3432;
-}
-
+/* Login Form Styles */
 .login-form-container {
     display: none;
     position: absolute;
@@ -51,11 +12,12 @@ h3 {
     z-index: 2;
 }
 
+/* Signup Form Styles */
 .signup-form-container {
     display: none;
     position: absolute;
-    width: 50%;
-    height: 70%;
+    width: 25%;
+    height: 35%;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -64,11 +26,22 @@ h3 {
     z-index: 2;
 }
 
+/* Common Styles for Both Forms */
+.text-container {
+    position: absolute;
+    top: 3%;
+    left: 38%;
+}
+
+.username-style,
+.password-style {
+    color: #4a3432;
+}
+
 .close-button-container {
     position: absolute;
     top: 0;
     left: 0;
-
 }
 
 .close-button {
