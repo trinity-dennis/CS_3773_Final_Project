@@ -7,7 +7,7 @@ app = Flask(__name__)
 @app.route('/')
 def home_page():
     # this would be the websites home page
-    return render_template("index.html", genre_page="Check Out Our Vast Selection Of Books!")
+    return render_template("index.html", books="pass book_data", accessories="add accessory_data")
 
 
 @app.route('/non-fiction')
@@ -18,7 +18,7 @@ def non_fiction():
     genre_page = "Non-Fiction"
     books = db_executor.get_books_by_genre(genre_page)
     books_data = [{'img': book.img, 'title': book.title, 'author': book.author, 'price': book.price} for book in books]
-    return render_template("index.html", genre_page=genre_page, books=books_data)
+    return render_template("display-books.html", genre_page=genre_page, books=books_data)
 
 
 @app.route('/fiction')
@@ -29,7 +29,7 @@ def fiction():
     genre_page = "Fiction"
     books = db_executor.get_books_by_genre(genre_page)
     books_data = [{'img': book.img, 'title': book.title, 'author': book.author, 'price': book.price} for book in books]
-    return render_template("index.html", genre_page=genre_page, books=books_data)
+    return render_template("display-books.html", genre_page=genre_page, books=books_data)
 
 
 @app.route('/romance')
@@ -40,7 +40,7 @@ def romance():
     genre_page = "Romance"
     books = db_executor.get_books_by_genre(genre_page)
     books_data = [{'img': book.img, 'title': book.title, 'author': book.author, 'price': book.price} for book in books]
-    return render_template("index.html", genre_page=genre_page, books=books_data)
+    return render_template("display-books.html", genre_page=genre_page, books=books_data)
 
 
 @app.route('/action')
@@ -51,7 +51,7 @@ def action():
     genre_page = "Action"
     books = db_executor.get_books_by_genre(genre_page)
     books_data = [{'img': book.img, 'title': book.title, 'author': book.author, 'price': book.price} for book in books]
-    return render_template("index.html", genre_page=genre_page, books=books_data)
+    return render_template("display-books.html", genre_page=genre_page, books=books_data)
 
 
 @app.route('/kids')
@@ -62,7 +62,7 @@ def kids():
     genre_page = "Kids"
     books = db_executor.get_books_by_genre(genre_page)
     books_data = [{'img': book.img, 'title': book.title, 'author': book.author, 'price': book.price} for book in books]
-    return render_template("index.html", genre_page=genre_page, books=books_data)
+    return render_template("display-books.html", genre_page=genre_page, books=books_data)
 
 
 @app.route('/fantasy')
@@ -74,7 +74,7 @@ def fantasy():
     genre_page = "Fantasy"
     books = db_executor.get_books_by_genre(genre_page)
     books_data = [{'img': book.img, 'title': book.title, 'author': book.author, 'price': book.price} for book in books]
-    return render_template("index.html", genre_page=genre_page, books=books_data)
+    return render_template("display-books.html", genre_page=genre_page, books=books_data)
 
 
 @app.route('/horror')
@@ -85,7 +85,7 @@ def horror():
     genre_page = "Horror"
     books = db_executor.get_books_by_genre(genre_page)
     books_data = [{'img': book.img, 'title': book.title, 'author': book.author, 'price': book.price} for book in books]
-    return render_template("index.html", genre_page=genre_page, books=books_data)
+    return render_template("display-books.html", genre_page=genre_page, books=books_data)
 
 
 @app.route('/comic-manga')
@@ -96,7 +96,7 @@ def comic_manga():
     genre_page = "Comic/Manga"
     books = db_executor.get_books_by_genre(genre_page)
     books_data = [{'img': book.img, 'title': book.title, 'author': book.author, 'price': book.price} for book in books]
-    return render_template("index.html",  genre_page=genre_page, books=books_data)
+    return render_template("display-books.html",  genre_page=genre_page, books=books_data)
 
 
 @app.route('/accessories')

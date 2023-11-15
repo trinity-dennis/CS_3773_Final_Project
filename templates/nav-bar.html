@@ -1,0 +1,86 @@
+<div class="logo-container background-c">
+    <img class="logo-style" src="{{ url_for('static', filename='assets/logo.png')}}">
+</div>
+<div class="py-2 background-c full-width">
+    <nav class="py-2 background-c">
+        <div class="px-2 d-flex flex-wrap">
+            <ul class="nav me-auto">
+            </ul>
+            <ul class="nav">
+                <!-- Use a button to trigger the form display -->
+                <li class="nav-item"><button class="nav-link link-body-emphasis px-2" id="login-button">Login</button></li>
+                <li class="nav-item"><button class="nav-link link-body-emphasis px-2" id="signup-button">Sign up</button></li>
+                <li class="nav-item"><a href="#" class="nav-link link-body-emphasis px-2">Cart</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="nav-bar-contain"> <!-- Contains First navbar "Calico reads " and the search bar-->
+        <div class="search-bar-container">
+
+            <input id="search-bar" type="text" placeholder="Search..">
+        </div>
+    </div>
+
+    <div class="nav-bar-contain">
+        <div class="nav-bar">
+            <a class="item" href="/non-fiction">Non-Fiction</a>
+            <a class="item" href="/fiction">Fiction</a>
+            <a class="item" href="/romance">Romance</a>
+            <a class="item" href="/action">Action</a>
+            <a class="item" href="/kids">Kids</a>
+            <a class="item" href="/fantasy">Fantasy</a>
+            <a class="item" href="/horror">Horror</a>
+            <a class="item" href="/comic-manga">Comic/Manga</a>
+            <a class="item last" href="/accessories">Accessories</a>
+        </div>
+    </div>
+</div>
+
+<!-- Pop-up form container -->
+<div class="overlay" id="login-overlay"></div>
+<div class="login-form-container" id="login-form-container">
+    <form id="login-form" method="get">
+        <div class="login-text-container">
+            <h3>Login</h3>
+        </div>
+        <div class="close-button-container">
+            <button class="close-button" type="submit" id="close-button" onclick="closeLoginForm()">X</button>
+        </div>
+        <div class="login-username-container">
+            <label class="username-style" for="username"><b>Username:</b></label>
+            <input type="text" name="username" id="username" />
+        </div>
+        <div class="login-password-container">
+            <label class="password-style" for="password"><b>Password:</b></label>
+            <input type="password" name="password" id="password" />
+        </div>
+        <div class="submit-button-container">
+            <input class="submit-button" type="submit" value="Submit" id="login-submit-button">
+        </div>
+    </form>
+</div>
+
+<!-- Pop-up login form container -->
+<div class="overlay" id="signup-overlay"></div>
+<div class="signup-form-container" id="signup-form-container">
+    <form id="signup-form" method="get">
+        <div class="signup-text-container">
+            <h3>Sign Up</h3>
+        </div>
+        <div class="close-button-container">
+            <button class="close-button" type="submit" id="signup-close-button" onclick="closeSignupForm()">X</button>
+        </div>
+        <div class="signup-username-container">
+            <label class="username-style" for="signup-username"><b>Username/Email:</b></label>
+            <input type="text" name="signup-username" id="signup-username" />
+        </div>
+        <div class="signup-password-container">
+            <label class="password-style" for="signup-password"><b>Password:</b></label>
+            <input type="password" name="signup-password" id="signup-password" />
+        </div>
+        <div class="submit-button-container">
+            <input class="submit-button" type="submit" value="Sign Up" id="signup-submit-button">
+        </div>
+    </form>
+</div>

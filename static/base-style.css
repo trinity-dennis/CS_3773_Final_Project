@@ -14,31 +14,50 @@ h2 {
     color: #4A3432;
 }
 
+body {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vw;
+    margin: 0;
+}
 
+.main-container {
+    width: 100vw;
+    height: auto;
+}
+
+.page-header-container {
+    display: flex;
+    align-items: center;
+}
+
+.body-content-container {
+    display: flex;
+    flex-direction: column;
+    z-index: 1;
+}
 
 
 /* logo style */
 
 .logo-style {
-    height: 100%;
-    width: 100%;
-    object-fit: contain;
-    position: absolute;
-    top: 0;
-    left: 0;
+    height: 10vw;
+    width: 10vw;
 }
 
 .logo-container{
-    height: 175px;
-    width: 175px;
-    float: left;
-    position: relative;
-    overflow: hidden;
-    margin-top: -10px;
+
 }
 
 .background-c{
     background-color: #ebe5d5;
+}
+
+.py-2.full-width {
+    flex: 1;
+    height: 10vw;
+    width: 90vw;
 }
 
 
@@ -47,7 +66,7 @@ h2 {
 
 .paragraph-style {
     color: #4a3432;
-    width: 25%;
+    width: 25vw;
     margin-left: 20px;
     background-color: #ebe5d5;
     padding: 25px;
@@ -59,12 +78,11 @@ h2 {
     justify-content: center;
     align-items: center;
     background-color: 	#ebe5d5;
-    width: 85%;
+
 }
 .nav-bar {
     display: flex;
     text-align: center;
-    margin-left: -125px;
 }
 
 .item{
@@ -99,16 +117,9 @@ a{
     text-decoration: none;
 }
 
-.content-container{
-    padding-top: 20px;
-    display: flex;
-    width: 80%;
-    margin: auto;
-    justify-content: center;
-}
 .content {
     display: flex;
-    width: 70%;
+    width: 70vw;
     flex-wrap: wrap;
     justify-content: center;
     gap: 25px;
@@ -118,59 +129,53 @@ a{
 
 
 .book-container{
-    
+    display: flex;
+    flex-direction: column;
     background-color:white;
-    width: 15%;
-    height: 225px;
+    width: 10vw;
+    height: 18vw;
     margin-top: 15px;
     margin-bottom: 15px;
-    
+    padding: 5px;
 
 }
 
 .cr-r{
     text-align: right;
 }
-.website{
-    padding-right: 20px;
-    text-align: center;
-    color: #4A3432;
-    font-weight: 600;
-    font-stretch: normal;
-    font-style: normal;
-    font-size: 25px;
-    letter-spacing: 1px;
-}
+
 .search-bar-container{
-    width: 80%;
+    width: 40vw;
     display: flex;
     justify-content: center;
     padding-bottom: 20px;
-    margin-left: -120px;
 }
 #search-bar{
-    width: 500px;
+    width: 500vw;
 
 }
 
 .book{
     display: block;
-  margin-left: auto;
-  margin-right: auto;
-    height: 130px;
-    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    height: 10vw;
+    width: 8vw;
     object-fit: contain;
 }
+
 p{
     padding: 0px;
     margin: 0px;
 }
+
 .book-title{
     font-size: 10px;
     font-weight: bold;
     text-align: center;
     padding-top: 5px;
 }
+
 .book-author{
 font-size: 8px;
 text-decoration: underline;
@@ -178,6 +183,7 @@ text-align: center;
 padding-top: 5px;
 
 }
+
 .book-price{
     font-size: 8px;
     font-weight: bold;

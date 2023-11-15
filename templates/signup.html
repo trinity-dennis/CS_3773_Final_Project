@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block script %}
+<!--script to open the login form-->
+<script src="static/assets/scripts/account.js"></script>
+{% endblock %}
+
+{% block content %} 
+<!-- Pop-up form container -->
+<div class="overlay" id="signup-overlay"></div>
+<div class="signup-form-container" id="signup-form-container">
+    <form id="signup-form" method="get">
+        <div class="text-container">
+            <h3>Sign Up</h3>
+        </div>
+        <div class="close-button-container">
+            <button class="close-button" type="submit" id="signup-close-button" onclick="closeSignupForm()">X</button>
+        </div>
+        <div class="username-container">
+            <label class="username-style" for="signup-username"><b>Username/Email:</b></label>
+            <input type="text" name="signup-username" id="signup-username" />
+        </div>
+        <div class="password-container">
+            <label class="password-style" for="signup-password"><b>Password:</b></label>
+            <input type="password" name="signup-password" id="signup-password" />
+        </div>
+        <div class="submit-button-container">
+            <input class="submit-button" type="submit" value="Sign Up" id="signup-submit-button">
+        </div>
+    </form>
+</div>
+{% endblock %}
