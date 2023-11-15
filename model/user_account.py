@@ -8,4 +8,3 @@ class UserAccount(BaseModel):
     id = Column(Integer, primary_key=True, autoincrement=True)
     firstName = Column(String)
     lastName = Column(String)
-
