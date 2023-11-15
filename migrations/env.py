@@ -1,13 +1,8 @@
 from model.base_model import BaseModel
-from model.user_account import UserAccount
-from model.book import Book
 from model.accessories import Accessories
-from model.accessoryOrders import AccessoryOrders
-from model.administrators import Administrators
-from model.bookAndAccessoryOrders import BookAndAccessoryOrders
-from model.bookOrders import BookOrders
-from model.customerWithAccounts import CustomerWithAccounts
-from model.customerWithoutAccounts import CustomerWithoutAccounts
+from model.orders import Orders
+from model.accounts import Account
+from model.book import Book
 
 from logging.config import fileConfig
 

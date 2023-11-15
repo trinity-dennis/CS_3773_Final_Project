@@ -1,6 +1,6 @@
 import unittest
 from database.database_executor import DatabaseExecutor, DatabaseSession
-from model.user_account import UserAccount
+from model.accounts import Account
 
 
 class TestDatabaseExecutor(unittest.TestCase):
@@ -14,7 +14,7 @@ class TestDatabaseExecutor(unittest.TestCase):
         self.assertEqual('Bob', user_account.lastName, "Expected the users last name to be Bob")
 
     def test_add_delete_user_account(self):
-        nu = UserAccount(firstName="Test", lastName="User")
+        nu = Account(firstName="Test", lastName="User")
         nu.save()
 
         user_accounts = self.db_exec.get_user_accounts()
