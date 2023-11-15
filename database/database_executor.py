@@ -3,6 +3,7 @@ from sqlalchemy.orm import make_transient
 from database.database_session import DatabaseSession
 from model.accounts import Account
 from model.book import Book
+from model.accessories import Accessories
 
 
 class DatabaseExecutor:
@@ -25,3 +26,12 @@ class DatabaseExecutor:
                 session.expunge(book)
                 make_transient(book)
             return books
+
+    def get_accessories(self):
+        with self._db_session.session() as session:
+            accessories = session.query(Accessories).all()
+            for accessory in accessories:
+                # disconnect from database so updates aren't tracked
+                session.expunge(accessory)
+                make_transient(accessory)
+            return accessories

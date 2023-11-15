@@ -6,8 +6,7 @@ class Accessories(BaseModel):
     __tablename__ = 'accessories'
 
     accessory_id = Column(Integer, primary_key=True, autoincrement=True)
-    name = Column(String)
-    description = Column(String)
-    title = Column(String)
+    img = Column(String)
+    item_name = Column(String)
     quantity = Column(Integer)
     price = Column(Double)

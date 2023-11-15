@@ -101,8 +101,13 @@ def comic_manga():
 
 @app.route('/accessories')
 def accesories():
-    # test to see if i could route link
-    return render_template("display-accessories.html", genre_page="Accessories")
+    db_executor = DatabaseExecutor()
+
+    # get the accessories
+    genre_page = "Accessories"
+    accessories = db_executor.get_accessories()
+    accessories_data = [{'img': accessory.img, 'item_name': accessory.item_name, 'price': accessory.price} for accessory in accessories]
+    return render_template("display-accessories.html", genre_page="Accessories", accessories=accessories_data)
 
 
 @app.route('/shopping-cart')

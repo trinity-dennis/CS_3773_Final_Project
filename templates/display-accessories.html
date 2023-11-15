@@ -2,5 +2,14 @@
 {% extends "base.html" %}
 {% block content %}
 <h2>{{ genre_page}}</h2>
-TODO: display accessories, can be done similar to the books
+<div class="content">
+    <!-- For loop printing out book containers-->
+    {% for accessory in accessories %}
+    <div class="accessory-container rounded-3 shadow">
+        <img class="accessory" src="{{ url_for('static', filename='assets/accessories/'+ accessory.img)}}" alt="accessory">
+        <p class="item-name">{{accessory.item_name}}</p>
+        <p class="item-price">{{accessory.price}}</p>
+    </div>
+    {% endfor %}
+</div>
 {% endblock %}

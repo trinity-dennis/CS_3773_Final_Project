@@ -10,4 +10,5 @@ class Book(BaseModel):
     genre = Column(String)
     title = Column(String)
     author = Column(String)
+    quantity = Column(Integer)
     price = Column(Float)

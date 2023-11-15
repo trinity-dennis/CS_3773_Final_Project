@@ -140,6 +140,18 @@ a{
 
 }
 
+.accessory-container{
+    display: flex;
+    flex-direction: column;
+    background-color:white;
+    width: 10vw;
+    height: 18vw;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    padding: 5px;
+
+}
+
 .cr-r{
     text-align: right;
 }
@@ -164,12 +176,28 @@ a{
     object-fit: contain;
 }
 
+.accessory{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    height: 10vw;
+    width: 8vw;
+    object-fit: contain;
+}
+
 p{
     padding: 0px;
     margin: 0px;
 }
 
 .book-title{
+    font-size: 10px;
+    font-weight: bold;
+    text-align: center;
+    padding-top: 5px;
+}
+
+.item-name{
     font-size: 10px;
     font-weight: bold;
     text-align: center;
@@ -185,6 +213,13 @@ padding-top: 5px;
 }
 
 .book-price{
+    font-size: 8px;
+    font-weight: bold;
+    text-align: center;
+    padding-top: 5px;
+}
+
+.item-price{
     font-size: 8px;
     font-weight: bold;
     text-align: center;
