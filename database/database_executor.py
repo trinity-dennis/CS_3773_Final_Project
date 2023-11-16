@@ -20,6 +20,8 @@ class DatabaseExecutor:
         with self._db_session.session() as session:
             try:
                 user = session.query(Account).filter_by(username=username, password=password).one()
+                print("HELLO")
+                print(user)
                 return user
             except NoResultFound:
                 return None

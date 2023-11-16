@@ -6,7 +6,7 @@ class Populate:
     db: DatabaseSession = DatabaseSession()
 
     def delete_all_except_admin(self):
-        with self.db.session() as session:
+         with self.db.session() as session:
             # deletes all accounts that are not admin
             session.query(Account).filter(Account.admin == False).delete()
             session.commit()
@@ -14,5 +14,4 @@ class Populate:
 
 if __name__ == "__main__":
     pop = Populate()
-
     pop.delete_all_except_admin()

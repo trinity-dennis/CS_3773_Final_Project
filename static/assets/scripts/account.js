@@ -43,6 +43,7 @@ window.onload = function() {
         })
         .then(response => response.text())
         .then(data => {
+            console.log("Server response:", data);
             if (data === 'success') {
                 // Successful login, close the form
                 closeLoginForm();
