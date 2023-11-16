@@ -109,6 +109,19 @@ def accesories():
     accessories_data = [{'img': accessory.img, 'item_name': accessory.item_name, 'price': accessory.price} for accessory in accessories]
     return render_template("display-accessories.html", genre_page="Accessories", accessories=accessories_data)
 
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    db_executor = DatabaseExecutor()
+    if request.method == 'POST':
+        username = request.json.get('login-username')
+        password = request.json.get('login-password')
+        user = db_executor.authenticate_user(username, password)
+        if user:
+            print("SUCCESS")
+            return 'success'
+        else:
+            print("FAILED")
+            return 'Invalid username or password'
 
 @app.route('/signup', methods=['POST'])
 def signup():

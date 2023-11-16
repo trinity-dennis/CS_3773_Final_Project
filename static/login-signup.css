@@ -45,6 +45,13 @@
     z-index: 2; /* Ensure it appears above other elements */
 }
 
+/* Button to either login as user ot admin */
+.role-container {
+    position: absolute;
+    bottom: 25%;
+    left: 37%;
+}
+
 .signup-text-container {
     position: absolute;
     top: 3%;
@@ -94,6 +101,14 @@
     position: absolute;
     top: 50%;
     left: 29%;
+}
+
+.error-message {
+    color: red;
+    position: absolute;
+    font-size: 20px;
+    bottom: 34%;
+    left: 30%;
 }
 
 .submit-button-container {

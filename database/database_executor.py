@@ -1,4 +1,5 @@
 from sqlalchemy.orm import make_transient
+from sqlalchemy.orm.exc import NoResultFound
 
 from database.database_session import DatabaseSession
 from model.accounts import Account
@@ -14,6 +15,14 @@ class DatabaseExecutor:
         new_user = Account(admin=admin, username=username, password=password)
         with self._db_session.session() as session:
             session.add(new_user)
+
+    def authenticate_user(self, username, password):
+        with self._db_session.session() as session:
+            try:
+                user = session.query(Account).filter_by(username=username, password=password).one()
+                return user
+            except NoResultFound:
+                return None
 
     def get_books_by_genre(self, genre):
         with self._db_session.session() as session:
