@@ -1,8 +1,10 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, session, redirect, url_for, jsonify
 from database.database_executor import DatabaseExecutor
 
 app = Flask(__name__)
 
+# secret key for session
+app.secret_key = 'TODO: Set Secret Key'
 
 @app.route('/')
 def home_page():
@@ -117,11 +119,18 @@ def login():
         password = request.json.get('login-password')
         user = db_executor.authenticate_user(username, password)
         if user:
+            session['username'] = username
             print("SUCCESS")
-            return 'success'
+            return jsonify({"status": "success", "username": username})
         else:
             print("FAILED")
-            return 'Invalid username or password'
+            return jsonify({"status": "failure", "error": "Invalid username or password"})
+
+@app.route('/logout')
+def logout():
+    # Clear the session to log the user out
+    session.pop('username', None)
+    return render_template("index.html", books="pass book_data", accessories="add accessory_data")
 
 @app.route('/signup', methods=['POST'])
 def signup():
@@ -142,6 +151,13 @@ def signup():
 @app.route('/shopping-cart')
 def shopping_cart():
     return 'Use templates to build out the shopping cart UI found at this route (http://127.0.0.1:5000/shopping-cart)'
+
+@app.route('/check_login_status')
+def check_login_status():
+    if 'username' in session:
+        return jsonify({"status": "success", "username": session['username']})
+    else:
+        return jsonify({"status": "failure"})
 
 
 if __name__ == '__main__':

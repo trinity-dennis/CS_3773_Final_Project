@@ -45,7 +45,7 @@
     z-index: 2; /* Ensure it appears above other elements */
 }
 
-/* Button to either login as user ot admin */
+/* Button to either login as user or admin */
 .role-container {
     position: absolute;
     bottom: 25%;
