@@ -122,7 +122,7 @@ document.addEventListener('DOMContentLoaded', function() {
             };
 
             // send AJAX request to Flask server
-            fetch("/signup", {
+           fetch("/signup", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
@@ -131,6 +131,7 @@ document.addEventListener('DOMContentLoaded', function() {
             })
             .then(response => {
                 closeSignupForm();
+                document.getElementById("signup-form").reset();
             })
             .catch(error => {
                 console.error("Error:", error);
