@@ -37,6 +37,7 @@ def display_books(genre):
 
     return render_template("display-books.html", genre_page=genre, books=books_data, sort_by=sort_by, order=order)
 
+
 # ...
 
 @app.route('/display-accessories', methods=['GET'])
@@ -61,9 +62,12 @@ def display_accessories():
     if order == 'desc':
         accessories.reverse()
 
-    accessories_data = [{'img': accessory.img, 'item_name': accessory.item_name, 'price': accessory.price} for accessory in accessories]
+    accessories_data = [{'img': accessory.img, 'item_name': accessory.item_name, 'price': accessory.price} for accessory
+                        in accessories]
 
-    return render_template("display-accessories.html", genre_page="Accessories", accessories=accessories_data, sort_by=sort_by, order=order)
+    return render_template("display-accessories.html", genre_page="Accessories", accessories=accessories_data,
+                           sort_by=sort_by, order=order)
+
 
 # ...
 
@@ -164,7 +168,7 @@ def comic_manga():
 
 
 @app.route('/accessories')
-def accesories():
+def accessories():
     db_executor = DatabaseExecutor()
 
     # get the accessories
