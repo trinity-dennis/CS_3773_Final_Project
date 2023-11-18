@@ -117,6 +117,12 @@ a{
     text-decoration: none;
 }
 
+.sorting-options {
+    display: flex;
+    width: 20vw;
+    justify-content: center;
+}
+
 .content {
     display: flex;
     width: 70vw;
