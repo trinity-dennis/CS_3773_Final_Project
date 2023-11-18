@@ -231,5 +231,29 @@ def check_login_status():
         return jsonify({"status": "failure"})
 
 
+@app.route('/search', methods=["GET"])
+def search():
+    db_executor = DatabaseExecutor()
+    user_search = request.args.get('user_search')
+    item_search = user_search
+    # if the item_search is a book title
+    if db_executor.get_books_by_title(item_search):
+        books = db_executor.get_books_by_title(item_search)
+        books_data = [{'img': book.img, 'title': book.title, 'author': book.author, 'price': book.price} for book in books]
+        return render_template('search.html', user_search=user_search, books=books_data)
+    # if the item_search is an accessory
+    elif db_executor.get_accessories_by_item_name(item_search):
+        accessories = db_executor.get_accessories_by_item_name(item_search)
+        accessories_data = [{'img': accessory.img, 'item_name': accessory.item_name, 'price': accessory.price} for accessory in accessories]
+        return render_template('search.html', user_search=user_search, accessories=accessories_data)
+    # if the item is not found display all books and accessories
+    else:
+        books = db_executor.get_books()
+        accessories = db_executor.get_accessories()
+        accessories_data = [{'img': accessory.img, 'item_name': accessory.item_name, 'price': accessory.price} for accessory in accessories]
+        books_data = [{'img': book.img, 'title': book.title, 'author': book.author, 'price': book.price} for book in books]
+        return render_template('search.html',  user_search=user_search + ': no results found', books=books_data, accessories=accessories_data)
+
+
 if __name__ == '__main__':
     app.run(debug=True)

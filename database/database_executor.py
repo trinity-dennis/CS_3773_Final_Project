@@ -41,3 +41,27 @@ class DatabaseExecutor:
                 session.expunge(accessory)
                 make_transient(accessory)
             return accessories
+
+    def get_books_by_title(self, title):
+        with self._db_session.session() as session:
+            books = session.query(Book).filter_by(title=title.title()).all()
+            for book in books:
+                session.expunge(book)
+                make_transient(book)
+        return books
+
+    def get_books(self):
+        with self._db_session.session() as session:
+            books = session.query(Book).all()
+            for book in books:
+                session.expunge(book)
+                make_transient(book)
+        return books
+
+    def get_accessories_by_item_name(self, item):
+        with self._db_session.session() as session:
+            accessories = session.query(Accessories).filter(Accessories.item_name.like(item)).all()
+            for accessory in accessories:
+                session.expunge(accessory)
+                make_transient(accessory)
+        return accessories

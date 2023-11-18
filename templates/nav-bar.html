@@ -23,10 +23,11 @@
     </nav>
 
     <div class="nav-bar-contain"> <!-- Contains First navbar "Calico reads " and the search bar-->
-        <div class="search-bar-container">
-
-            <input id="search-bar" type="text" placeholder="Search..">
-        </div>
+        <form id="searched" method="GET" action="/search">
+            <div class="search-bar-container">
+                <input id="search-bar" type="text" placeholder="Search.." name="user_search">
+            </div>
+        </form>
     </div>
 
     <div class="nav-bar-contain">
