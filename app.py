@@ -536,10 +536,5 @@ def search():
                                accessories=accessories_data)
 
 
-@app.route('/admin-create-modify')
-def admin_create_modify():
-    return 'figure out what to do'
-
-
 if __name__ == '__main__':
     app.run(debug=True)
