@@ -1,3 +1,5 @@
+import os
+
 from sqlalchemy.orm import make_transient
 from sqlalchemy.orm.exc import NoResultFound
 
@@ -8,9 +10,6 @@ from model.accessories import Accessories
 from model.cart import Cart
 
 
-
-
-
 class DatabaseExecutor:
     def __init__(self):
         self._db_session = DatabaseSession()
@@ -19,14 +18,14 @@ class DatabaseExecutor:
         with self._db_session.session() as session:
             session.query(Cart).filter_by(item_no=id).delete()
 
-
     def register_user(self, admin, username, password):
         new_user = Account(admin=admin, username=username, password=password)
         with self._db_session.session() as session:
             session.add(new_user)
 
-    def add_cart_item(self, session_id,item_name, quantity, item_type , price, img, id):
-        cart_item = Cart(session_id=session_id, item_name=item_name, quantity=quantity, type=item_type, price=price, img=img, item_id=id)
+    def add_cart_item(self, session_id, item_name, quantity, item_type, price, img, id):
+        cart_item = Cart(session_id=session_id, item_name=item_name, quantity=quantity, type=item_type, price=price,
+                         img=img, item_id=id)
         with self._db_session.session() as session:
             session.add(cart_item)
 
@@ -39,7 +38,7 @@ class DatabaseExecutor:
                 make_transient(item)
             return items
 
-    def increase_quantity(self,id):
+    def increase_quantity(self, id):
         with self._db_session.session() as session:
             items = session.query(Cart).filter_by(item_no=id).first()
             items.quantity += 1
@@ -52,7 +51,7 @@ class DatabaseExecutor:
 
     def delete_cart(self):
         with self._db_session.session() as session:
-             session.query(Cart).delete()
+            session.query(Cart).delete()
 
     def authenticate_user(self, username, password):
         with self._db_session.session() as session:
@@ -137,9 +136,6 @@ class DatabaseExecutor:
                 make_transient(accessory)
         return accessories
 
-
-
-
     def get_accessories_by_id(self, id):
         with self._db_session.session() as session:
             accessories = session.query(Accessories).filter_by(accessory_id=id).all()
@@ -149,3 +145,20 @@ class DatabaseExecutor:
                 make_transient(accessory)
             return accessories
 
+    def add_book(self, genre, title, author, quantity, price, availability, img_filename):
+        with self._db_session.session() as session:
+            new_book = Book(img=img_filename, genre=genre, title=title, author=author,
+                            quantity=quantity, price=price, availability=availability)
+            session.add(new_book)
+            session.commit()
+
+        return {'success': True, 'message': 'Book added successfully'}
+
+    def add_accessory(self, item_name, quantity, price, availability, img_filename):
+        with self._db_session.session() as session:
+            new_accessory = Accessories(img=img_filename, item_name=item_name,
+                                        quantity=quantity, price=price, availability=availability)
+            session.add(new_accessory)
+            session.commit()
+
+        return {'success': True, 'message': 'Accessory added successfully'}

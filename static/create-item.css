@@ -1,0 +1,24 @@
+/* this will hold any styles that will be used for the 'create item' table */
+
+.create-button {
+    display: flex;
+    justify-content: center;
+    background-color: #e07e3d;
+    color: #fff;
+    border: 1px solid black;
+    width: 10vw;
+    margin: 0 auto;
+}
+
+.form-container {
+    width: 50vw;
+    margin: 0 auto;
+}
+
+.form {
+    display: flex;
+    width: auto;
+    justify-content: center;
+    border: 1px solid black;
+    padding: 10px;
+}
