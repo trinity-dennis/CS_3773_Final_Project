@@ -89,6 +89,57 @@ class DatabaseExecutor:
                 make_transient(accessory)
             return accessories
 
+    def get_books_by_title(self, title):
+        with self._db_session.session() as session:
+            books = session.query(Book).filter(Book.title.contains(title)).all()
+            for book in books:
+                session.expunge(book)
+                make_transient(book)
+        return books
+
+    def get_books(self):
+        with self._db_session.session() as session:
+            books = session.query(Book).all()
+            for book in books:
+                session.expunge(book)
+                make_transient(book)
+        return books
+
+    def get_stock_information(self):
+        with self._db_session.session() as session:
+            books = session.query(Book).all()
+            accessories = session.query(Accessories).all()
+
+            # Make books and accessories transient
+            for item in books + accessories:
+                session.expunge(item)
+                make_transient(item)
+
+            return books + accessories
+
+    def get_order_information(self):
+        with self._db_session.session() as session:
+            books = session.query(Book).all()
+            accessories = session.query(Accessories).all()
+
+            # Make books and accessories transient
+            for item in books + accessories:
+                session.expunge(item)
+                make_transient(item)
+
+            return books + accessories
+
+    def get_accessories_by_item_name(self, item):
+        with self._db_session.session() as session:
+            accessories = session.query(Accessories).filter(Accessories.item_name.contains(item)).all()
+            for accessory in accessories:
+                session.expunge(accessory)
+                make_transient(accessory)
+        return accessories
+
+
+
+
     def get_accessories_by_id(self, id):
         with self._db_session.session() as session:
             accessories = session.query(Accessories).filter_by(accessory_id=id).all()

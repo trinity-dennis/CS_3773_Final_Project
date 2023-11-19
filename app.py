@@ -1,15 +1,14 @@
 from flask import Flask, render_template, request, session, redirect, url_for, jsonify
-import random
-
 from database.database_executor import DatabaseExecutor
+from model.book import Book  # Add this import
+from model.accessories import Accessories  # Add this import
 
 app = Flask(__name__)
-cart_books =[]
-cart_accessories = []
-
 
 # secret key for session
 app.secret_key = 'TODO: Set Secret Key'
+
+from flask import request
 
 @app.route('/')
 def home_page():
@@ -63,6 +62,64 @@ def add_to_cart(id):
 
 
 
+@app.route('/display-books/<genre>', methods=['GET'])
+def display_books(genre):
+    db_executor = DatabaseExecutor()
+
+    # Get books by genre
+    books = db_executor.get_books_by_genre(genre)
+
+    # Sorting parameters
+    sort_by = request.args.get('sort_by', 'title')
+    order = request.args.get('order', 'asc')
+
+    # Sort the books based on the selected criteria
+    if sort_by == 'title':
+        books.sort(key=lambda x: x.title)
+    elif sort_by == 'price':
+        books.sort(key=lambda x: float(x.price))
+    elif sort_by == 'quantity':
+        books.sort(key=lambda x: x.quantity)
+
+    # Handle descending order
+    if order == 'desc':
+        books.reverse()
+
+    books_data = [{'img': book.img, 'title': book.title, 'author': book.author, 'price': book.price, 'quantity': book.quantity} for book in books]
+
+    return render_template("display-books.html", genre_page=genre, books=books_data, sort_by=sort_by, order=order)
+
+# ...
+
+@app.route('/display-accessories', methods=['GET'])
+def display_accessories():
+    db_executor = DatabaseExecutor()
+
+    # Get accessories
+    accessories = db_executor.get_accessories()
+
+    # Sorting parameters
+    sort_by = request.args.get('sort_by', 'title')
+    order = request.args.get('order', 'asc')
+
+    # Sort the accessories based on the selected criteria
+    if sort_by == 'title':
+        accessories.sort(key=lambda x: x.item_name)
+    elif sort_by == 'price':
+        accessories.sort(key=lambda x: float(x.price))
+    elif sort_by == 'quantity':
+        accessories.sort(key=lambda x: x.quantity)
+
+    # Handle descending order
+    if order == 'desc':
+        accessories.reverse()
+
+    accessories_data = [{'img': accessory.img, 'item_name': accessory.item_name, 'price': accessory.price, 'quantity': accessory.quantity} for accessory in accessories]
+
+    return render_template("display-accessories.html", genre_page="Accessories", accessories=accessories_data, sort_by=sort_by, order=order)
+
+# ...
+
 
 @app.route('/non-fiction')
 def non_fiction():
@@ -71,8 +128,7 @@ def non_fiction():
     # Get books by genre
     genre_page = "Non-Fiction"
     books = db_executor.get_books_by_genre(genre_page)
-    books_data = [{'img': book.img, 'title': book.title, 'author': book.author, 'price': book.price, 'id': book.id,
-                   'availability': book.availability } for book in books]
+    books_data = [{'img': book.img, 'title': book.title, 'author': book.author, 'price': book.price} for book in books]
     return render_template("display-books.html", genre_page=genre_page, books=books_data)
 
 
@@ -83,7 +139,7 @@ def fiction():
     # Get books by genre
     genre_page = "Fiction"
     books = db_executor.get_books_by_genre(genre_page)
-    books_data = [{'img': book.img, 'title': book.title, 'author': book.author, 'price': book.price ,'id': book.id,'availability': book.availability } for book in books]
+    books_data = [{'img': book.img, 'title': book.title, 'author': book.author, 'price': book.price} for book in books]
     return render_template("display-books.html", genre_page=genre_page, books=books_data)
 
 
@@ -94,7 +150,7 @@ def romance():
     # Get books by genre
     genre_page = "Romance"
     books = db_executor.get_books_by_genre(genre_page)
-    books_data = [{'img': book.img, 'title': book.title, 'author': book.author, 'price': book.price , 'id': book.id, 'availability': book.availability } for book in books]
+    books_data = [{'img': book.img, 'title': book.title, 'author': book.author, 'price': book.price} for book in books]
     return render_template("display-books.html", genre_page=genre_page, books=books_data)
 
 
@@ -105,7 +161,7 @@ def action():
     # Get books by genre
     genre_page = "Action"
     books = db_executor.get_books_by_genre(genre_page)
-    books_data = [{'img': book.img, 'title': book.title, 'author': book.author, 'price': book.price, 'id': book.id ,'availability': book.availability } for book in books]
+    books_data = [{'img': book.img, 'title': book.title, 'author': book.author, 'price': book.price} for book in books]
     return render_template("display-books.html", genre_page=genre_page, books=books_data)
 
 
@@ -116,7 +172,7 @@ def kids():
     # Get books by genre
     genre_page = "Kids"
     books = db_executor.get_books_by_genre(genre_page)
-    books_data = [{'img': book.img, 'title': book.title, 'author': book.author, 'price': book.price, 'id': book.id ,'availability': book.availability} for book in books]
+    books_data = [{'img': book.img, 'title': book.title, 'author': book.author, 'price': book.price} for book in books]
     return render_template("display-books.html", genre_page=genre_page, books=books_data)
 
 
@@ -128,7 +184,7 @@ def fantasy():
     # Get books by genre
     genre_page = "Fantasy"
     books = db_executor.get_books_by_genre(genre_page)
-    books_data = [{'img': book.img, 'title': book.title, 'author': book.author, 'price': book.price ,'id': book.id, 'availability': book.availability } for book in books]
+    books_data = [{'img': book.img, 'title': book.title, 'author': book.author, 'price': book.price} for book in books]
     return render_template("display-books.html", genre_page=genre_page, books=books_data)
 
 
@@ -139,7 +195,7 @@ def horror():
     # Get books by genre
     genre_page = "Horror"
     books = db_executor.get_books_by_genre(genre_page)
-    books_data = [{'img': book.img, 'title': book.title, 'author': book.author, 'price': book.price ,'id': book.id ,'availability': book.availability} for book in books]
+    books_data = [{'img': book.img, 'title': book.title, 'author': book.author, 'price': book.price} for book in books]
     return render_template("display-books.html", genre_page=genre_page, books=books_data)
 
 
@@ -155,7 +211,7 @@ def comic_manga():
 
 
 @app.route('/accessories')
-def accesories():
+def accessories():
     db_executor = DatabaseExecutor()
 
     # get the accessories
@@ -173,7 +229,6 @@ def login():
         user = db_executor.authenticate_user(username, password)
         if user:
             session['username'] = username
-            session['session_id'] = random.random()
             print("SUCCESS")
             return jsonify({"status": "success", "username": username})
         else:
@@ -215,6 +270,64 @@ def shopping_cart():
     a_total = round(subtotal * tax , 2)
 
 
+# Add this to your existing Flask app code
+
+@app.route('/stock')
+def display_stock():
+    db_executor = DatabaseExecutor()
+
+    # Get stock information (books and accessories)
+    stock = db_executor.get_stock_information()
+
+    # Sorting parameters
+    sort_by = request.args.get('sort_by', 'title')
+    order = request.args.get('order', 'asc')
+
+    # Sort stock items based on the selected criteria
+    if sort_by == 'title':
+        stock.sort(key=lambda x: str(getattr(x, 'title', '')) if isinstance(x, Book) else str(getattr(x, 'item_name', '')))
+    elif sort_by == 'price':
+        stock.sort(key=lambda x: float(getattr(x, 'price', 0)))
+    elif sort_by == 'quantity':
+        stock.sort(key=lambda x: int(getattr(x, 'quantity', 0)))
+
+    # Handle descending order
+    if order == 'desc':
+        stock.reverse()
+
+    return render_template("stock.html", stock=stock, sort_by=sort_by, order=order)
+
+@app.route('/orders')
+def display_orders():
+    db_executor = DatabaseExecutor()
+
+    # Get stock information (books and accessories)
+    stock = db_executor.get_stock_information()
+
+    # Sorting parameters
+    sort_by = request.args.get('sort_by', 'title')
+    order = request.args.get('order', 'asc')
+
+    # Sort stock items based on the selected criteria
+    if sort_by == 'title':
+        stock.sort(key=lambda x: str(getattr(x, 'title', '')) if isinstance(x, Book) else str(getattr(x, 'item_name', '')))
+    elif sort_by == 'price':
+        stock.sort(key=lambda x: float(getattr(x, 'price', 0)))
+    elif sort_by == 'quantity':
+        stock.sort(key=lambda x: int(getattr(x, 'quantity', 0)))
+
+    # Handle descending order
+    if order == 'desc':
+        stock.reverse()
+
+    return render_template("orders.html", stock=stock, sort_by=sort_by, order=order)
+
+
+
+
+
+
+
     return render_template("cart.html", books=items, subtotal=subtotal, tax=tax, total=a_total)
 @app.route("/increase<id>")
 def increase_quantity(id):
@@ -251,6 +364,40 @@ def check_login_status():
         return jsonify({"status": "success", "username": session['username']})
     else:
         return jsonify({"status": "failure"})
+
+
+@app.route('/search', methods=["GET"])
+def search():
+    db_executor = DatabaseExecutor()
+    user_search = request.args.get('user_search')
+    item_search = user_search
+    # if the item_search is a book title
+    if db_executor.get_books_by_title(item_search):
+        books = db_executor.get_books_by_title(item_search)
+        books_data = [{'img': book.img, 'title': book.title, 'author': book.author, 'price': book.price} for book in books]
+        if db_executor.get_accessories_by_item_name(item_search):
+            accessories = db_executor.get_accessories_by_item_name(item_search)
+            accessories_data = [{'img': accessory.img, 'item_name': accessory.item_name, 'price': accessory.price} for accessory in accessories]
+            return render_template('search.html', user_search=user_search, books=books_data, accessories=accessories_data)
+        else:
+            return render_template('search.html', user_search=user_search, books=books_data)
+    # if the item_search is an accessory
+    elif db_executor.get_accessories_by_item_name(item_search):
+        accessories = db_executor.get_accessories_by_item_name(item_search)
+        accessories_data = [{'img': accessory.img, 'item_name': accessory.item_name, 'price': accessory.price} for accessory in accessories]
+        return render_template('search.html', user_search=user_search, accessories=accessories_data)
+    # if the item is not found display all books and accessories
+    else:
+        books = db_executor.get_books()
+        accessories = db_executor.get_accessories()
+        accessories_data = [{'img': accessory.img, 'item_name': accessory.item_name, 'price': accessory.price} for accessory in accessories]
+        books_data = [{'img': book.img, 'title': book.title, 'author': book.author, 'price': book.price} for book in books]
+        return render_template('search.html',  user_search=user_search + ': no results found', books=books_data, accessories=accessories_data)
+
+
+@app.route('/admin-create-modify')
+def admin_create_modify():
+    return 'figure out what to do'
 
 
 if __name__ == '__main__':
