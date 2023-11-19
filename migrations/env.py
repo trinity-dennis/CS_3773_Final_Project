@@ -3,7 +3,7 @@ from model.accessories import Accessories
 from model.orders import Orders
 from model.accounts import Account
 from model.book import Book
-
+from model.cart import Cart
 from logging.config import fileConfig
 
 from sqlalchemy import engine_from_config

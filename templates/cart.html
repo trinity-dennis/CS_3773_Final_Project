@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Check</title>
+    <link rel="stylesheet" type="text/css" href="/static/cart-style.css">
+</head>
+<body>
+<div>
+           </form>
+
+                 <form action="/non-fiction">
+            <input id="continue-shopping" type="submit" value="Continue Shopping" />
+            </form>
+        </div>
+    <div class="container">
+        <div id="cart">Shopping Cart</div>
+
+        <div class="content-container">
+
+            {% for book in books %}
+            <div class="item-container">
+
+                {% if book.type == "book" %}
+                <img class="book" src="{{ url_for('static', filename='assets/books/'+ book.img)}}" alt="book">
+                {% else %}
+                <img class="book" src="{{ url_for('static', filename='assets/accessories/'+ book.img)}}" alt="book">
+                {% endif %}
+              <div class="item-title">{{book.item_name}}</div>
+                <label id="quantityLabel">Quantity </label>
+                </form>
+                <form action="/increase{{book.item_no}}">
+                <input id="increase" type="submit" value="+" />
+                </form>
+                <div class="item-quantity"> {{book.quantity}}</div>
+                </form>
+                <form action="/decrease{{book.item_no}}">
+                <input id="decrease" type="submit" value="-" />
+                </form>
+
+                </form>
+                <form action="/remove-book{{book.item_no}}">
+                <input class="remove" type="submit" value="Remove" />
+                </form>
+
+                <div class="item-price">{{(book.price * book.quantity * 1.00)}}</div>
+
+             </div>
+             {% endfor %}
+
+        </div>
+
+         <div class="calc-container">
+
+              <div class="subtotal">
+                  <label>Subtotal</label>
+                  <label>{{subtotal}} </label>  </div>
+              <div class="tax">
+                  <label>Tax</label>
+                 <label>{{tax}}</label>  </div>
+              <div class="total">
+                 <label> Total </label>
+                 <label>{{total}} </label>  </div>
+             <div class="actions">
+                 <form action="/remove-all">
+            <input id="clear-button" type="submit" value="Clear Cart" />
+            </form>
+
+                 <form action="/check-out">
+            <input id="checkout" type="submit" value="Check Out" />
+            </form>
+             </div>
+
+
+          </div>
+
+
+
+
+    </div>
+
+
+
+</body>
+</html>

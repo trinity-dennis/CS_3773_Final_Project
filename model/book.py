@@ -12,3 +12,4 @@ class Book(BaseModel):
     author = Column(String)
     quantity = Column(Integer)
     price = Column(Float)
+    availability = Column(Integer)

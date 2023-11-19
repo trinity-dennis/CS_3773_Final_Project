@@ -1,0 +1,138 @@
+body{
+background-color: #ebe5d5;
+}
+.container{
+
+    background-color: #ebe5d5;
+    min -height: 400px;
+    margin-top: 0px;
+    height: fit-content;
+
+}
+
+#cart{
+    text-align: center;
+    font-size: 50px;
+    padding-top: 50px;
+
+}
+.content-container{
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 50px;
+    width: 60%;
+    min-height: 300px;
+    background-color: white;
+
+
+}
+.calc-container{
+padding-top:10px;
+
+margin-left: auto;
+margin-right: auto;
+width :60%;
+display: flex;
+flex-direction: column;
+background-color: white;
+border-style: solid;
+border-width: 1.5px 0px 0px 0px;
+}
+.subtotal{
+display: flex;
+justify-content: space-between;
+padding: 5px 20px;
+}
+
+.tax{
+display: flex;
+justify-content:space-between;
+padding: 5px 20px;
+}
+.total{
+display:flex;
+justify-content:space-between;
+padding: 5px 20px;
+font-weight:bold;
+font-size: 30px;
+
+}
+.actions{
+display:flex;
+justify-content:space-around;
+}
+#clear-button{
+margin-top: 20px;
+height: 50px;
+width: 100px;
+background-color: red;
+border-radius: 10%;
+color:white;
+}
+
+#checkout{
+margin-top: 20px;
+height: 50px;
+width: 100px;
+background-color: green;
+border-radius: 10%;
+color:white;
+}
+
+#continue-shopping{
+margin-left: 10px;
+height: 40px;
+width: 150px;
+border-radius: 10%;
+}
+.item-container{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 10px;
+    background-color: white;
+    height: 100px;
+
+}
+.book{
+    display: inline-block;
+   max-height: 80px;
+    min-width: 80px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+
+}
+.item-title{
+    display: inline-block;
+    margin-left: 30px;
+    font-size: 20px;
+    padding-top: auto;
+    padding-bottom: auto;
+    white-space: nowrap;
+overflow: hidden;
+max-width : 220px;
+
+
+
+}
+#increase{
+}
+#decrease{
+}
+#quantityLabel{
+}
+.item-price{
+
+    display: inline-block;
+}
+.item-quantity{
+
+    display: inline-block;
+}
+.remove{
+background-color:red;
+color: white;
+border-radius: 25px;
+}

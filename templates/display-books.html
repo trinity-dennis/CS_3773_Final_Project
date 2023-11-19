@@ -6,10 +6,13 @@
     <!-- For loop printing out book containers-->
     {% for book in books %}
     <div class="book-container rounded-3 shadow">
-        <img class="book" src="{{ url_for('static', filename='assets/books/'+ book.img)}}" alt="book">
-        <p class="book-title">{{book.title}}</p>
+        <form class="form" action="/addb{{book.id}}" method="post">
+         <img class="book" src="{{ url_for('static', filename='assets/books/'+ book.img)}}" alt="book">
+        <p class="book-title"> {{book.title}}</p>
         <p class="book-author">{{book.author}}</p>
         <p class="book-price">{{book.price}}</p>
+        <input class="addToCart" type="submit" value="Add To Cart">
+        </form>
     </div>
     {% endfor %}
 </div>

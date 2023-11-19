@@ -10,3 +10,4 @@ class Accessories(BaseModel):
     item_name = Column(String)
     quantity = Column(Integer)
     price = Column(Double)
+    availability = Column(Integer)
