@@ -85,7 +85,7 @@ def display_books(genre):
     if order == 'desc':
         books.reverse()
 
-    books_data = [{'img': book.img, 'title': book.title, 'author': book.author, 'price': book.price, 'quantity': book.quantity} for book in books]
+    books_data = [{'img': book.img, 'title': book.title, 'author': book.author, 'price': book.price, 'quantity': book.quantity ,'id': book.id} for book in books]
 
     return render_template("display-books.html", genre_page=genre, books=books_data, sort_by=sort_by, order=order)
 
@@ -128,7 +128,7 @@ def non_fiction():
     # Get books by genre
     genre_page = "Non-Fiction"
     books = db_executor.get_books_by_genre(genre_page)
-    books_data = [{'img': book.img, 'title': book.title, 'author': book.author, 'price': book.price} for book in books]
+    books_data = [{'img': book.img, 'title': book.title, 'author': book.author, 'price': book.price ,'id': book.id} for book in books]
     return render_template("display-books.html", genre_page=genre_page, books=books_data)
 
 
@@ -139,7 +139,7 @@ def fiction():
     # Get books by genre
     genre_page = "Fiction"
     books = db_executor.get_books_by_genre(genre_page)
-    books_data = [{'img': book.img, 'title': book.title, 'author': book.author, 'price': book.price} for book in books]
+    books_data = [{'img': book.img, 'title': book.title, 'author': book.author, 'price': book.price,'id': book.id} for book in books]
     return render_template("display-books.html", genre_page=genre_page, books=books_data)
 
 
@@ -150,7 +150,7 @@ def romance():
     # Get books by genre
     genre_page = "Romance"
     books = db_executor.get_books_by_genre(genre_page)
-    books_data = [{'img': book.img, 'title': book.title, 'author': book.author, 'price': book.price} for book in books]
+    books_data = [{'img': book.img, 'title': book.title, 'author': book.author, 'price': book.price,'id': book.id} for book in books]
     return render_template("display-books.html", genre_page=genre_page, books=books_data)
 
 
@@ -161,7 +161,7 @@ def action():
     # Get books by genre
     genre_page = "Action"
     books = db_executor.get_books_by_genre(genre_page)
-    books_data = [{'img': book.img, 'title': book.title, 'author': book.author, 'price': book.price} for book in books]
+    books_data = [{'img': book.img, 'title': book.title, 'author': book.author, 'price': book.price, 'id': book.id} for book in books]
     return render_template("display-books.html", genre_page=genre_page, books=books_data)
 
 
@@ -172,7 +172,7 @@ def kids():
     # Get books by genre
     genre_page = "Kids"
     books = db_executor.get_books_by_genre(genre_page)
-    books_data = [{'img': book.img, 'title': book.title, 'author': book.author, 'price': book.price} for book in books]
+    books_data = [{'img': book.img, 'title': book.title, 'author': book.author, 'price': book.price,'id': book.id} for book in books]
     return render_template("display-books.html", genre_page=genre_page, books=books_data)
 
 
@@ -184,7 +184,7 @@ def fantasy():
     # Get books by genre
     genre_page = "Fantasy"
     books = db_executor.get_books_by_genre(genre_page)
-    books_data = [{'img': book.img, 'title': book.title, 'author': book.author, 'price': book.price} for book in books]
+    books_data = [{'img': book.img, 'title': book.title, 'author': book.author, 'price': book.price,'id': book.id} for book in books]
     return render_template("display-books.html", genre_page=genre_page, books=books_data)
 
 
@@ -195,7 +195,7 @@ def horror():
     # Get books by genre
     genre_page = "Horror"
     books = db_executor.get_books_by_genre(genre_page)
-    books_data = [{'img': book.img, 'title': book.title, 'author': book.author, 'price': book.price} for book in books]
+    books_data = [{'img': book.img, 'title': book.title, 'author': book.author, 'price': book.price, 'id': book.id} for book in books]
     return render_template("display-books.html", genre_page=genre_page, books=books_data)
 
 
@@ -265,10 +265,12 @@ def shopping_cart():
     tax = 1.08
     a_total =0.00
     for item in items:
+        print(item.item_name)
         subtotal += item.price * item.quantity
     subtotal = round(subtotal,2)
     a_total = round(subtotal * tax , 2)
 
+    return render_template("cart.html", books=items, subtotal=subtotal,tax=tax, total=a_total)
 
 # Add this to your existing Flask app code
 
