@@ -162,3 +162,4 @@ class DatabaseExecutor:
             session.commit()
 
         return {'success': True, 'message': 'Accessory added successfully'}
+
