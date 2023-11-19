@@ -120,6 +120,31 @@ def display_accessories():
 
 # ...
 
+@app.route('/shopping-cart', methods=['GET', 'POST'])
+def shopping_cart():
+    db_executor = DatabaseExecutor()
+    items = db_executor.get_cart_items()
+    subtotal = 0.00
+
+    tax = 1.08
+    a_total = 0.00
+    for item in items:
+        print(item.item_name)
+        subtotal += item.price * item.quantity
+    subtotal = round(subtotal, 2)
+    if request.method == 'POST':
+        coupon = request.form.get('coupon')
+        if str(coupon) == "COUPON":
+            a_total = round(subtotal * tax,2) - 10
+            print("COUPON GOOD")
+        else:
+            a_total = round(subtotal * tax, 2)
+    else:
+        a_total = round(subtotal * tax, 2)
+
+    return render_template("cart.html", books=items, subtotal=subtotal, tax=tax, total=a_total)
+
+
 
 @app.route('/non-fiction')
 def non_fiction():
@@ -257,20 +282,7 @@ def signup():
         return ''
 
 
-@app.route('/shopping-cart')
-def shopping_cart():
-    db_executor = DatabaseExecutor()
-    items = db_executor.get_cart_items()
-    subtotal = 0.00
-    tax = 1.08
-    a_total =0.00
-    for item in items:
-        print(item.item_name)
-        subtotal += item.price * item.quantity
-    subtotal = round(subtotal,2)
-    a_total = round(subtotal * tax , 2)
 
-    return render_template("cart.html", books=items, subtotal=subtotal,tax=tax, total=a_total)
 
 # Add this to your existing Flask app code
 

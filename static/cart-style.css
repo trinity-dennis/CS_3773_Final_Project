@@ -49,6 +49,11 @@ display: flex;
 justify-content:space-between;
 padding: 5px 20px;
 }
+.coupon{
+display:flex;
+
+padding:5px 20px;
+}
 .total{
 display:flex;
 justify-content:space-between;
@@ -56,6 +61,12 @@ padding: 5px 20px;
 font-weight:bold;
 font-size: 30px;
 
+}
+.discount{
+margin-right:300px;
+}
+#coupon{
+min-width:50%;
 }
 .actions{
 display:flex;

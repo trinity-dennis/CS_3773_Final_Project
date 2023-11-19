@@ -59,6 +59,14 @@
               <div class="tax">
                   <label>Tax</label>
                  <label>{{tax}}</label>  </div>
+             <div>
+
+                 <form class="coupon" action="/shopping-cart" method="POST">
+                     <label class="discount">Discount</label>
+                     <input type="text" id="coupon" name="coupon">
+                     <input type="submit" value="Apply">
+                 </form>
+             </div>
               <div class="total">
                  <label> Total </label>
                  <label>{{total}} </label>  </div>
