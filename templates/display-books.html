@@ -9,6 +9,7 @@
         <select id="sort-by" name="sort_by">
             <option value="title" {% if sort_by == 'title' %}selected{% endif %}>Title</option>
             <option value="price" {% if sort_by == 'price' %}selected{% endif %}>Price</option>
+            <option value="quantity" {% if sort_by == 'quantity' %}selected{% endif %}>Quantity</option>
         </select>
         <label for="order">Order:</label>
         <select id="order" name="order">
