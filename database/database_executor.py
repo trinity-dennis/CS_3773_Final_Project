@@ -163,31 +163,3 @@ class DatabaseExecutor:
 
         return {'success': True, 'message': 'Accessory added successfully'}
 
-    def update_book(self, book_id, new_genre, new_price, new_availability):
-        with self._db_session.session() as session:
-            # Assuming `Book` is the model for your books table
-            book = session.query(Book).get(book_id)
-
-            if book:
-                book.genre = new_genre
-                book.price = new_price
-                book.availability = new_availability
-
-                session.commit()
-                return {'success': True, 'message': 'Book updated successfully'}
-            else:
-                return {'success': False, 'message': 'Book not found'}
-
-    def update_accessory(self, accessory_id, new_price, new_availability):
-        with self._db_session.session() as session:
-            # Assuming `Accessory` is the model for your accessories table
-            accessory = session.query(Accessories).get(accessory_id)
-
-            if accessory:
-                accessory.price = new_price
-                accessory.availability = new_availability
-
-                session.commit()
-                return {'success': True, 'message': 'Accessory updated successfully'}
-            else:
-                return {'success': False, 'message': 'Accessory not found'}
