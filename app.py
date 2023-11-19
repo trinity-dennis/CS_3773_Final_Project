@@ -240,7 +240,12 @@ def search():
     if db_executor.get_books_by_title(item_search):
         books = db_executor.get_books_by_title(item_search)
         books_data = [{'img': book.img, 'title': book.title, 'author': book.author, 'price': book.price} for book in books]
-        return render_template('search.html', user_search=user_search, books=books_data)
+        if db_executor.get_accessories_by_item_name(item_search):
+            accessories = db_executor.get_accessories_by_item_name(item_search)
+            accessories_data = [{'img': accessory.img, 'item_name': accessory.item_name, 'price': accessory.price} for accessory in accessories]
+            return render_template('search.html', user_search=user_search, books=books_data, accessories=accessories_data)
+        else:
+            return render_template('search.html', user_search=user_search, books=books_data)
     # if the item_search is an accessory
     elif db_executor.get_accessories_by_item_name(item_search):
         accessories = db_executor.get_accessories_by_item_name(item_search)
