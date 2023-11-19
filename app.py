@@ -245,6 +245,32 @@ def display_stock():
 
     return render_template("stock.html", stock=stock, sort_by=sort_by, order=order)
 
+@app.route('/orders')
+def display_orders():
+    db_executor = DatabaseExecutor()
+
+    # Get stock information (books and accessories)
+    stock = db_executor.get_stock_information()
+
+    # Sorting parameters
+    sort_by = request.args.get('sort_by', 'title')
+    order = request.args.get('order', 'asc')
+
+    # Sort stock items based on the selected criteria
+    if sort_by == 'title':
+        stock.sort(key=lambda x: str(getattr(x, 'title', '')) if isinstance(x, Book) else str(getattr(x, 'item_name', '')))
+    elif sort_by == 'price':
+        stock.sort(key=lambda x: float(getattr(x, 'price', 0)))
+    elif sort_by == 'quantity':
+        stock.sort(key=lambda x: int(getattr(x, 'quantity', 0)))
+
+    # Handle descending order
+    if order == 'desc':
+        stock.reverse()
+
+    return render_template("orders.html", stock=stock, sort_by=sort_by, order=order)
+
+
 
 
 

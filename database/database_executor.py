@@ -70,6 +70,18 @@ class DatabaseExecutor:
 
             return books + accessories
 
+    def get_order_information(self):
+        with self._db_session.session() as session:
+            books = session.query(Book).all()
+            accessories = session.query(Accessories).all()
+
+            # Make books and accessories transient
+            for item in books + accessories:
+                session.expunge(item)
+                make_transient(item)
+
+            return books + accessories
+
     def get_accessories_by_item_name(self, item):
         with self._db_session.session() as session:
             accessories = session.query(Accessories).filter(Accessories.item_name.contains(item)).all()
