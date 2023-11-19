@@ -373,7 +373,7 @@ def modify_item():
     books = db_executor.get_books()
     accessories = db_executor.get_accessories()
 
-    return render_template('modify-items.html', books=books, accessories=accessories)
+    return render_template('modify-items.html', booksData=books, accessoriesData=accessories)
 
 
 @app.route('/stock')

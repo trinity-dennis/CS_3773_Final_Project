@@ -2,6 +2,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // No need to fetch books, as you have them in the template
     populateBooksTable(booksData);
     populateAccessoriesTable(accessoriesData);
+
 });
 
 function populateBooksTable(books) {
@@ -33,6 +34,36 @@ function populateBooksTable(books) {
                 Availability: ${book.availability}
             </div>`;
         actionsCell.innerHTML = `<a href="/modify_item/${book.id}" class="btn btn-primary btn-sm">Edit</a>`;
+    });
+}
+
+// Function to populate the Accessories table
+function populateAccessoriesTable(accessories) {
+    var accessoriesTableBody = document.querySelector('#accessories-table tbody');
+
+    // Clear existing content
+    accessoriesTableBody.innerHTML = '';
+
+    // Loop through the accessories and add rows to the table
+    accessories.forEach(function(accessory) {
+        var row = accessoriesTableBody.insertRow();
+
+        // Create cells for each column
+        var imageCell = row.insertCell(0);
+        var detailsCell = row.insertCell(1);
+        var actionsCell = row.insertCell(2);
+
+        // Add content to cells
+        imageCell.innerHTML = `<img src="${accessory.img}" alt="Accessory Image" height="50">`;
+        detailsCell.innerHTML = `
+            <div>
+                <strong>${accessory.item_name}</strong>
+            </div>
+            <div>
+                Price: ${accessory.price}<br>
+                Availability: ${accessory.availability}
+            </div>`;
+        actionsCell.innerHTML = `<a href="/modify-item?item_type=accessory&item_id=${accessory.id}" class="btn btn-primary btn-sm">Edit</a>`;
     });
 }
 

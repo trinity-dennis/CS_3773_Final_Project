@@ -1,7 +1,7 @@
 <!--this will hold the table to modify an item on the admin side-->
 
 {% extends "base.html" %}
-{% block title %}Create Items{% endblock %}
+{% block title %}Modify items{% endblock %}
 {% block content %}
     <head>
         <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='modify-item.css')}}">
@@ -28,7 +28,7 @@
                 </tr>
             </thead>
             <tbody>
-                {% for book in books %}
+                {% for book in booksData %}
                     <tr>
                         <td>
                             <div>
@@ -63,7 +63,7 @@
                 </tr>
             </thead>
             <tbody>
-                {% for accessory in accessories %}
+                {% for accessory in accessoriesData %}
                     <tr>
                         <td>
                             <div>
@@ -73,7 +73,6 @@
                                 <strong>{{ accessory.item_name }}</strong>
                             </div>
                             <div>
-                                Quantity: {{ accessory.quantity }}<br>
                                 Price: {{ accessory.price }}<br>
                                 Availability: {{ accessory.availability }}
                             </div>
