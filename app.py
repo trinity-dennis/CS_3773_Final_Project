@@ -1,7 +1,6 @@
 import os
 
 from flask import Flask, render_template, request, session, redirect, url_for, jsonify
-from flask_session import Session
 from database.database_executor import DatabaseExecutor
 from model.book import Book  # Add this import
 from model.accessories import Accessories  # Add this import
@@ -13,8 +12,7 @@ ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg'}
 # secret key for session
 app.secret_key = 'CalicoReads'
 app.config['SESSION_TYPE'] = 'filesystem'
-Session(app)
-from flask import request
+# Session(app)
 
 
 @app.route('/')
@@ -291,6 +289,7 @@ def logout():
     session.pop('username', None)
     return redirect(url_for('home_page'))
 
+
 @app.route('/signup', methods=['POST'])
 def signup():
     db_executor = DatabaseExecutor()
@@ -371,10 +370,35 @@ def create_item():
 @app.route('/modify-item', methods=['GET', 'POST'])
 def modify_item():
     db_executor = DatabaseExecutor()
-    books = db_executor.get_books()
-    accessories = db_executor.get_accessories()
 
-    return render_template('modify-items.html', booksData=books, accessoriesData=accessories)
+    if request.method == 'POST':
+        # Assuming the request contains JSON data
+        data = request.json
+
+        # Extract data for book or accessory update
+        item_type = data.get('item_type')
+        item_id = data.get('item_id')
+        new_genre = data.get('genre')
+        new_price = data.get('price')
+        new_availability = data.get('availability')
+
+        if item_type == 'book':
+            result = db_executor.update_book(item_id, new_genre, new_price, new_availability)
+        elif item_type == 'accessory':
+            result = db_executor.update_accessory(item_id, new_price, new_availability)
+        else:
+            return jsonify({'success': False, 'message': 'Invalid item type'})
+
+        if result:
+            return jsonify({'success': True, 'message': 'Item updated successfully'})
+        else:
+            return jsonify({'success': False, 'message': 'Failed to update item'})
+
+    elif request.method == 'GET':
+        # Handle the GET request for viewing the items
+        books = db_executor.get_books()
+        accessories = db_executor.get_accessories()
+        return render_template('modify-items.html', booksData=books, accessoriesData=accessories)
 
 
 @app.route('/stock')

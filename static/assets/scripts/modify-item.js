@@ -1,8 +1,6 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // No need to fetch books, as you have them in the template
     populateBooksTable(booksData);
     populateAccessoriesTable(accessoriesData);
-
 });
 
 function populateBooksTable(books) {
@@ -29,11 +27,10 @@ function populateBooksTable(books) {
             </div>
             <div>
                 Genre: ${book.genre}<br>
-                Quantity: ${book.quantity}<br>
                 Price: ${book.price}<br>
                 Availability: ${book.availability}
             </div>`;
-        actionsCell.innerHTML = `<a href="/modify_item/${book.id}" class="btn btn-primary btn-sm">Edit</a>`;
+        actionsCell.innerHTML = `<a href="/modify-item?item_type=book&item_id=${book.id}" class="btn btn-primary btn-sm">Edit</a>`;
     });
 }
 
@@ -67,6 +64,183 @@ function populateAccessoriesTable(accessories) {
     });
 }
 
+function toggleEdit(type, id) {
+    var infoDiv = document.getElementById(`${type}-info-${id}`);
+    var detailsDiv = document.getElementById(`${type}-details-${id}`);
+    var editButton = document.querySelector(`#${type}-edit-${id}`);
+    var submitButton = document.querySelector(`#${type}-submit-${id}`);
+    var cancelButton = document.querySelector(`#${type}-cancel-${id}`);
+
+    // Toggle contenteditable attribute
+    infoDiv.querySelectorAll('span').forEach(element => {
+        element.contentEditable = (element.contentEditable === 'true') ? 'false' : 'true';
+    });
+
+    detailsDiv.querySelectorAll('span').forEach(element => {
+        element.contentEditable = (element.contentEditable === 'true') ? 'false' : 'true';
+    });
+
+    // Toggle visibility of buttons
+    editButton.style.display = 'none';
+    submitButton.style.display = 'block';
+    cancelButton.style.display = 'block';
+}
+
+function submitBookChanges(type, id) {
+    console.log('Submit button clicked:', type, id);
+    var infoDiv = document.getElementById(`${type}-info-${id}`);
+    var detailsDiv = document.getElementById(`${type}-details-${id}`);
+    var editButton = document.querySelector(`#${type}-edit-${id}`);
+    var submitButton = document.querySelector(`#${type}-submit-${id}`);
+    var cancelButton = document.querySelector(`#${type}-cancel-${id}`);
+
+    console.log('infoDiv:', infoDiv);
+    console.log('detailsDiv:', detailsDiv);
+    console.log('editButton:', editButton);
+    console.log('submitButton:', submitButton);
+    console.log('cancelButton:', cancelButton);
+
+    // Get updated values
+    var newGenre = detailsDiv.querySelector('span[data-field="genre"]').innerText;
+    var newPrice = detailsDiv.querySelector('span[data-field="price"]').innerText;
+    var newAvailability = detailsDiv.querySelector('span[data-field="availability"]').innerText;
+
+    console.log('newGenre:', newGenre);
+    console.log('newPrice:', newPrice);
+    console.log('newAvailability:', newAvailability);
+
+    // Make a fetch request to update the item in the database
+    fetch('/modify-item', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            item_type: type,
+            item_id: id,
+            genre: newGenre,
+            price: newPrice,
+            availability: newAvailability,
+        }),
+    })
+    .then(response => response.json())
+    .then(data => {
+        // Handle the response from the server
+        if (data.success) {
+            console.log(data.message);
+            // Update the UI if needed
+        } else {
+            console.error(data.message);
+            // Handle the error
+        }
+    })
+    .catch(error => {
+        console.error('Error submitting changes:', error);
+    });
+
+    // Toggle contenteditable attribute back to false
+    infoDiv.querySelectorAll('span').forEach(element => {
+        element.contentEditable = 'false';
+    });
+
+    detailsDiv.querySelectorAll('span').forEach(element => {
+        element.contentEditable = 'false';
+    });
+
+    // Toggle visibility of buttons
+    editButton.style.display = 'block';
+    submitButton.style.display = 'none';
+    cancelButton.style.display = 'none';
+}
+
+function submitAccessoryChanges(type, id) {
+    console.log('Submit button clicked:', type, id);
+    var infoDiv = document.getElementById(`${type}-info-${id}`);
+    var detailsDiv = document.getElementById(`${type}-details-${id}`);
+    var editButton = document.querySelector(`#${type}-edit-${id}`);
+    var submitButton = document.querySelector(`#${type}-submit-${id}`);
+    var cancelButton = document.querySelector(`#${type}-cancel-${id}`);
+
+    console.log('infoDiv:', infoDiv);
+    console.log('detailsDiv:', detailsDiv);
+    console.log('editButton:', editButton);
+    console.log('submitButton:', submitButton);
+    console.log('cancelButton:', cancelButton);
+
+    // Get updated values
+    var newPrice = detailsDiv.querySelector('span[data-field="price"]').innerText;
+    var newAvailability = detailsDiv.querySelector('span[data-field="availability"]').innerText;
+
+    console.log('newPrice:', newPrice);
+    console.log('newAvailability:', newAvailability);
+
+    // Make a fetch request to update the item in the database
+    fetch('/modify-item', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            item_type: type,
+            item_id: id,
+            price: newPrice,
+            availability: newAvailability,
+        }),
+    })
+    .then(response => response.json())
+    .then(data => {
+        // Handle the response from the server
+        if (data.success) {
+            console.log(data.message);
+            // Update the UI if needed
+        } else {
+            console.error(data.message);
+            // Handle the error
+        }
+    })
+    .catch(error => {
+        console.error('Error submitting changes:', error);
+    });
+
+    // Toggle contenteditable attribute back to false
+    infoDiv.querySelectorAll('span').forEach(element => {
+        element.contentEditable = 'false';
+    });
+
+    detailsDiv.querySelectorAll('span').forEach(element => {
+        element.contentEditable = 'false';
+    });
+
+    // Toggle visibility of buttons
+    editButton.style.display = 'block';
+    submitButton.style.display = 'none';
+    cancelButton.style.display = 'none';
+}
+
+function cancelEdit(type, id) {
+    var infoDiv = document.getElementById(`${type}-info-${id}`);
+    var detailsDiv = document.getElementById(`${type}-details-${id}`);
+    var editButton = document.querySelector(`#${type}-edit-${id}`);
+    var submitButton = document.querySelector(`#${type}-submit-${id}`);
+    var cancelButton = document.querySelector(`#${type}-cancel-${id}`);
+
+    // Revert content back to the original state
+    infoDiv.querySelectorAll('span').forEach(element => {
+        element.innerText = element.dataset.originalValue;
+        element.contentEditable = 'false';
+    });
+
+    detailsDiv.querySelectorAll('span').forEach(element => {
+        element.innerText = element.dataset.originalValue;
+        element.contentEditable = 'false';
+    });
+
+    // Toggle visibility of buttons
+    editButton.style.display = 'block';
+    submitButton.style.display = 'none';
+    cancelButton.style.display = 'none';
+}
+
 // Function to toggle between Books and Accessories
 function toggleItemTable() {
     var itemType = document.getElementById("item-type").value;
@@ -83,4 +257,7 @@ function toggleItemTable() {
 }
 
 // Attach the toggleItemTable function to the change event of the item type dropdown
-document.getElementById("item-type").addEventListener("change", toggleItemTable);
+document.addEventListener('DOMContentLoaded', function() {
+    // Your existing code here
+    document.getElementById("item-type").addEventListener("change", toggleItemTable);
+});
