@@ -261,5 +261,10 @@ def search():
         return render_template('search.html',  user_search=user_search + ': no results found', books=books_data, accessories=accessories_data)
 
 
+@app.route('/admin-create-modify')
+def admin_create_modify():
+    return 'figure out what to do'
+
+
 if __name__ == '__main__':
     app.run(debug=True)
