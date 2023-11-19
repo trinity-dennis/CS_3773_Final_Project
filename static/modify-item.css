@@ -1,0 +1,20 @@
+.edit-button {
+    background-color: #e07e3d;
+    color: #fff;
+    border: 1px solid black;
+}
+
+.table-container {
+    width: 70vw;
+    margin: 0 auto;
+}
+
+.table-style {
+    border: 1px solid black;
+    padding: 10px;
+}
+
+.dropdown-container {
+    width: 15vw;
+    margin: 0 auto;
+}

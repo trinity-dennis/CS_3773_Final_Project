@@ -321,10 +321,18 @@ def create_item():
         title = request.form.get('title')
         author = request.form.get('author')
 
-        # Convert the form input values to appropriate data types
-        quantity = int(request.form.get('quantity_books')) if request.form.get('quantity_books') else None
-        price = float(request.form.get('price_books')) if request.form.get('price_books') else None
-        availability = int(request.form.get('availability_books')) if request.form.get('availability_books') else None
+        # Convert the form input values to appropriate data types for books
+        quantity_book = int(request.form.get('quantity_books')) if request.form.get('quantity_books') else None
+        price_book = float(request.form.get('price_books')) if request.form.get('price_books') else None
+        availability_book = int(request.form.get('availability_books')) if request.form.get('availability_books') else None
+
+        # Convert the form input values to appropriate data types for accessories
+        quantity_accessory = int(request.form.get('quantity_accessories')) if request.form.get(
+            'quantity_accessories') else None
+        price_accessory = float(request.form.get('price_accessories')) if request.form.get(
+            'price_accessories') else None
+        availability_accessory = int(request.form.get('availability_accessories')) if request.form.get(
+            'availability_accessories') else None
 
         # Access file data
         img_file = request.files['img']
@@ -348,9 +356,9 @@ def create_item():
 
             # Register the item in the database
             if item_type == 'books':
-                result = db_executor.add_book(genre, title, author, quantity, price, availability, img_filename)
+                result = db_executor.add_book(genre, title, author, quantity_book, price_book, availability_book, img_filename)
             elif item_type == 'accessories':
-                result = db_executor.add_accessory(item_name, quantity, price, availability, img_filename)
+                result = db_executor.add_accessory(item_name, quantity_accessory, price_accessory, availability_accessory, img_filename)
 
             return jsonify(result)
         else:
@@ -358,6 +366,15 @@ def create_item():
     else:
         # Render the form for GET requests
         return render_template('create-items.html')
+
+
+@app.route('/modify-item', methods=['GET', 'POST'])
+def modify_item():
+    db_executor = DatabaseExecutor()
+    books = db_executor.get_books()
+    accessories = db_executor.get_accessories()
+
+    return render_template('modify-items.html', books=books, accessories=accessories)
 
 
 @app.route('/stock')

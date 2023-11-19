@@ -1,0 +1,89 @@
+<!--this will hold the table to modify an item on the admin side-->
+
+{% extends "base.html" %}
+{% block title %}Create Items{% endblock %}
+{% block content %}
+    <head>
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='modify-item.css')}}">
+        <script src="static/assets/scripts/modify-item.js"></script>
+    </head>
+    <h2>Modify Items</h2><br/>
+    <!-- Display a dropdown to switch between Books and Accessories -->
+    <div class="mb-3 dropdown-container">
+        <label for="item-type" class="form-label">Select Item Type:</label>
+        <select class="form-select" id="item-type" name="item_type" onchange="toggleItemTable()" required>
+            <option value="books">Books</option>
+            <option value="accessories">Accessories</option>
+        </select>
+    </div>
+
+
+    <!-- Display a table for Books -->
+    <div class="table-container" id="books-table">
+        <table class="table table-striped table-style">
+            <thead>
+                <tr>
+                    <th>Books</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for book in books %}
+                    <tr>
+                        <td>
+                            <div>
+                                <img src="{{ url_for('static', filename='assets/books/' + book.img) }}" alt="Book Image" height="50">
+                            </div>
+                            <div>
+                                <strong>{{ book.title }}</strong><br>
+                                <small>{{ book.author }}</small>
+                            </div>
+                            <div>
+                                Genre: {{ book.genre }}<br>
+                                Price: {{ book.price }}<br>
+                                Availability: {{ book.availability }}
+                            </div>
+                        </td>
+                        <td>
+                            <a href="{{ url_for('modify_item', id=book.id) }}" class="btn btn-primary btn-sm edit-button">Edit</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table><br/>
+    </div>
+
+    <!-- Display a table for Accessories (initially hidden) -->
+    <div class="table-container" id="accessories-table" style="display: none;">
+        <table class="table table-striped table-style">
+            <thead>
+                <tr>
+                    <th>Accessories</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for accessory in accessories %}
+                    <tr>
+                        <td>
+                            <div>
+                                <img src="{{ url_for('static', filename='assets/accessories/' + accessory.img) }}" alt="Accessory Image" height="50">
+                            </div>
+                            <div>
+                                <strong>{{ accessory.item_name }}</strong>
+                            </div>
+                            <div>
+                                Quantity: {{ accessory.quantity }}<br>
+                                Price: {{ accessory.price }}<br>
+                                Availability: {{ accessory.availability }}
+                            </div>
+                        </td>
+                        <td>
+                            <a href="{{ url_for('modify_item', id=accessory.accessory_id) }}" class="btn btn-primary btn-sm edit-button">Edit</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table><br/>
+    </div>
+{% endblock %}
