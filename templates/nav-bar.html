@@ -10,8 +10,20 @@
             <ul class="nav">
                 <!-- If someone is logged on, displays that instead login and sign up -->
                 {% if 'username' in session %}
-                    <li class="nav-item"><span class="nav-link link-body-emphasis px-2" id="username-button" >{{ session['username'] }}</span></li>
-                    <li class="nav-item"><a href="/logout" class="nav-link link-body-emphasis px-2" id="logout-button">Log out</a></li>
+                    {% if session['username'] == 'admin' %}
+                        <!-- Dropdown for admin -->
+                        <li class="nav-item dropdown">
+                            <button class="nav-link link-body-emphasis px-2 dropdown-toggle" data-bs-toggle="dropdown">{{ session['username'] }}</button>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item" href="#">Create/Modify</a>
+                                <a class="dropdown-item" href="#">View</a>
+                            </div>
+                        </li>
+                    {% else %}
+                        <!-- Regular username and logout button -->
+                        <li class="nav-item"><span class="nav-link link-body-emphasis px-2" id="username-button" >{{ session['username'] }}</span></li>
+                        <li class="nav-item"><a href="/logout" class="nav-link link-body-emphasis px-2" id="logout-button">Log out</a></li>
+                    {% endif %}
                 {% else %}
                 <!-- Use a button to trigger the form display -->
                     <li class="nav-item"><button class="nav-link link-body-emphasis px-2" id="login-button">Login</button></li>

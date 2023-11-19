@@ -68,16 +68,46 @@ document.addEventListener('DOMContentLoaded', function() {
             loginButton.style.display = "none";
             signupButton.style.display = "none";
 
-            usernameButton.innerText = username;
             usernameButton.className = "nav-link link-body-emphasis px-2";
-            logoutButton.href = "/logout";
-            logoutButton.innerText = "Log out";
             logoutButton.className = "nav-link link-body-emphasis px-2";
 
-            var nav = document.querySelector('.nav');
-            nav.appendChild(usernameButton);
-            nav.appendChild(logoutButton);
+            if (username === "admin") {
+                // Create a dropdown for admin
+                var adminDropdown = document.createElement("div");
+                adminDropdown.className = "nav-item dropdown";
 
+                var adminDropdownToggle = document.createElement("button");
+                adminDropdownToggle.className = "nav-link link-body-emphasis px-2 dropdown-toggle";
+                adminDropdownToggle.setAttribute("data-bs-toggle", "dropdown");
+                adminDropdownToggle.innerText = username;
+
+                var adminDropdownMenu = document.createElement("div");
+                adminDropdownMenu.className = "dropdown-menu";
+
+                var adminOption1 = document.createElement("a");
+                adminOption1.className = "dropdown-item";
+                adminOption1.innerText = "Option 1";
+
+                var adminOption2 = document.createElement("a");
+                adminOption2.className = "dropdown-item";
+                adminOption2.innerText = "Option 2";
+
+                adminDropdownMenu.appendChild(adminOption1);
+                adminDropdownMenu.appendChild(adminOption2);
+
+                adminDropdown.appendChild(adminDropdownToggle);
+                adminDropdown.appendChild(adminDropdownMenu);
+
+                nav.appendChild(adminDropdown);
+            } else {
+                // Display regular username and logout button
+                usernameButton.innerText = username;
+                logoutButton.href = "/logout";
+                logoutButton.innerText = "Log out";
+
+                nav.appendChild(usernameButton);
+                nav.appendChild(logoutButton);
+            }
         }
 
         //makes sure that if someone is logged in, they dont sign out for any reason
