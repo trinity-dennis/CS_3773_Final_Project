@@ -1,5 +1,7 @@
 from flask import Flask, render_template, request, session, redirect, url_for, jsonify
 from database.database_executor import DatabaseExecutor
+from model.book import Book  # Add this import
+from model.accessories import Accessories  # Add this import
 
 app = Flask(__name__)
 
@@ -7,71 +9,6 @@ app = Flask(__name__)
 app.secret_key = 'TODO: Set Secret Key'
 
 from flask import request
-
-
-# ...
-
-# ...
-
-@app.route('/display-books/<genre>', methods=['GET'])
-def display_books(genre):
-    db_executor = DatabaseExecutor()
-
-    # Get books by genre
-    books = db_executor.get_books_by_genre(genre)
-
-    # Sorting parameters
-    sort_by = request.args.get('sort_by', 'title')
-    order = request.args.get('order', 'asc')
-
-    # Sort the books based on the selected criteria
-    if sort_by == 'title':
-        books.sort(key=lambda x: x.title)
-    elif sort_by == 'price':
-        books.sort(key=lambda x: float(x.price))
-    elif sort_by == 'quantity':
-        books.sort(key=lambda x: x.quantity)
-
-    # Handle descending order
-    if order == 'desc':
-        books.reverse()
-
-    books_data = [{'img': book.img, 'title': book.title, 'author': book.author, 'price': book.price, 'quantity': book.quantity} for book in books]
-
-    return render_template("display-books.html", genre_page=genre, books=books_data, sort_by=sort_by, order=order)
-
-# ...
-
-@app.route('/display-accessories', methods=['GET'])
-def display_accessories():
-    db_executor = DatabaseExecutor()
-
-    # Get accessories
-    accessories = db_executor.get_accessories()
-
-    # Sorting parameters
-    sort_by = request.args.get('sort_by', 'title')
-    order = request.args.get('order', 'asc')
-
-    # Sort the accessories based on the selected criteria
-    if sort_by == 'title':
-        accessories.sort(key=lambda x: x.item_name)
-    elif sort_by == 'price':
-        accessories.sort(key=lambda x: float(x.price))
-    elif sort_by == 'quantity':
-        accessories.sort(key=lambda x: x.quantity)
-
-    # Handle descending order
-    if order == 'desc':
-        accessories.reverse()
-
-    accessories_data = [{'img': accessory.img, 'item_name': accessory.item_name, 'price': accessory.price, 'quantity': accessory.quantity} for accessory in accessories]
-
-    return render_template("display-accessories.html", genre_page="Accessories", accessories=accessories_data, sort_by=sort_by, order=order)
-
-# ...
-
-
 
 @app.route('/')
 def home_page():
@@ -222,6 +159,37 @@ def signup():
 @app.route('/shopping-cart')
 def shopping_cart():
     return 'Use templates to build out the shopping cart UI found at this route (http://127.0.0.1:5000/shopping-cart)'
+
+# Add this to your existing Flask app code
+
+@app.route('/stock')
+def display_stock():
+    db_executor = DatabaseExecutor()
+
+    # Get stock information (books and accessories)
+    stock = db_executor.get_stock_information()
+
+    # Sorting parameters
+    sort_by = request.args.get('sort_by', 'title')
+    order = request.args.get('order', 'asc')
+
+    # Sort stock items based on the selected criteria
+    if sort_by == 'title':
+        stock.sort(key=lambda x: str(getattr(x, 'title', '')) if isinstance(x, Book) else str(getattr(x, 'item_name', '')))
+    elif sort_by == 'price':
+        stock.sort(key=lambda x: float(getattr(x, 'price', 0)))
+    elif sort_by == 'quantity':
+        stock.sort(key=lambda x: int(getattr(x, 'quantity', 0)))
+
+    # Handle descending order
+    if order == 'desc':
+        stock.reverse()
+
+    return render_template("stock.html", stock=stock, sort_by=sort_by, order=order)
+
+
+
+
 
 
 @app.route('/check_login_status')

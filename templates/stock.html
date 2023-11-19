@@ -1,0 +1,53 @@
+<!-- stock.html -->
+
+{% extends "base.html" %}
+{% block title %}Stock Information{% endblock %}
+{% block content %}
+    <h2>{{ genre_page }}</h2>
+    <h1>Stock Information</h1>
+
+    <!-- Sorting options form -->
+    <div class="sorting-options">
+        <form action="{{ url_for('display_stock') }}" method="get">
+            <label for="sort-by">Sort by:</label>
+            <select id="sort-by" name="sort_by">
+                <option value="title" {% if sort_by == 'title' %}selected{% endif %}>Title</option>
+                <option value="price" {% if sort_by == 'price' %}selected{% endif %}>Price</option>
+                <option value="quantity" {% if sort_by == 'quantity' %}selected{% endif %}>Quantity</option>
+            </select>
+            <label for="order">Order:</label>
+            <select id="order" name="order">
+                <option value="asc" {% if order == 'asc' %}selected{% endif %}>Ascending</option>
+                <option value="desc" {% if order == 'desc' %}selected{% endif %}>Descending</option>
+            </select>
+            <button type="submit">Apply</button>
+        </form>
+    </div>
+
+    <!-- Display stock information here -->
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Item Name</th>
+                <th>Quantity</th>
+                <th>Price</th>
+                <!-- Add more headers if needed based on your models -->
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in stock %}
+                <tr>
+                    {% if item.title %}
+                        <td>{{ item.title }}</td>
+                    {% elif item.item_name %}
+                        <td>{{ item.item_name }}</td>
+                    {% endif %}
+                    <td>{{ item.quantity }}</td>
+                    <td>{{ item.price }}</td>
+                    <!-- Add more columns if needed based on your models -->
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
