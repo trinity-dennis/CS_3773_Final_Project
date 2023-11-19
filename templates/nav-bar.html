@@ -16,6 +16,7 @@
                             <button class="nav-link link-body-emphasis px-2 dropdown-toggle" data-bs-toggle="dropdown">{{ session['username'] }}</button>
                             <div class="dropdown-menu">
                                 <a class="dropdown-item" href="{{ url_for('create_item') }}">Create Item</a>
+                                <a class="dropdown-item" href="{{ url_for('modify_item') }}">Modify Items</a>
                                 <a class="dropdown-item" href="{{ url_for('display_stock') }}">Stock</a>
                                 <a class="dropdown-item" href="{{ url_for('display_orders') }}">Orders</a>
                             </div>

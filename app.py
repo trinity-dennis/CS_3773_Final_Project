@@ -359,6 +359,15 @@ def create_item():
         return render_template('create-items.html')
 
 
+@app.route('/modify-item', methods=['GET', 'POST'])
+def modify_item():
+    db_executor = DatabaseExecutor()
+    books = db_executor.get_books()
+    accessories = db_executor.get_accessories()
+
+    return render_template('modify-items.html', books=books, accessories=accessories)
+
+
 @app.route('/stock')
 def display_stock():
     db_executor = DatabaseExecutor()
