@@ -1,7 +1,7 @@
 <!--this will hold the table to modify an item on the admin side-->
 
 {% extends "base.html" %}
-{% block title %}Modify items{% endblock %}
+{% block title %}Modify Items{% endblock %}
 {% block content %}
     <head>
         <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='modify-item.css')}}">
@@ -34,18 +34,20 @@
                             <div>
                                 <img src="{{ url_for('static', filename='assets/books/' + book.img) }}" alt="Book Image" height="50">
                             </div>
-                            <div>
+                            <div id="book-info-{{ book.id }}" class="editable-info">
                                 <strong>{{ book.title }}</strong><br>
                                 <small>{{ book.author }}</small>
                             </div>
-                            <div>
-                                Genre: {{ book.genre }}<br>
-                                Price: {{ book.price }}<br>
-                                Availability: {{ book.availability }}
+                            <div id="book-details-{{ book.id }}" class="editable-info">
+                                Genre: <span data-field="genre" data-original-value="{{ book.genre }}" contenteditable="false">{{ book.genre }}</span><br>
+                                Price: <span data-field="price" data-original-value="{{ book.price }}" contenteditable="false">{{ book.price }}</span><br>
+                                Availability: <span data-field="availability" data-original-value="{{ book.availability }}" contenteditable="false">{{ book.availability }}</span><br>
                             </div>
                         </td>
                         <td>
-                            <a href="{{ url_for('modify_item', id=book.id) }}" class="btn btn-primary btn-sm edit-button">Edit</a>
+                            <button onclick="toggleEdit('book', {{ book.id }})" class="btn btn-primary btn-sm edit-button" id="book-edit-{{ book.id }}">Edit</button>
+                            <button onclick="submitBookChanges('book', {{ book.id }})" class="btn btn-success btn-sm submit-button" id="book-submit-{{ book.id }}" style="display: none;">Submit Changes</button>
+                            <button onclick="cancelEdit('book', {{ book.id }})" class="btn btn-danger btn-sm cancel-button" id="book-cancel-{{ book.id }}" style="display: none;">Cancel</button>
                         </td>
                     </tr>
                 {% endfor %}
@@ -69,16 +71,18 @@
                             <div>
                                 <img src="{{ url_for('static', filename='assets/accessories/' + accessory.img) }}" alt="Accessory Image" height="50">
                             </div>
-                            <div>
+                            <div id="accessory-info-{{ accessory.accessory_id }}" class="editable-info">
                                 <strong>{{ accessory.item_name }}</strong>
                             </div>
-                            <div>
-                                Price: {{ accessory.price }}<br>
-                                Availability: {{ accessory.availability }}
+                            <div id="accessory-details-{{ accessory.accessory_id }}" class="editable-info">
+                                Price: <span data-field="price" data-original-value="{{ accessory.price }}" contenteditable="false">{{ accessory.price }}</span><br>
+                                Availability: <span data-field="availability" data-original-value="{{ accessory.availability }}" contenteditable="false">{{ accessory.availability }}</span><br>
                             </div>
                         </td>
                         <td>
-                            <a href="{{ url_for('modify_item', id=accessory.accessory_id) }}" class="btn btn-primary btn-sm edit-button">Edit</a>
+                            <button onclick="toggleEdit('accessory', {{ accessory.accessory_id }})" class="btn btn-primary btn-sm edit-button" id="accessory-edit-{{ accessory.accessory_id }}">Edit</button>
+                            <button onclick="submitAccessoryChanges('accessory', {{ accessory.accessory_id }})" class="btn btn-success btn-sm submit-button" id="accessory-submit-{{ accessory.accessory_id }}" style="display: none;">Submit Changes</button>
+                            <button onclick="cancelEdit('accessory', {{ accessory.accessory_id }})" class="btn btn-danger btn-sm cancel-button" id="accessory-cancel-{{ accessory.accessory_id }}" style="display: none;">Cancel</button>
                         </td>
                     </tr>
                 {% endfor %}
