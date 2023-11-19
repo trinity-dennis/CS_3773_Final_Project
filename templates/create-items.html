@@ -1,0 +1,79 @@
+<!--this will hold the table to create an item on the admin side-->
+
+{% extends "base.html" %}
+{% block title %}Create Items{% endblock %}
+{% block content %}
+    <head>
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='create-item.css')}}">
+        <script src="static/assets/scripts/create-item.js"></script>
+    </head>
+    <h2>Create a New Item</h2><br/>
+    <div class="form-container">
+        <form class="form" method="post" action="{{ url_for('create_item') }}" id="create-item-form" enctype="multipart/form-data" onsubmit="return handleFormSubmission()">
+            <div class="mb-3">
+                <label for="item-type" class="form-label">Select Item Type:</label>
+                <select class="form-select" id="item-type" name="item_type" onchange="toggleFormFields()" required>
+                    <option value="books">Books</option>
+                    <option value="accessories">Accessories</option>
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label for="img" class="form-label">Image:</label>
+                <input type="file" class="form-control" id="img" name="img" accept="image/*" required>
+            </div>
+
+            <div class="mb-3" id="item-name-container">
+                <label for="item-name" class="form-label">Item Name:</label>
+                <input type="text" class="form-control" id="item-name" name="item_name">
+            </div>
+
+            <div class="mb-3" id="genre-container">
+                <label for="genre" class="form-label">Genre:</label>
+                <input type="text" class="form-control" id="genre" name="genre">
+            </div>
+
+            <div class="mb-3" id="title-container">
+                <label for="title" class="form-label">Title:</label>
+                <input type="text" class="form-control" id="title" name="title">
+            </div>
+
+            <div class="mb-3" id="author-container">
+                <label for="author" class="form-label">Author:</label>
+                <input type="text" class="form-control" id="author" name="author">
+            </div>
+
+            <div class="mb-3" id="quantity-container-books">
+                <label for="quantity-books" class="form-label">Quantity:</label>
+                <input type="text" class="form-control" id="quantity-books" name="quantity_books">
+            </div>
+
+            <div class="mb-3" id="price-container-books">
+                <label for="price-books" class="form-label">Price:</label>
+                <input type="text" class="form-control" id="price-books" name="price_books">
+            </div>
+
+            <div class="mb-3" id="availability-container-books">
+                <label for="availability-books" class="form-label">Availability:</label>
+                <input type="text" class="form-control" id="availability-books" name="availability_books">
+            </div>
+
+            <div class="mb-3" id="quantity-container">
+                <label for="quantity" class="form-label">Quantity:</label>
+                <input type="text" class="form-control" id="quantity" name="quantity">
+            </div>
+
+            <div class="mb-3" id="price-container">
+                <label for="price" class="form-label">Price:</label>
+                <input type="text" class="form-control" id="price" name="price">
+            </div>
+
+            <div class="mb-3" id="availability-container">
+                <label for="availability" class="form-label">Availability:</label>
+                <input type="text" class="form-control" id="availability" name="availability">
+            </div>
+
+            <button type="submit" class="btn btn-primary create-button">Create Item</button>
+        </form>
+    </div>
+{% endblock %}
