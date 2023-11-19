@@ -1,6 +1,7 @@
 import os
 
 from flask import Flask, render_template, request, session, redirect, url_for, jsonify
+from flask_session import Session
 from database.database_executor import DatabaseExecutor
 from model.book import Book  # Add this import
 from model.accessories import Accessories  # Add this import
@@ -10,8 +11,9 @@ app = Flask(__name__)
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg'}
 
 # secret key for session
-app.secret_key = 'TODO: Set Secret Key'
-
+app.secret_key = 'CalicoReads'
+app.config['SESSION_TYPE'] = 'filesystem'
+Session(app)
 from flask import request
 
 
@@ -287,8 +289,7 @@ def login():
 def logout():
     # Clear the session to log the user out
     session.pop('username', None)
-    return render_template("index.html", books="pass book_data", accessories="add accessory_data")
-
+    return redirect(url_for('home_page'))
 
 @app.route('/signup', methods=['POST'])
 def signup():

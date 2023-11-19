@@ -1,4 +1,6 @@
 document.addEventListener('DOMContentLoaded', function() {
+    checkLoginStatus();
+});
     window.onload = function() {
         // login form
         function openLoginForm() {
@@ -71,6 +73,8 @@ document.addEventListener('DOMContentLoaded', function() {
             usernameButton.className = "nav-link link-body-emphasis px-2";
             logoutButton.className = "nav-link link-body-emphasis px-2";
 
+            var nav = document.querySelector('.nav');
+
             if (username === "admin") {
                 // Create a dropdown for admin
                 var adminDropdown = document.createElement("div");
@@ -100,19 +104,19 @@ document.addEventListener('DOMContentLoaded', function() {
 
                 nav.appendChild(adminDropdown);
             } else {
-                // Display regular username and logout button
+                // Display regular username
                 usernameButton.innerText = username;
-                logoutButton.href = "/logout";
-                logoutButton.innerText = "Log out";
-
                 nav.appendChild(usernameButton);
-                nav.appendChild(logoutButton);
             }
+
+            logoutButton.href = "/logout";
+            logoutButton.innerText = "Log out";
+            nav.appendChild(logoutButton);
         }
 
-        //makes sure that if someone is logged in, they dont sign out for any reason
+        //makes sure that if someone is logged in, they don't sign out for any reason
         function checkLoginStatus() {
-        fetch("/check_login_status") // Add a Flask route to check login status
+        fetch("/check_login_status")
             .then(response => response.json())
             .then(data => {
                 if (data.status === 'success') {
@@ -125,7 +129,7 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         }
 
-        checkLoginStatus();
+        //checkLoginStatus();
 
         // signup form
         function openSignupForm() {
@@ -176,4 +180,3 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
     };
-});
