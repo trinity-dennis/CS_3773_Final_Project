@@ -163,3 +163,10 @@ class DatabaseExecutor:
 
         return {'success': True, 'message': 'Accessory added successfully'}
 
+    def get_users(self):
+        with self._db_session.session() as session:
+            users = session.query(Account).all()
+            for user in users:
+                session.expunge(user)
+                make_transient(user)
+            return users
