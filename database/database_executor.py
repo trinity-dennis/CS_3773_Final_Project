@@ -12,7 +12,6 @@ from model.discount import Discount
 from model.orders import Orders  # Adjust the import based on your actual module structure
 
 
-
 class DatabaseExecutor:
     def __init__(self):
         self._db_session = DatabaseSession()
@@ -57,11 +56,12 @@ class DatabaseExecutor:
             session.query(Cart).delete()
 
     def add_order(self, book_id, accessory_id, customer_id, order_date, order_total):
-        order = Orders(book_id=book_id, accessory_id=accessory_id, customer_id=customer_id, order_date=order_date, order_total=order_total)
+        order = Orders(book_id=book_id, accessory_id=accessory_id, customer_id=customer_id, order_date=order_date,
+                       order_total=order_total)
         with self._db_session.session() as session:
             session.add(order)
 
-    def decrease_book_availability(self, id,quantity):
+    def decrease_book_availability(self, id, quantity):
         with self._db_session.session() as session:
             item = session.query(Book).filter_by(id=id).first()
             if item.availability > 0:
@@ -328,3 +328,18 @@ class DatabaseExecutor:
             # Add the new discount to the database
             session.add(new_discount)
             session.commit()
+
+    def get_discount_by_code(self, code):
+        with self._db_session.session() as session:
+            try:
+                discount = session.query(Discount).filter_by(code=code).first()
+
+                # Expunge and make_transient to detach the object from the session
+                if discount:
+                    session.expunge(discount)
+                    make_transient(discount)
+
+                return discount
+            except Exception as e:
+                print(f"Error fetching discount by code: {e}")
+                return None

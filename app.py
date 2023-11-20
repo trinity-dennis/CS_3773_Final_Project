@@ -147,21 +147,34 @@ def shopping_cart():
 
     tax = 1.08
     a_total = 0.00
+
     for item in items:
-        print(item.item_name)
         subtotal += item.price * item.quantity
+
     subtotal = round(subtotal, 2)
+
     if request.method == 'POST':
         coupon = request.form.get('coupon')
-        if str(coupon) == "COUPON":
-            a_total = round(subtotal * tax, 2) - 10
-            print("COUPON GOOD")
+
+        # Check if the discount code exists in the database
+        discount = db_executor.get_discount_by_code(coupon)
+
+        if discount:
+            # Apply the discount percentage to the subtotal
+            discount_percentage = discount.percentage / 100
+            subtotal *= (1 - discount_percentage)
+            a_total = round(subtotal * tax, 2)
+            session["total"] = a_total
+            return render_template("cart.html", books=items, subtotal=subtotal, tax=tax, total=a_total, discount_applied=True)
         else:
             a_total = round(subtotal * tax, 2)
+            session["total"] = a_total
+            return render_template("cart.html", books=items, subtotal=subtotal, tax=tax, total=a_total, discount_applied=False)
+
     else:
         a_total = round(subtotal * tax, 2)
-    session["total"] = a_total
-    return render_template("cart.html", books=items, subtotal=subtotal, tax=tax, total=a_total)
+        session["total"] = a_total
+        return render_template("cart.html", books=items, subtotal=subtotal, tax=tax, total=a_total, discount_applied=False)
 
 @app.route("/check-out")
 def update_availability():
