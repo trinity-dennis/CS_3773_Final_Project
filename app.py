@@ -400,6 +400,29 @@ def modify_item():
         accessories = db_executor.get_accessories()
         return render_template('modify-items.html', booksData=books, accessoriesData=accessories)
 
+@app.route('/modify-users', methods=['GET', 'POST'])
+def modify_users():
+    db_executor = DatabaseExecutor()
+
+    if request.method == 'POST':
+        # Assuming the request contains JSON data
+        data = request.json
+
+        # Extract data for user update
+        user_id = data.get('user_id')
+        new_role = data.get('role')
+
+        result = db_executor.update_user(user_id, new_role)
+
+        if result:
+            return jsonify({'success': True, 'message': 'User updated successfully'})
+        else:
+            return jsonify({'success': False, 'message': 'Failed to update user'})
+
+    elif request.method == 'GET':
+        # Handle the GET request for viewing the users
+        users = db_executor.get_users()
+        return render_template('modify-users.html', usersData=users)
 
 @app.route('/stock')
 def display_stock():
@@ -454,7 +477,7 @@ def display_orders():
 
     return render_template("orders.html", stock=stock, sort_by=sort_by, order=order)
 
-    return render_template("cart.html", books=items, subtotal=subtotal, tax=tax, total=a_total)
+
 
 
 @app.route("/increase<id>")
@@ -508,11 +531,11 @@ def search():
     # if the item_search is a book title
     if db_executor.get_books_by_title(item_search):
         books = db_executor.get_books_by_title(item_search)
-        books_data = [{'img': book.img, 'title': book.title, 'author': book.author, 'price': book.price} for book in
+        books_data = [{'img': book.img, 'title': book.title, 'author': book.author, 'price': book.price ,'id': book.id} for book in
                       books]
         if db_executor.get_accessories_by_item_name(item_search):
             accessories = db_executor.get_accessories_by_item_name(item_search)
-            accessories_data = [{'img': accessory.img, 'item_name': accessory.item_name, 'price': accessory.price} for
+            accessories_data = [{'img': accessory.img, 'item_name': accessory.item_name, 'price': accessory.price ,'id':accessory.accessory_id} for
                                 accessory in accessories]
             return render_template('search.html', user_search=user_search, books=books_data,
                                    accessories=accessories_data)
@@ -521,16 +544,16 @@ def search():
     # if the item_search is an accessory
     elif db_executor.get_accessories_by_item_name(item_search):
         accessories = db_executor.get_accessories_by_item_name(item_search)
-        accessories_data = [{'img': accessory.img, 'item_name': accessory.item_name, 'price': accessory.price} for
+        accessories_data = [{'img': accessory.img, 'item_name': accessory.item_name, 'price': accessory.price, 'id':accessory.accessory_id} for
                             accessory in accessories]
         return render_template('search.html', user_search=user_search, accessories=accessories_data)
     # if the item is not found display all books and accessories
     else:
         books = db_executor.get_books()
         accessories = db_executor.get_accessories()
-        accessories_data = [{'img': accessory.img, 'item_name': accessory.item_name, 'price': accessory.price} for
+        accessories_data = [{'img': accessory.img, 'item_name': accessory.item_name, 'price': accessory.price, 'id': accessory.accessory_id} for
                             accessory in accessories]
-        books_data = [{'img': book.img, 'title': book.title, 'author': book.author, 'price': book.price} for book in
+        books_data = [{'img': book.img, 'title': book.title, 'author': book.author, 'price': book.price, 'id':book.id} for book in
                       books]
         return render_template('search.html', user_search=user_search + ': no results found', books=books_data,
                                accessories=accessories_data)

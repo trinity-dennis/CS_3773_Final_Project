@@ -1,0 +1,51 @@
+<!-- modify-users.html -->
+
+{% extends "base.html" %}
+{% block title %}Modify Users{% endblock %}
+{% block content %}
+    <head>
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='modify-user.css')}}">
+        <script src="static/assets/scripts/modify-user.js"></script>
+    </head>
+    <h2>Modify Users</h2><br/>
+
+    <!-- Display a table for Users -->
+    <div class="table-container" id="users-table">
+        <table class="table table-striped table-style">
+            <thead>
+                <tr>
+                    <th>User ID</th>
+                    <th>Username</th>
+                    <th>Password</th>
+                    <th>Admin</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for user in usersData %}
+                    <tr>
+                        <td>{{ user.id }}</td>
+                        <td>
+                            <div id="user-username-{{ user.id }}" class="editable-info">
+                                {{ user.username }}
+                            </div>
+                        </td>
+                        <td>
+                            <div id="user-password-{{ user.id }}" class="editable-info">
+                                {{ user.password }}
+                            </div>
+                        </td>
+                        <td>
+                            <div id="user-admin-{{ user.id }}" class="editable-info">
+                                {{ user.admin }}
+                            </div>
+                        </td>
+                        <td>
+                            <button onclick="deleteUser({{ user.id }})" class="btn btn-danger btn-sm delete-button">Delete</button>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table><br/>
+    </div>
+{% endblock %}
