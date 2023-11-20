@@ -8,6 +8,8 @@ from model.accounts import Account
 from model.book import Book
 from model.accessories import Accessories
 from model.cart import Cart
+from model.orders import Orders  # Adjust the import based on your actual module structure
+
 
 
 class DatabaseExecutor:
@@ -118,15 +120,14 @@ class DatabaseExecutor:
 
     def get_order_information(self):
         with self._db_session.session() as session:
-            books = session.query(Book).all()
-            accessories = session.query(Accessories).all()
+            orders = session.query(Orders).all()
 
-            # Make books and accessories transient
-            for item in books + accessories:
-                session.expunge(item)
-                make_transient(item)
+            # Make orders transient
+            for order in orders:
+                session.expunge(order)
+                make_transient(order)
 
-            return books + accessories
+            return orders
 
     def get_accessories_by_item_name(self, item):
         with self._db_session.session() as session:

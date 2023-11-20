@@ -5,6 +5,7 @@ from model.accounts import Account
 from model.book import Book
 from model.cart import Cart
 from model.discount import Discount
+
 from logging.config import fileConfig
 
 from sqlalchemy import engine_from_config

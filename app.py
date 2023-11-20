@@ -3,6 +3,8 @@ import os
 from flask import Flask, render_template, request, session, redirect, url_for, jsonify
 from database.database_executor import DatabaseExecutor
 from model.book import Book  # Add this import
+from model.orders import Orders  # Adjust the import based on your actual module structure
+
 from model.accessories import Accessories  # Add this import
 from werkzeug.utils import secure_filename
 
@@ -486,32 +488,30 @@ def display_stock():
     return render_template("stock.html", stock=stock, sort_by=sort_by, order=order)
 
 
-@app.route('/orders')
+# In your Flask app
+# In your Flask app
+@app.route('/orders', methods=['GET'])
 def display_orders():
     db_executor = DatabaseExecutor()
 
-    # Get stock information (books and accessories)
-    stock = db_executor.get_stock_information()
+    # Get orders
+    orders = db_executor.get_order_information()
 
     # Sorting parameters
-    sort_by = request.args.get('sort_by', 'title')
+    sort_by = request.args.get('sort_by', 'order_date')
     order = request.args.get('order', 'asc')
 
-    # Sort stock items based on the selected criteria
-    if sort_by == 'title':
-        stock.sort(
-            key=lambda x: str(getattr(x, 'title', '')) if isinstance(x, Book) else str(getattr(x, 'item_name', '')))
-    elif sort_by == 'price':
-        stock.sort(key=lambda x: float(getattr(x, 'price', 0)))
-    elif sort_by == 'quantity':
-        stock.sort(key=lambda x: int(getattr(x, 'quantity', 0)))
+    # Sort the orders based on the selected criteria
+    if sort_by == 'order_date':
+        orders.sort(key=lambda x: x.order_date)
+    elif sort_by == 'order_total':
+        orders.sort(key=lambda x: x.order_total)
 
     # Handle descending order
     if order == 'desc':
-        stock.reverse()
+        orders.reverse()
 
-    return render_template("orders.html", stock=stock, sort_by=sort_by, order=order)
-
+    return render_template("orders.html", orders=orders, sort_by=sort_by, order=order)
 
 @app.route("/increase<id>")
 def increase_quantity(id):
