@@ -180,7 +180,6 @@ class DatabaseExecutor:
 
     def update_accessory(self, accessory_id, new_price, new_availability):
         with self._db_session.session() as session:
-            # Assuming `Accessory` is the model for your accessories table
             accessory = session.query(Accessories).get(accessory_id)
 
             if accessory:
@@ -188,8 +187,10 @@ class DatabaseExecutor:
                 accessory.availability = new_availability
 
                 session.commit()
+                print(f"Accessory updated: {accessory_id}")
                 return {'success': True, 'message': 'Accessory updated successfully'}
             else:
+                print(f"Accessory not found: {accessory_id}")
                 return {'success': False, 'message': 'Accessory not found'}
 
     def get_book_price(self, book_id):
@@ -242,7 +243,7 @@ class DatabaseExecutor:
         with self._db_session.session() as session:
             book = session.query(Book).filter_by(id=book_id).first()
             if book:
-                book.display_on_homepage = True  # Assuming there's a boolean attribute for this purpose
+                book.display_on_homepage = True
                 book.genre = new_genre
                 book.availability = new_availability
                 session.commit()
@@ -252,13 +253,19 @@ class DatabaseExecutor:
 
     def move_accessory_to_homepage(self, accessory_id, new_availability):
         with self._db_session.session() as session:
-            accessory = session.query(Book).filter_by(id=accessory_id).first()
-            if accessory:
-                accessory.display_on_homepage = True  # Assuming there's a boolean attribute for this purpose
-                accessory.availability = new_availability
-                session.commit()
-                return True
-            else:
+            accessory = session.query(Accessories).filter_by(accessory_id=accessory_id).first()
+            try:
+                if accessory:
+                    accessory.display_on_homepage = True
+                    accessory.availability = new_availability
+                    session.commit()
+                    print(f"Accessory moved to homepage: {accessory_id}")
+                    return True
+                else:
+                    print(f"Accessory not found: {accessory_id}")
+                    return False
+            except Exception as e:
+                print(f"Error moving accessory to homepage: {e}")
                 return False
 
     def get_homepage_books(self):
@@ -278,6 +285,7 @@ class DatabaseExecutor:
                 session.expunge(accessories)
                 make_transient(accessories)
             return homepage_accessories
+
     def get_users(self):
         with self._db_session.session() as session:
             users = session.query(Account).all()

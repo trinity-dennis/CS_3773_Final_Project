@@ -17,17 +17,18 @@
     </div>
     {% endfor %}
 </div>
-<div class="content">
-    <!-- For loop printing out book containers-->
-    {% for accessory in accessories %}
-    <div class="accessory-container rounded-3 shadow">
-        <form class="form" action="/adda{{accessory.id}}" method="post">
-        <img class="accessory" src="{{ url_for('static', filename='assets/accessories/'+ accessory.img)}}" alt="accessory">
-        <p class="item-name">{{accessory.item_name}}</p>
-        <p class="item-price">{{accessory.price}}</p>
-            <button class="addToCart" type="submit"> Add To Cart</button>
-        </form>
-    </div>
-    {% endfor %}
-</div>
+
+<!--<div class="content">-->
+<!--&lt;!&ndash; For loop printing out book containers&ndash;&gt;-->
+<!--    {% for accessory in accessories %}-->
+<!--    <div class="accessory-container rounded-3 shadow">-->
+<!--        <form class="form" action="/adda{{accessory.id}}" method="post">-->
+<!--        <img class="accessory" src="{{ url_for('static', filename='assets/accessories/'+ accessory.img)}}" alt="accessory">-->
+<!--        <p class="item-name">{{accessory.item_name}}</p>-->
+<!--        <p class="item-price">{{accessory.price}}</p>-->
+<!--            <button class="addToCart" type="submit"> Add To Cart</button>-->
+<!--        </form>-->
+<!--    </div>-->
+<!--    {% endfor %-->
+<!--</div>-->
 {% endblock %}

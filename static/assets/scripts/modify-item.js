@@ -297,11 +297,10 @@ function applyBookChanges(type, itemId) {
 }
 
 function applyAccessoryChanges(type, itemId) {
-    var priceElement = document.querySelector(`#book-details-${itemId} [data-field="price"]`);
+    var priceElement = document.querySelector(`#accessory-details-${itemId} [data-field="price"]`);
     var reductionDropdown = document.querySelector(`#reduction-dropdown-${itemId}`);
     var moveToHomepageCheckbox = document.querySelector(`#move-to-homepage-${itemId}`);
-    var genreElement = document.querySelector(`#book-details-${itemId} [data-field="genre"]`);
-    var availabilityElement = document.querySelector(`#book-details-${itemId} [data-field="availability"]`);
+    var availabilityElement = document.querySelector(`#accessory-details-${itemId} [data-field="availability"]`);
 
     var originalPrice = parseFloat(priceElement.getAttribute('data-original-value'));
     var reductionPercentage = parseFloat(reductionDropdown.value);

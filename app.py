@@ -12,6 +12,8 @@ ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg'}
 # secret key for session
 app.secret_key = 'CalicoReads'
 app.config['SESSION_TYPE'] = 'filesystem'
+
+
 # Session(app)
 
 
@@ -23,7 +25,7 @@ def home_page():
     homepage_books = db_executor.get_homepage_books()
     homepage_accessories = db_executor.get_homepage_accessories()
 
-    return render_template("index.html", books=homepage_books, accessories="homepage_accessories")
+    return render_template("index.html", books=homepage_books, accessories=homepage_accessories)
 
 
 @app.route('/add<id>', methods=['GET', 'POST'])
@@ -328,7 +330,8 @@ def create_item():
         # Convert the form input values to appropriate data types for books
         quantity_book = int(request.form.get('quantity_books')) if request.form.get('quantity_books') else None
         price_book = float(request.form.get('price_books')) if request.form.get('price_books') else None
-        availability_book = int(request.form.get('availability_books')) if request.form.get('availability_books') else None
+        availability_book = int(request.form.get('availability_books')) if request.form.get(
+            'availability_books') else None
 
         # Convert the form input values to appropriate data types for accessories
         quantity_accessory = int(request.form.get('quantity_accessories')) if request.form.get(
@@ -360,9 +363,11 @@ def create_item():
 
             # Register the item in the database
             if item_type == 'books':
-                result = db_executor.add_book(genre, title, author, quantity_book, price_book, availability_book, img_filename)
+                result = db_executor.add_book(genre, title, author, quantity_book, price_book, availability_book,
+                                              img_filename)
             elif item_type == 'accessories':
-                result = db_executor.add_accessory(item_name, quantity_accessory, price_accessory, availability_accessory, img_filename)
+                result = db_executor.add_accessory(item_name, quantity_accessory, price_accessory,
+                                                   availability_accessory, img_filename)
 
             return jsonify(result)
         else:
@@ -381,13 +386,13 @@ def modify_item():
 
         item_type = data.get('item_type')
         item_id = data.get('item_id')
-        new_genre = data.get('genre')
         new_price = data.get('price')
         new_availability = data.get('availability')
         reduction_percentage = data.get('reduction_percentage')
         move_to_homepage = data.get('move_to_homepage')
 
         if item_type == 'book':
+            new_genre = data.get('genre')
             # Update the book in the database
             result = db_executor.update_book(item_id, new_genre, new_price, new_availability)
 
@@ -413,6 +418,7 @@ def modify_item():
 
             # Move to homepage if selected
             if move_to_homepage:
+                print("Move to homepage selected")
                 db_executor.move_accessory_to_homepage(item_id, new_availability)
 
         else:
@@ -425,8 +431,9 @@ def modify_item():
 
     elif request.method == 'GET':
         books = db_executor.get_books()
-        accessories = db_executor.get_accessories()
-        return render_template('modify-items.html', booksData=books, accessoriesData=accessories)
+        accessories2 = db_executor.get_accessories()
+        return render_template('modify-items.html', booksData=books, accessoriesData=accessories2)
+
 
 @app.route('/modify-users', methods=['GET', 'POST'])
 def modify_users():
@@ -451,6 +458,7 @@ def modify_users():
         # Handle the GET request for viewing the users
         users = db_executor.get_users()
         return render_template('modify-users.html', usersData=users)
+
 
 @app.route('/stock')
 def display_stock():
@@ -506,8 +514,6 @@ def display_orders():
     return render_template("orders.html", stock=stock, sort_by=sort_by, order=order)
 
 
-
-
 @app.route("/increase<id>")
 def increase_quantity(id):
     db_executor = DatabaseExecutor()
@@ -559,11 +565,13 @@ def search():
     # if the item_search is a book title
     if db_executor.get_books_by_title(item_search):
         books = db_executor.get_books_by_title(item_search)
-        books_data = [{'img': book.img, 'title': book.title, 'author': book.author, 'price': book.price ,'id': book.id} for book in
+        books_data = [{'img': book.img, 'title': book.title, 'author': book.author, 'price': book.price, 'id': book.id}
+                      for book in
                       books]
         if db_executor.get_accessories_by_item_name(item_search):
             accessories = db_executor.get_accessories_by_item_name(item_search)
-            accessories_data = [{'img': accessory.img, 'item_name': accessory.item_name, 'price': accessory.price ,'id':accessory.accessory_id} for
+            accessories_data = [{'img': accessory.img, 'item_name': accessory.item_name, 'price': accessory.price,
+                                 'id': accessory.accessory_id} for
                                 accessory in accessories]
             return render_template('search.html', user_search=user_search, books=books_data,
                                    accessories=accessories_data)
@@ -572,16 +580,19 @@ def search():
     # if the item_search is an accessory
     elif db_executor.get_accessories_by_item_name(item_search):
         accessories = db_executor.get_accessories_by_item_name(item_search)
-        accessories_data = [{'img': accessory.img, 'item_name': accessory.item_name, 'price': accessory.price, 'id':accessory.accessory_id} for
+        accessories_data = [{'img': accessory.img, 'item_name': accessory.item_name, 'price': accessory.price,
+                             'id': accessory.accessory_id} for
                             accessory in accessories]
         return render_template('search.html', user_search=user_search, accessories=accessories_data)
     # if the item is not found display all books and accessories
     else:
         books = db_executor.get_books()
         accessories = db_executor.get_accessories()
-        accessories_data = [{'img': accessory.img, 'item_name': accessory.item_name, 'price': accessory.price, 'id': accessory.accessory_id} for
+        accessories_data = [{'img': accessory.img, 'item_name': accessory.item_name, 'price': accessory.price,
+                             'id': accessory.accessory_id} for
                             accessory in accessories]
-        books_data = [{'img': book.img, 'title': book.title, 'author': book.author, 'price': book.price, 'id':book.id} for book in
+        books_data = [{'img': book.img, 'title': book.title, 'author': book.author, 'price': book.price, 'id': book.id}
+                      for book in
                       books]
         return render_template('search.html', user_search=user_search + ': no results found', books=books_data,
                                accessories=accessories_data)

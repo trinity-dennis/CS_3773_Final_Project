@@ -85,16 +85,16 @@
                             </div>
                             <div id="accessory-details-{{ accessory.accessory_id }}" class="editable-info">
                                 Price: <span data-field="price" data-original-value="{{ accessory.price }}" contenteditable="false">{{ accessory.price }}</span><br>
-                                Availability: <span data-field="availability" data-original-value="{{ accessory.availability }}" contenteditable="false">{{ accessory.availability }}</span><br>
-                                <select id="reduction-dropdown-{{ accessory.id }}">
+                                Availability: <span data-field="availability" data-original-value="{{ accessory.availability }}" contenteditable="false">{{ accessory.availability }}</span><br><br>
+                                <select id="reduction-dropdown-{{ accessory.accessory_id }}">
                                     <option value="0">No Reduction</option>
                                     <option value="0.05">5% Reduction</option>
                                     <option value="0.10">10% Reduction</option>
                                     <option value="0.15">15% Reduction</option>
                                 </select><br>
-                                <label for="move-to-homepage-{{ book.id }}">Move to Homepage</label>
-                                <input type="checkbox" id="move-to-homepage-{{ accessory.id }}">
-                                <button onclick="applyAccessoryChanges('accessory', {{ accessory.id }})" class="btn btn-success btn-sm sale-button">Put Item On Sale</button>
+                                <label for="move-to-homepage-{{ accessory.accessory_id }}">Move to Homepage</label>
+                                <input type="checkbox" id="move-to-homepage-{{ accessory.accessory_id }}">
+                                <button onclick="applyAccessoryChanges('accessory', {{ accessory.accessory_id }})" class="btn btn-success btn-sm sale-button">Put Item On Sale</button>
                             </div>
                         </td>
                         <td>
