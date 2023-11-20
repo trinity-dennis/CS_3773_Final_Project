@@ -553,8 +553,8 @@ def display_stock():
 def display_orders():
     db_executor = DatabaseExecutor()
 
-    # Get orders
-    orders = db_executor.get_order_information()
+    # Get orders with the related Account objects loaded
+    orders = db_executor.get_order_information(load_customer=True)
 
     # Sorting parameters
     sort_by = request.args.get('sort_by', 'order_date')

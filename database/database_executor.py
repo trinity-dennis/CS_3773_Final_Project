@@ -1,6 +1,6 @@
 import os
 
-from sqlalchemy.orm import make_transient
+from sqlalchemy.orm import make_transient, joinedload
 from sqlalchemy.orm.exc import NoResultFound
 
 from database.database_session import DatabaseSession
@@ -144,16 +144,27 @@ class DatabaseExecutor:
 
             return books + accessories
 
-    def get_order_information(self):
+    def get_order_information(self, load_customer=False):
         with self._db_session.session() as session:
-            orders = session.query(Orders).all()
+            try:
+                # Use joinedload to eagerly load the related customer objects
+                query = session.query(Orders)
+                if load_customer:
+                    query = query.options(joinedload(Orders.customer))
 
-            # Make orders transient
-            for order in orders:
-                session.expunge(order)
-                make_transient(order)
+                orders = query.all()
 
-            return orders
+                # Expunge the objects from the session to avoid detached instance issues
+                for order in orders:
+                    session.expunge(order)
+                    if load_customer:
+                        session.expunge(order.customer)
+                        make_transient(order.customer)
+
+                return orders
+            except Exception as e:
+                print(f"Error fetching order information: {e}")
+                return None
 
     def get_accessories_by_item_name(self, item):
         with self._db_session.session() as session:
