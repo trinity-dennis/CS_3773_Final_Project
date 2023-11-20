@@ -435,24 +435,23 @@ def modify_item():
         return render_template('modify-items.html', booksData=books, accessoriesData=accessories2)
 
 
-@app.route('/modify-users', methods=['GET', 'POST'])
+@app.route('/modify-users', methods=['GET', 'POST', 'DELETE'])
 def modify_users():
     db_executor = DatabaseExecutor()
 
-    if request.method == 'POST':
+    if request.method == 'DELETE':
         # Assuming the request contains JSON data
         data = request.json
 
-        # Extract data for user update
+        # Extract data for user deletion
         user_id = data.get('user_id')
-        new_role = data.get('role')
 
-        result = db_executor.update_user(user_id, new_role)
+        result = db_executor.delete_user(user_id)
 
         if result:
-            return jsonify({'success': True, 'message': 'User updated successfully'})
+            return jsonify({'success': True, 'message': 'User deleted successfully'})
         else:
-            return jsonify({'success': False, 'message': 'Failed to update user'})
+            return jsonify({'success': False, 'message': 'Failed to delete user'})
 
     elif request.method == 'GET':
         # Handle the GET request for viewing the users

@@ -85,7 +85,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 adminDropdownToggle.setAttribute("data-bs-toggle", "dropdown");
                 adminDropdownToggle.innerText = username;
 
-                var adminDropdownMenu = document.createElement("div");
+                var adminDropdownMenu = document.createElement("li");
                 adminDropdownMenu.className = "dropdown-menu";
 
                 var createItemOption = document.createElement("a");
@@ -99,9 +99,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 modifyItemOption.innerText = "Modify Items";
 
                 var modifyUserOption = document.createElement("a");
-                modifyItemOption.className = "dropdown-item";
-                modifyItemOption.href = "/modify-users";
-                modifyItemOption.innerText = "Modify Users";
+                modifyUserOption.className = "dropdown-item";
+                modifyUserOption.href = "/modify-users";
+                modifyUserOption.innerText = "Modify Users";
 
                 var displayStockOption = document.createElement("a");
                 displayStockOption.className = "dropdown-item";

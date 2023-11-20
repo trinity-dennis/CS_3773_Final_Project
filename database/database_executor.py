@@ -293,3 +293,13 @@ class DatabaseExecutor:
                 session.expunge(user)
                 make_transient(user)
             return users
+
+    def delete_user(self, user_id):
+        with self._db_session.session() as session:
+            try:
+                user = session.query(Account).filter_by(id=user_id).one()
+                session.delete(user)
+                session.commit()
+                return {'success': True, 'message': 'User deleted successfully'}
+            except NoResultFound:
+                return {'success': False, 'message': 'User not found'}

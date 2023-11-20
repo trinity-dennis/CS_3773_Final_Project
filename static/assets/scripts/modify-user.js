@@ -28,101 +28,6 @@ function populateUsersTable(users) {
     });
 }
 
-function toggleEdit(type, id) {
-    var usernameDiv = document.getElementById(`user-username-${id}`);
-    var passwordDiv = document.getElementById(`user-password-${id}`);
-    var adminDiv = document.getElementById(`user-admin-${id}`);
-    var editButton = document.querySelector(`#user-edit-${id}`);
-    var submitButton = document.querySelector(`#user-submit-${id}`);
-    var cancelButton = document.querySelector(`#user-cancel-${id}`);
-
-    // Toggle contenteditable attribute
-    [usernameDiv, passwordDiv, adminDiv].forEach(element => {
-        element.contentEditable = (element.contentEditable === 'true') ? 'false' : 'true';
-    });
-
-    // Toggle visibility of buttons
-    editButton.style.display = 'none';
-    submitButton.style.display = 'block';
-    cancelButton.style.display = 'block';
-}
-
-function submitUserChanges(type, id) {
-    console.log('Submit button clicked:', type, id);
-    var usernameDiv = document.getElementById(`user-username-${id}`);
-    var passwordDiv = document.getElementById(`user-password-${id}`);
-    var adminDiv = document.getElementById(`user-admin-${id}`);
-    var editButton = document.querySelector(`#user-edit-${id}`);
-    var submitButton = document.querySelector(`#user-submit-${id}`);
-    var cancelButton = document.querySelector(`#user-cancel-${id}`);
-
-    // Get updated values
-    var newUsername = usernameDiv.innerText;
-    var newPassword = passwordDiv.innerText;
-    var newAdmin = adminDiv.innerText;
-
-    console.log('newUsername:', newUsername);
-    console.log('newPassword:', newPassword);
-    console.log('newAdmin:', newAdmin);
-
-    // Make a fetch request to update the user in the database
-    fetch('/modify-user', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-            user_id: id,
-            username: newUsername,
-            password: newPassword,
-            admin: newAdmin,
-        }),
-    })
-    .then(response => response.json())
-    .then(data => {
-        // Handle the response from the server
-        if (data.success) {
-            console.log(data.message);
-            // Update the UI if needed
-        } else {
-            console.error(data.message);
-            // Handle the error
-        }
-    })
-    .catch(error => {
-        console.error('Error submitting changes:', error);
-    });
-
-    // Toggle contenteditable attribute back to false
-    [usernameDiv, passwordDiv, adminDiv].forEach(element => {
-        element.contentEditable = 'false';
-    });
-
-    // Toggle visibility of buttons
-    editButton.style.display = 'block';
-    submitButton.style.display = 'none';
-    cancelButton.style.display = 'none';
-}
-
-function cancelEdit(type, id) {
-    var usernameDiv = document.getElementById(`user-username-${id}`);
-    var passwordDiv = document.getElementById(`user-password-${id}`);
-    var adminDiv = document.getElementById(`user-admin-${id}`);
-    var editButton = document.querySelector(`#user-edit-${id}`);
-    var submitButton = document.querySelector(`#user-submit-${id}`);
-    var cancelButton = document.querySelector(`#user-cancel-${id}`);
-
-    // Revert content back to the original state
-    [usernameDiv, passwordDiv, adminDiv].forEach(element => {
-        element.innerText = element.dataset.originalValue;
-        element.contentEditable = 'false';
-    });
-
-    // Toggle visibility of buttons
-    editButton.style.display = 'block';
-    submitButton.style.display = 'none';
-    cancelButton.style.display = 'none';
-
 function deleteUser(userId) {
     if (confirm("Are you sure you want to delete this user?")) {
         // Perform deletion logic, for example, send an AJAX request to the server
@@ -131,8 +36,12 @@ function deleteUser(userId) {
         // using JavaScript DOM manipulation
 
         // Example AJAX request using fetch:
-        fetch(`/delete-user/${userId}`, {
+        fetch(`/modify-users`, {
             method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ user_id: userId }),
         })
         .then(response => response.json())
         .then(data => {
@@ -156,5 +65,4 @@ function removeUserRow(userId) {
     if (userRow) {
         userRow.remove();
     }
-}
 }
