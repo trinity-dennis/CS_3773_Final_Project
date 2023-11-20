@@ -29,7 +29,7 @@ if __name__ == "__main__":
     # list of books
     accessories_to_insert = [
         {"item_name": "Be Calm and Color: Channel Your Anxiety into a Soothing, Creative Activity",
-         "quantity": 1, "price": 7.00, "img": "cb-calmandcool.jpg", "availability": 50, "display_on_homepage": False},
+         "quantity": 1, "price": 7.63, "img": "cb-calmandcool.jpg", "availability": 50, "display_on_homepage": False},
         {"item_name": "Beaded Bookmark - You Fell Asleep Here",
          "quantity": 1, "price": 2.95, "img": "bm-youfellasleephere.jpg", "availability": 50, "display_on_homepage": False},
         {"item_name": "Recharge Book Light, White",

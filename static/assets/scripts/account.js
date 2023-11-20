@@ -88,21 +88,36 @@ document.addEventListener('DOMContentLoaded', function() {
                 var adminDropdownMenu = document.createElement("div");
                 adminDropdownMenu.className = "dropdown-menu";
 
-                var adminOption1 = document.createElement("a");
-                adminOption1.className = "dropdown-item";
-                adminOption1.innerText = "Option 1";
+                var createItemOption = document.createElement("a");
+                createItemOption.className = "dropdown-item";
+                createItemOption.href = "/create-item";
+                createItemOption.innerText = "Create Item";
 
-                var adminOption2 = document.createElement("a");
-                adminOption2.className = "dropdown-item";
-                adminOption2.innerText = "Option 2";
+                var modifyItemOption = document.createElement("a");
+                modifyItemOption.className = "dropdown-item";
+                modifyItemOption.href = "/modify-item";
+                modifyItemOption.innerText = "Modify Items";
 
-                var adminOption3 = document.createElement("a");
-                adminOption2.className = "dropdown-item";
-                adminOption2.innerText = "Option 3";
+                var modifyUserOption = document.createElement("a");
+                modifyItemOption.className = "dropdown-item";
+                modifyItemOption.href = "/modify-users";
+                modifyItemOption.innerText = "Modify Users";
 
-                adminDropdownMenu.appendChild(adminOption1);
-                adminDropdownMenu.appendChild(adminOption2);
-                adminDropdownMenu.appendChild(adminOption3);
+                var displayStockOption = document.createElement("a");
+                displayStockOption.className = "dropdown-item";
+                displayStockOption.href = "/stock";
+                displayStockOption.innerText = "Stock";
+
+                var displayOrdersOption = document.createElement("a");
+                displayOrdersOption.className = "dropdown-item";
+                displayOrdersOption.href = "/orders";
+                displayOrdersOption.innerText = "Orders";
+
+                adminDropdownMenu.appendChild(createItemOption);
+                adminDropdownMenu.appendChild(modifyItemOption);
+                adminDropdownMenu.appendChild(modifyUserOption);
+                adminDropdownMenu.appendChild(displayStockOption);
+                adminDropdownMenu.appendChild(displayOrdersOption);
 
                 adminDropdown.appendChild(adminDropdownToggle);
                 adminDropdown.appendChild(adminDropdownMenu);
