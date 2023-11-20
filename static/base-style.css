@@ -153,6 +153,14 @@ a{
     display: flex;
     width: 20vw;
     justify-content: center;
+    margin: 0 auto;
+}
+
+.apply-button {
+    background-color: #e07e3d;
+    color: #fff;
+    border: 1px solid black;
+    border-radius: 5px;
 }
 
 .content {
@@ -171,7 +179,7 @@ a{
     flex-direction: column;
     background-color: #ebe5d5;
     width: 10vw;
-    height: 20vw;
+    height: 22vw;
     margin-top: 15px;
     margin-bottom: 15px;
     padding: 5px;
@@ -189,7 +197,7 @@ justify-content:center;
     flex-direction: column;
     background-color: #ebe5d5;
     width: 10vw;
-    height: 18vw;
+    height: 22vw;
     margin-top: 15px;
     margin-bottom: 15px;
     padding: 5px;
@@ -235,17 +243,17 @@ p{
 }
 
 .book-title{
-    font-size: 10px;
+    font-size: 12px;
     font-weight: bold;
     text-align: center;
     padding-top: 5px;
-    max-height :50px;
+    max-height :55px;
 
 overflow: hidden;
 }
 
 .item-name{
-    font-size: 10px;
+    font-size: 12px;
     font-weight: bold;
     text-align: center;
     padding-top: 5px;
@@ -254,7 +262,7 @@ overflow: hidden;
 }
 
 .book-author{
-font-size: 8px;
+font-size: 10px;
 text-decoration: underline;
 text-align: center;
 padding-top: 5px;
@@ -262,21 +270,46 @@ padding-top: 5px;
 }
 
 .book-price{
-    font-size: 8px;
+    font-size: 10px;
+    font-weight: bold;
+    text-align: center;
+    padding-top: 5px;
+}
+
+.book-availability{
+    font-size: 10px;
+    font-weight: bold;
+    text-align: center;
+    padding-top: 5px;
+}
+
+.item-availability{
+    font-size: 10px;
     font-weight: bold;
     text-align: center;
     padding-top: 5px;
 }
 
 .item-price{
-    font-size: 8px;
+    font-size: 10px;
     font-weight: bold;
     text-align: center;
     padding-top: 5px;
 }
+
+.add-to-cart-container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+}
+
 .addToCart{
-margin-left: auto;
-margin-right: auto;
-height:15px;
-font-size:9px;
+    display: flex;
+    justify-content: center;
+    background-color: #e07e3d;
+    color: #fff;
+    border: 1px solid black;
+    width: 5vw;
+    font-size: 10px;
+    border-radius: 5px;
 }

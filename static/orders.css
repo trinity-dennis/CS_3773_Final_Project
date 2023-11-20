@@ -1,0 +1,22 @@
+.table-container {
+    width: 70vw;
+    margin: 0 auto;
+}
+
+.table-style {
+    border: 1px solid black;
+    padding: 10px;
+    margin: 0 auto;
+}
+
+.dropdown-container {
+    width: 21vw;
+    margin: 0 auto;
+}
+
+.apply-button {
+    background-color: #e07e3d;
+    color: #fff;
+    border: 1px solid black;
+    border-radius: 5px;
+}

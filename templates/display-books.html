@@ -1,7 +1,7 @@
 <!--This displays the books-->
 {% extends "base.html" %}
 {% block content %}
-<h2>{{ genre_page}}</h2>
+<h2>{{ genre_page}}</h2><br/>
 
 <div class="sorting-options">
     <form action="{{ url_for('display_books', genre=genre_page) }}" method="get">
@@ -9,14 +9,14 @@
         <select id="sort-by" name="sort_by">
             <option value="title" {% if sort_by == 'title' %}selected{% endif %}>Title</option>
             <option value="price" {% if sort_by == 'price' %}selected{% endif %}>Price</option>
-            <option value="quantity" {% if sort_by == 'quantity' %}selected{% endif %}>Quantity</option>
+            <option value="availability" {% if sort_by == 'availability' %}selected{% endif %}>Availability</option>
         </select>
         <label for="order">Order:</label>
         <select id="order" name="order">
             <option value="asc" {% if order == 'asc' %}selected{% endif %}>Ascending</option>
             <option value="desc" {% if order == 'desc' %}selected{% endif %}>Descending</option>
         </select>
-        <button type="submit">Apply</button>
+        <button type="submit" class="apply-button">Apply</button>
     </form>
 
 </div>
@@ -32,7 +32,8 @@
         <p class="book-title"> {{book.title}}</p>
         <p class="book-author">{{book.author}}</p>
         <p class="book-price">{{book.price}}</p>
-        <input class="addToCart" type="submit" value="Add To Cart">
+        <p class="book-availability">Stock: {{book.availability}}</p><br/>
+        <div class="add-to-cart-container"><input class="addToCart" type="submit" value="Add To Cart"></div>
         </form>
     </div>
     {% endfor %}

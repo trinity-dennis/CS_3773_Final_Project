@@ -55,11 +55,36 @@ class DatabaseExecutor:
         with self._db_session.session() as session:
             session.query(Cart).delete()
 
+    def add_order(self, book_id, accessory_id, customer_id, order_date, order_total):
+        order = Orders(book_id=book_id, accessory_id=accessory_id, customer_id=customer_id, order_date=order_date, order_total=order_total)
+        with self._db_session.session() as session:
+            session.add(order)
+
+    def decrease_book_availability(self, id,quantity):
+        with self._db_session.session() as session:
+            item = session.query(Book).filter_by(id=id).first()
+            if item.availability > 0:
+                item.availability -= quantity
+
+    def decrease_accessory_availability(self, id, quantity):
+        with self._db_session.session() as session:
+            item = session.query(Accessories).filter_by(accessory_id=id).first()
+            if item.availability > 0:
+                item.availability -= quantity
+
     def authenticate_user(self, username, password):
         with self._db_session.session() as session:
             try:
                 user = session.query(Account).filter_by(username=username, password=password).one()
                 return user
+            except NoResultFound:
+                return None
+
+    def get_user_id(self, username, password):
+        with self._db_session.session() as session:
+            try:
+                user = session.query(Account).filter_by(username=username, password=password).one()
+                return user.id
             except NoResultFound:
                 return None
 
@@ -181,18 +206,13 @@ class DatabaseExecutor:
 
     def update_accessory(self, accessory_id, new_price, new_availability):
         with self._db_session.session() as session:
-            accessory = session.query(Accessories).get(accessory_id)
-
+            accessory = session.query(Accessories).filter_by(accessory_id=accessory_id).first()
             if accessory:
                 accessory.price = new_price
                 accessory.availability = new_availability
-
                 session.commit()
-                print(f"Accessory updated: {accessory_id}")
-                return {'success': True, 'message': 'Accessory updated successfully'}
-            else:
-                print(f"Accessory not found: {accessory_id}")
-                return {'success': False, 'message': 'Accessory not found'}
+                return True
+            return False
 
     def get_book_price(self, book_id):
         with self._db_session.session() as session:

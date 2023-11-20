@@ -12,7 +12,7 @@
             <p class="book-title">{{book.title}}</p>
             <p class="book-author">{{book.author}}</p>
             <p class="book-price">{{book.price}}</p>
-            <button class="addToCart" type="submit"> Add To Cart</button>
+            <div class="add-to-cart-container"><input class="addToCart" type="submit" value="Add To Cart"></div>
         </form>
     </div>
     {% endfor %}
@@ -26,7 +26,7 @@
         <img class="accessory" src="{{ url_for('static', filename='assets/accessories/'+ accessory.img)}}" alt="accessory">
         <p class="item-name">{{accessory.item_name}}</p>
         <p class="item-price">{{accessory.price}}</p>
-            <button class="addToCart" type="submit"> Add To Cart</button>
+        <div class="add-to-cart-container"><input class="addToCart" type="submit" value="Add To Cart"></div>
         </form>
     </div>
     {% endfor %}

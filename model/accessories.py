@@ -1,5 +1,5 @@
 from model.base_model import BaseModel
-from sqlalchemy import Integer, String, Column, Double, Boolean
+from sqlalchemy import Integer, String, Column, Float, Boolean
 
 
 class Accessories(BaseModel):
@@ -9,6 +9,6 @@ class Accessories(BaseModel):
     img = Column(String)
     item_name = Column(String)
     quantity = Column(Integer)
-    price = Column(Double)
+    price = Column(Float)
     availability = Column(Integer)
     display_on_homepage = Column(Boolean)

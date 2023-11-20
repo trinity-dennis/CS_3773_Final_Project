@@ -2,6 +2,9 @@
 from model.base_model import BaseModel
 from sqlalchemy import Integer, Column, String, Double, ForeignKey, Text
 from sqlalchemy.orm import relationship
+from model.book import Book
+from model.accounts import Account
+from model.accessories import Accessories
 
 
 class Orders(BaseModel):
@@ -16,3 +19,4 @@ class Orders(BaseModel):
 
     book = relationship('Book')
     accessory = relationship('Accessories')
+    customer = relationship('Account')
