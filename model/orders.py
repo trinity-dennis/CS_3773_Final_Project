@@ -15,4 +15,4 @@ class Orders(BaseModel):
     order_total = Column(Double)
 
     book = relationship('Book')
-    accessory = relationship('Accessory')
+    accessory = relationship('Accessories')

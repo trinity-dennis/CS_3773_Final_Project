@@ -8,6 +8,7 @@ from model.accounts import Account
 from model.book import Book
 from model.accessories import Accessories
 from model.cart import Cart
+from model.orders import Orders
 
 
 class DatabaseExecutor:
@@ -29,6 +30,11 @@ class DatabaseExecutor:
         with self._db_session.session() as session:
             session.add(cart_item)
 
+    def add_order(self,book_id,accessory_id,customer_id,order_date,order_total):
+        order = Orders(book_id=book_id,accessory_id=accessory_id,customer_id=customer_id,order_date=order_date, order_total =order_total)
+        with self._db_session.session() as session:
+            session.add(order)
+
     def get_cart_items(self):
         with self._db_session.session() as session:
             items = session.query(Cart).all()
@@ -49,6 +55,17 @@ class DatabaseExecutor:
             if items.quantity > 0:
                 items.quantity -= 1
 
+    def decrease_book_availability(self, id,quantity):
+        with self._db_session.session() as session:
+            item = session.query(Book).filter_by(id=id).first()
+            if item.availability > 0:
+                item.availability -= quantity
+    def decrease_accessory_availability(self, id,quantity):
+        with self._db_session.session() as session:
+            item = session.query(Accessories).filter_by(accessory_id=id).first()
+            if item.availability > 0:
+                item.availability -= quantity
+
     def delete_cart(self):
         with self._db_session.session() as session:
             session.query(Cart).delete()
@@ -58,6 +75,14 @@ class DatabaseExecutor:
             try:
                 user = session.query(Account).filter_by(username=username, password=password).one()
                 return user
+            except NoResultFound:
+                return None
+
+    def get_user_id (self, username, password):
+        with self._db_session.session() as session:
+            try:
+                user = session.query(Account).filter_by(username=username, password=password).one()
+                return user.id
             except NoResultFound:
                 return None
 
@@ -162,6 +187,8 @@ class DatabaseExecutor:
             session.commit()
 
         return {'success': True, 'message': 'Accessory added successfully'}
+
+
 
     def get_users(self):
         with self._db_session.session() as session:

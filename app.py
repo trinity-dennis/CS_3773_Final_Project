@@ -1,3 +1,4 @@
+import datetime
 import os
 
 from flask import Flask, render_template, request, session, redirect, url_for, jsonify
@@ -55,7 +56,7 @@ def add_to_cart(id):
         accessory_data = [{'img': a.img, 'item_name': a.item_name, 'quantity': a.quantity, 'price': a.price,
                            'id': a.accessory_id, "availability": a.availability} for a in accessories]
         accessory_a = accessory_data[0]
-        db_executor.add_cart_item(1, accessory_a.get("item_name"), accessory_a.get("quantity"), "ACCESSORY",
+        db_executor.add_cart_item(1, accessory_a.get("item_name"), accessory_a.get("quantity"), "accessory",
                                   accessory_a.get("price"), accessory_a.get("img"), accessory_a.get("id"))
 
         # cart_accessories.append(accessory_a)
@@ -153,8 +154,35 @@ def shopping_cart():
             a_total = round(subtotal * tax, 2)
     else:
         a_total = round(subtotal * tax, 2)
-
+    session["total"] = a_total
     return render_template("cart.html", books=items, subtotal=subtotal, tax=tax, total=a_total)
+@app.route("/check-out")
+def update_availability():
+    db_executor = DatabaseExecutor()
+    cart = db_executor.get_cart_items()
+    username = session.get("username")
+
+    id = session.get("id")
+
+    date = datetime.date.today()
+    total = session.get("total")
+    for items in cart:
+
+        if items.type == "book":
+            db_executor.decrease_book_availability(items.item_id,items.quantity)
+        elif items.type == "availability":
+            db_executor.decrease_accessory_availability(items.item_id,items.quantity)
+    if id:
+        db_executor.add_order(None,None,id,date,total)
+    else:
+        db_executor.add_order(None,None,-1, date,total)
+    print(id)
+    print(date)
+    print(total)
+    db_executor.delete_cart()
+    session.pop("total",0)
+
+    return redirect("/non-fiction")
 
 
 @app.route('/non-fiction')
@@ -274,8 +302,13 @@ def login():
         username = request.json.get('login-username')
         password = request.json.get('login-password')
         user = db_executor.authenticate_user(username, password)
+        id = db_executor.get_user_id(username,password)
         if user:
             session['username'] = username
+            if id:
+                session['id'] = id
+                print(id)
+
             print("SUCCESS")
             return jsonify({"status": "success", "username": username})
         else:
@@ -287,6 +320,8 @@ def login():
 def logout():
     # Clear the session to log the user out
     session.pop('username', None)
+    session.pop('id', None)
+
     return redirect(url_for('home_page'))
 
 
