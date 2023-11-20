@@ -1,5 +1,5 @@
 from model.base_model import BaseModel
-from sqlalchemy import Integer, String, Column, Double
+from sqlalchemy import Integer, String, Column, Double, Boolean
 
 
 class Accessories(BaseModel):
@@ -11,3 +11,4 @@ class Accessories(BaseModel):
     quantity = Column(Integer)
     price = Column(Double)
     availability = Column(Integer)
+    display_on_homepage = Column(Boolean)
