@@ -1,0 +1,26 @@
+<!--this will hold the table to modify an item on the admin side-->
+
+{% extends "base.html" %}
+{% block title %}Modify Items{% endblock %}
+{% block content %}
+<head>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='discounts.css')}}">
+    <script src="static/assets/scripts/discounts.js"></script>
+</head>
+<h2>Discount Codes</h2><br/>
+<div class="form-container">
+    <form class="form" method="post" action="{{ url_for('discounts') }}" id="create-discount-form" enctype="multipart/form-data" onsubmit="return handleFormSubmission()">
+        <div class="mb-3" id="item-name-container">
+            <label for="code" class="form-label">Discount Code:</label>
+            <input type="text" class="form-control" id="code" name="code">
+        </div>
+
+        <div class="mb-3" id="genre-container">
+            <label for="percentage" class="form-label">Percentage:</label>
+            <input type="text" class="form-control" id="percentage" name="percentage">
+        </div>
+        <button type="submit" class="btn btn-primary create-button">Create Discount Code</button>
+    </form>
+</div>
+
+{% endblock %}

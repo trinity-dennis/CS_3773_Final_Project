@@ -495,6 +495,20 @@ def modify_users():
         return render_template('modify-users.html', usersData=users)
 
 
+@app.route('/discounts', methods=['GET', 'POST'])
+def discounts():
+    db_executor = DatabaseExecutor()
+
+    if request.method == 'POST':
+        discount_code = request.form.get('code')  # Update to 'code'
+        percentage = request.form.get('percentage')
+
+        # Use your DatabaseExecutor to add the discount to the database
+        success = db_executor.add_discount(discount_code, percentage)
+
+    return render_template('discounts.html')
+
+
 @app.route('/stock')
 def display_stock():
     db_executor = DatabaseExecutor()

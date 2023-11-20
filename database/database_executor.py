@@ -8,6 +8,7 @@ from model.accounts import Account
 from model.book import Book
 from model.accessories import Accessories
 from model.cart import Cart
+from model.discount import Discount
 from model.orders import Orders  # Adjust the import based on your actual module structure
 
 
@@ -275,18 +276,12 @@ class DatabaseExecutor:
     def move_accessory_to_homepage(self, accessory_id, new_availability):
         with self._db_session.session() as session:
             accessory = session.query(Accessories).filter_by(accessory_id=accessory_id).first()
-            try:
-                if accessory:
-                    accessory.display_on_homepage = True
-                    accessory.availability = new_availability
-                    session.commit()
-                    print(f"Accessory moved to homepage: {accessory_id}")
-                    return True
-                else:
-                    print(f"Accessory not found: {accessory_id}")
-                    return False
-            except Exception as e:
-                print(f"Error moving accessory to homepage: {e}")
+            if accessory:
+                accessory.display_on_homepage = True
+                accessory.availability = new_availability
+                session.commit()
+                return True
+            else:
                 return False
 
     def get_homepage_books(self):
@@ -324,3 +319,12 @@ class DatabaseExecutor:
                 return {'success': True, 'message': 'User deleted successfully'}
             except NoResultFound:
                 return {'success': False, 'message': 'User not found'}
+
+    def add_discount(self, discount_code, percentage):
+        with self._db_session.session() as session:
+            # Assuming you have a Discount model defined
+            new_discount = Discount(code=discount_code, percentage=percentage)
+
+            # Add the new discount to the database
+            session.add(new_discount)
+            session.commit()

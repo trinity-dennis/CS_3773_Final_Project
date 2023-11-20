@@ -113,11 +113,17 @@ document.addEventListener('DOMContentLoaded', function() {
                 displayOrdersOption.href = "/orders";
                 displayOrdersOption.innerText = "Orders";
 
+                var displayDiscountOption = document.createElement("a");
+                displayDiscountOption.className = "dropdown-item";
+                displayDiscountOption.href = "/discounts";
+                displayDiscountOption.innerText = "Discounts";
+
                 adminDropdownMenu.appendChild(createItemOption);
                 adminDropdownMenu.appendChild(modifyItemOption);
                 adminDropdownMenu.appendChild(modifyUserOption);
                 adminDropdownMenu.appendChild(displayStockOption);
                 adminDropdownMenu.appendChild(displayOrdersOption);
+                adminDropdownMenu.appendChild(displayDiscountOption);
 
                 adminDropdown.appendChild(adminDropdownToggle);
                 adminDropdown.appendChild(adminDropdownMenu);
