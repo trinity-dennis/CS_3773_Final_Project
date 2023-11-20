@@ -17,8 +17,13 @@ app.config['SESSION_TYPE'] = 'filesystem'
 
 @app.route('/')
 def home_page():
-    # this would be the websites home page
-    return render_template("index.html", books="pass book_data", accessories="add accessory_data")
+    db_executor = DatabaseExecutor()
+
+    # Fetch books to be displayed on the homepage
+    homepage_books = db_executor.get_homepage_books()
+    homepage_accessories = db_executor.get_homepage_accessories()
+
+    return render_template("index.html", books=homepage_books, accessories="homepage_accessories")
 
 
 @app.route('/add<id>', methods=['GET', 'POST'])
@@ -372,20 +377,44 @@ def modify_item():
     db_executor = DatabaseExecutor()
 
     if request.method == 'POST':
-        # Assuming the request contains JSON data
         data = request.json
 
-        # Extract data for book or accessory update
         item_type = data.get('item_type')
         item_id = data.get('item_id')
         new_genre = data.get('genre')
         new_price = data.get('price')
         new_availability = data.get('availability')
+        reduction_percentage = data.get('reduction_percentage')
+        move_to_homepage = data.get('move_to_homepage')
 
         if item_type == 'book':
+            # Update the book in the database
             result = db_executor.update_book(item_id, new_genre, new_price, new_availability)
+
+            # Apply reduction if selected
+            if reduction_percentage:
+                original_price = db_executor.get_book_price(item_id)
+                reduced_price = original_price - (original_price * float(reduction_percentage))
+                db_executor.update_book_price(item_id, reduced_price)
+
+            # Move to homepage if selected
+            if move_to_homepage:
+                db_executor.move_book_to_homepage(item_id, new_genre, new_availability)
+
         elif item_type == 'accessory':
+            # Update the accessory in the database
             result = db_executor.update_accessory(item_id, new_price, new_availability)
+
+            # Apply reduction if selected
+            if reduction_percentage:
+                original_price = db_executor.get_accessory_price(item_id)
+                reduced_price = original_price - (original_price * float(reduction_percentage))
+                db_executor.update_accessory_price(item_id, reduced_price)
+
+            # Move to homepage if selected
+            if move_to_homepage:
+                db_executor.move_accessory_to_homepage(item_id, new_availability)
+
         else:
             return jsonify({'success': False, 'message': 'Invalid item type'})
 
@@ -395,7 +424,6 @@ def modify_item():
             return jsonify({'success': False, 'message': 'Failed to update item'})
 
     elif request.method == 'GET':
-        # Handle the GET request for viewing the items
         books = db_executor.get_books()
         accessories = db_executor.get_accessories()
         return render_template('modify-items.html', booksData=books, accessoriesData=accessories)

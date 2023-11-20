@@ -148,7 +148,7 @@ class DatabaseExecutor:
     def add_book(self, genre, title, author, quantity, price, availability, img_filename):
         with self._db_session.session() as session:
             new_book = Book(img=img_filename, genre=genre, title=title, author=author,
-                            quantity=quantity, price=price, availability=availability)
+                            quantity=quantity, price=price, availability=availability, display_on_homepage=False)
             session.add(new_book)
             session.commit()
 
@@ -163,6 +163,121 @@ class DatabaseExecutor:
 
         return {'success': True, 'message': 'Accessory added successfully'}
 
+    def update_book(self, book_id, new_genre, new_price, new_availability):
+        with self._db_session.session() as session:
+            # Assuming `Book` is the model for your books table
+            book = session.query(Book).get(book_id)
+
+            if book:
+                book.genre = new_genre
+                book.price = new_price
+                book.availability = new_availability
+
+                session.commit()
+                return {'success': True, 'message': 'Book updated successfully'}
+            else:
+                return {'success': False, 'message': 'Book not found'}
+
+    def update_accessory(self, accessory_id, new_price, new_availability):
+        with self._db_session.session() as session:
+            # Assuming `Accessory` is the model for your accessories table
+            accessory = session.query(Accessories).get(accessory_id)
+
+            if accessory:
+                accessory.price = new_price
+                accessory.availability = new_availability
+
+                session.commit()
+                return {'success': True, 'message': 'Accessory updated successfully'}
+            else:
+                return {'success': False, 'message': 'Accessory not found'}
+
+    def get_book_price(self, book_id):
+        with self._db_session.session() as session:
+            book = session.query(Book).filter_by(id=book_id).first()
+            if book:
+                return book.price
+            else:
+                return None
+
+    def update_book_price(self, book_id, new_price):
+        with self._db_session.session() as session:
+            book = session.query(Book).filter_by(id=book_id).first()
+            if book:
+                # Store the current genre and availability
+                current_genre = book.genre
+                current_availability = book.availability
+
+                # Update only the price
+                book.price = new_price
+
+                # Set back the current genre and availability
+                book.genre = current_genre
+                book.availability = current_availability
+
+                session.commit()
+                return True
+            else:
+                return False
+
+    def get_accessory_price(self, accessory_id):
+        with self._db_session.session() as session:
+            accessory = session.query(Accessories).filter_by(accessory_id=accessory_id).first()
+            if accessory:
+                return accessory.price
+            else:
+                return None
+
+    def update_accessory_price(self, accessory_id, new_price):
+        with self._db_session.session() as session:
+            accessory = session.query(Accessories).filter_by(accessory_id=accessory_id).first()
+            if accessory:
+                accessory.price = new_price
+                session.commit()
+                return True
+            else:
+                return False
+
+    def move_book_to_homepage(self, book_id, new_genre, new_availability):
+        with self._db_session.session() as session:
+            book = session.query(Book).filter_by(id=book_id).first()
+            if book:
+                book.display_on_homepage = True  # Assuming there's a boolean attribute for this purpose
+                book.genre = new_genre
+                book.availability = new_availability
+                session.commit()
+                return True
+            else:
+                return False
+
+    def move_accessory_to_homepage(self, accessory_id, new_availability):
+        with self._db_session.session() as session:
+            accessory = session.query(Book).filter_by(id=accessory_id).first()
+            if accessory:
+                accessory.display_on_homepage = True  # Assuming there's a boolean attribute for this purpose
+                accessory.availability = new_availability
+                session.commit()
+                return True
+            else:
+                return False
+
+    def get_homepage_books(self):
+        with self._db_session.session() as session:
+            homepage_books = session.query(Book).filter_by(display_on_homepage=True).all()
+            for book in homepage_books:
+                # Disconnect from the database so updates aren't tracked
+                session.expunge(book)
+                make_transient(book)
+            return homepage_books
+
+    def get_homepage_accessories(self):
+        with self._db_session.session() as session:
+            homepage_accessories = session.query(Accessories).filter_by(display_on_homepage=True).all()
+            for accessories in homepage_accessories:
+                # Disconnect from the database so updates aren't tracked
+                session.expunge(accessories)
+                make_transient(accessories)
+            return homepage_accessories
     def get_users(self):
         with self._db_session.session() as session:
             users = session.query(Account).all()

@@ -2,7 +2,32 @@
 {% extends 'base.html' %}
 {% block title %} Calico Reads {% endblock %}
 {% block content %}
-TODO: add in the on sale items for books and accessories<br/>
-{{books}}<br/>
-{{accessories}}<br/>
+<h2>Items On Sale!</h2>
+<div class="content">
+    <!-- For loop printing out book containers-->
+    {% for book in books %}
+    <div class="book-container rounded-3 shadow">
+        <form class="form" action="/addb{{book.id}}" method="post">
+            <img class="book" src="{{ url_for('static', filename='assets/books/'+ book.img)}}" alt="book">
+            <p class="book-title">{{book.title}}</p>
+            <p class="book-author">{{book.author}}</p>
+            <p class="book-price">{{book.price}}</p>
+            <button class="addToCart" type="submit"> Add To Cart</button>
+        </form>
+    </div>
+    {% endfor %}
+</div>
+<div class="content">
+    <!-- For loop printing out book containers-->
+    {% for accessory in accessories %}
+    <div class="accessory-container rounded-3 shadow">
+        <form class="form" action="/adda{{accessory.id}}" method="post">
+        <img class="accessory" src="{{ url_for('static', filename='assets/accessories/'+ accessory.img)}}" alt="accessory">
+        <p class="item-name">{{accessory.item_name}}</p>
+        <p class="item-price">{{accessory.price}}</p>
+            <button class="addToCart" type="submit"> Add To Cart</button>
+        </form>
+    </div>
+    {% endfor %}
+</div>
 {% endblock %}
