@@ -1,6 +1,7 @@
 <!--This holds everything for the nav bar-->
 <div class="logo-container background-c">
     <img class="logo-style" src="{{ url_for('static', filename='assets/logo.png')}}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='base-style.css')}}">
 </div>
 <div class="py-2 background-c full-width">
     <nav class="py-2 background-c">
@@ -48,6 +49,7 @@
 
     <div class="nav-bar-contain">
         <div class="nav-bar">
+            <a class="item" href="/">Sale</a>
             <a class="item" href="/non-fiction">Non-Fiction</a>
             <a class="item" href="/fiction">Fiction</a>
             <a class="item" href="/romance">Romance</a>

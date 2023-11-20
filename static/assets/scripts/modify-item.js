@@ -256,6 +256,84 @@ function toggleItemTable() {
     }
 }
 
+function applyBookChanges(type, itemId) {
+    var priceElement = document.querySelector(`#book-details-${itemId} [data-field="price"]`);
+    var reductionDropdown = document.querySelector(`#reduction-dropdown-${itemId}`);
+    var moveToHomepageCheckbox = document.querySelector(`#move-to-homepage-${itemId}`);
+    var genreElement = document.querySelector(`#book-details-${itemId} [data-field="genre"]`);
+    var availabilityElement = document.querySelector(`#book-details-${itemId} [data-field="availability"]`);
+
+    var originalPrice = parseFloat(priceElement.getAttribute('data-original-value'));
+    var reductionPercentage = parseFloat(reductionDropdown.value);
+    var newPrice = originalPrice - (originalPrice * reductionPercentage);
+
+    // Update the price in the UI
+    priceElement.innerText = newPrice.toFixed(2);
+
+    // Send the changes to the server
+    fetch("/modify-item", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            item_type: type,
+            item_id: itemId,
+            price: newPrice,
+            move_to_homepage: moveToHomepageCheckbox.checked,
+            reduction_percentage: reductionPercentage,
+            genre: genreElement.innerText,  // Include genre in the data
+            availability: availabilityElement.innerText  // Include availability in the data
+        })
+    })
+    .then(response => response.json())
+    .then(data => {
+        // Handle success or error from the server if needed
+        console.log(data);
+    })
+    .catch(error => {
+        console.error("Error:", error);
+    });
+}
+
+function applyAccessoryChanges(type, itemId) {
+    var priceElement = document.querySelector(`#accessory-details-${itemId} [data-field="price"]`);
+    var reductionDropdown = document.querySelector(`#reduction-dropdown-${itemId}`);
+    var moveToHomepageCheckbox = document.querySelector(`#move-to-homepage-${itemId}`);
+    var availabilityElement = document.querySelector(`#accessory-details-${itemId} [data-field="availability"]`);
+
+    var originalPrice = parseFloat(priceElement.getAttribute('data-original-value'));
+    var reductionPercentage = parseFloat(reductionDropdown.value);
+    var newPrice = originalPrice - (originalPrice * reductionPercentage);
+
+    // Update the price in the UI
+    priceElement.innerText = newPrice.toFixed(2);
+
+    // Send the changes to the server
+    fetch("/modify-item", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            item_type: type,
+            item_id: itemId,
+            price: newPrice,
+            move_to_homepage: moveToHomepageCheckbox.checked,
+            reduction_percentage: reductionPercentage,
+            availability: availabilityElement.innerText  // Include availability in the data
+        })
+    })
+    .then(response => response.json())
+    .then(data => {
+        // Handle success or error from the server if needed
+        console.log(data);
+    })
+    .catch(error => {
+        console.error("Error:", error);
+    });
+}
+
 // Attach the toggleItemTable function to the change event of the item type dropdown
 document.addEventListener('DOMContentLoaded', function() {
     // Your existing code here

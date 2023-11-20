@@ -4,6 +4,12 @@
     border: 1px solid black;
 }
 
+.sale-button {
+    background-color: #e07e3d;
+    color: #fff;
+    border: 1px solid black;
+}
+
 .table-container {
     width: 70vw;
     margin: 0 auto;

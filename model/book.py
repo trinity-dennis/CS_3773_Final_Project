@@ -1,5 +1,5 @@
 from model.base_model import BaseModel
-from sqlalchemy import Integer, String, Column, Float
+from sqlalchemy import Integer, String, Column, Float, Boolean
 
 
 class Book(BaseModel):
@@ -13,3 +13,4 @@ class Book(BaseModel):
     quantity = Column(Integer)
     price = Column(Float)
     availability = Column(Integer)
+    display_on_homepage = Column(Boolean)
